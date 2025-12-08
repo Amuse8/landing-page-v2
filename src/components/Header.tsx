@@ -5,7 +5,7 @@ const Header = () => {
         <header className="header">
         <div className="header-inner">
             <Link to="/" className="logo">
-            회사로고
+            amuse8
             </Link>
             <nav className="nav">
             <NavLink to="/about">회사소개</NavLink>
