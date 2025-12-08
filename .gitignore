@@ -1,0 +1,39 @@
+# Node.js dependencies (if you add any Node.js-based tooling)
+node_modules/
+package-lock.json
+yarn.lock
+
+# JetBrains WebStorm IDE settings
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+logs/
+*.log
+*.tmp
+
+# Compiled files
+*.class
+*.out
+*.pyc
+*.pyo
+*.pyd
+
+# Generated files and cache
+*.cache
+*.bak
+*.swp
+*.swo
+
+# Git-specific
+*.orig
+
+# Personal IDE settings
+*.iml
+
+Gemfile
+_site/
+Gemfile.lock
