@@ -138,11 +138,158 @@ const HomePage = () => {
             >
                     <div className="w-full max-w-[1600px]">
                     <p className="text-3xl sm:text-3xl lg:text-4xl font-semibold mb-16 leading-snug">
-                        AI와 정보 혁신을 통해 기업의 운영 방식과 미래 경쟁력을 재정의하고 있습니다.
+                        AI와 정보 혁신을 통해<br/>기업의 운영 방식과 미래 경쟁력을<br className="md:hidden"/> 재정의하고 있습니다.
                     </p>
-                    
+                    <div className="grid gap-12 lg:gap-16 md:grid-cols-3">
+                        <article
+                            ref={useScrollAnimation()}
+                            className="fade-up flex flex-col items-center text-center">
+                            <div className="w-full h-52 sm:h-60 bg-gray-200 rounded-lg mb-8">
+                                {/* <img src="..." alt="뉴스 썸네일" className="w-full h-full object-cover rounded-lg" /> */}
+                            </div>
+                            <h3 className="text-xl sm:text-2xl font-semibold mb-4"> 
+                                기사 제목
+                            </h3>
+                            <div className="flex flex-wrap justify-center gap-2 text-base sm:text-lg text-primary">
+                                <span>#해시태그</span>
+                                <span>#테크</span>
+                                <span>#인공지능</span>
+                            </div>   
+                        </article>
+                        <article
+                            ref={useScrollAnimation()}
+                            className="fade-up flex flex-col items-center text-center">
+                            <div className="w-full h-52 sm:h-60 bg-gray-200 rounded-lg mb-8">
+                                {/* <img src="..." alt="뉴스 썸네일" className="w-full h-full object-cover rounded-lg" /> */}
+                            </div>
+                            <h3 className="text-xl sm:text-2xl font-semibold mb-4"> 
+                                기사 제목
+                            </h3>
+                            <div className="flex flex-wrap justify-center gap-2 text-base sm:text-lg text-primary">
+                                <span>#해시태그</span>
+                                <span>#테크</span>
+                                <span>#인공지능</span>
+                            </div>   
+                        </article>
+                        <article
+                            ref={useScrollAnimation()}
+                            className="fade-up flex flex-col items-center text-center">
+                            <div className="w-full h-52 sm:h-60 bg-gray-200 rounded-lg mb-8">
+                                {/* <img src="..." alt="뉴스 썸네일" className="w-full h-full object-cover rounded-lg" /> */}
+                            </div>
+                            <h3 className="text-xl sm:text-2xl font-semibold mb-4"> 
+                                기사 제목
+                            </h3>
+                            <div className="flex flex-wrap justify-center gap-2 text-base sm:text-lg text-primary">
+                                <span>#해시태그</span>
+                                <span>#테크</span>
+                                <span>#인공지능</span>
+                            </div>
+                        </article>
+                    </div>
                     </div>
             </section>
+            <section
+    ref={nextSectionRef}
+    className="
+        bg-white text-gray-900
+        snap-start
+        w-full              /* 화면 너비 전체 사용 */
+        min-h-screen        /* 화면 높이 전체 사용 */
+        flex
+    "
+>
+    <div className="w-full grid grid-cols-1 lg:grid-cols-2">
+
+        <div
+            className="
+                flex flex-col justify-center
+                px-6 sm:px-12 lg:px-20
+                py-16
+            "
+        >
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-10">
+                Our Partners
+            </h2>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6">
+                {[1,2,3,4,5,6,7,8,9].map(i => (
+                    <div
+                        key={i}
+                        className="
+                            h-24 bg-gray-100 rounded-xl
+                            flex items-center justify-center
+                            text-gray-700 text-lg font-semibold
+                        "
+                    >
+                        파트너 {i}
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <div
+            className="
+                flex flex-col justify-center
+                px-6 sm:px-12 lg:px-20
+                py-16
+                bg-gray-50
+            "
+        >
+            <h3 className="
+                font-bold text-gray-900 leading-snug
+                text-2xl sm:text-3xl md:text-4xl
+            ">
+                AI로 확장되는<br />새로운 비즈니스 기회
+            </h3>
+
+            <p className="
+                text-gray-600 font-semibold leading-relaxed mt-5
+                text-lg sm:text-xl md:text-2xl
+            ">
+                Amuse8와 함께 미래의 서비스를 만들어보세요.
+            </p>
+            <a
+            href="mailto:supports@amuse8.kr"
+            className="
+                group
+                mt-6
+                inline-flex items-center
+                px-6 py-2.5
+                rounded-full
+                bg-gray-900 text-white text-base
+                w-fit
+                transition-all duration-200
+                hover:bg-white hover:text-gray-900
+                hover:shadow-lg hover:-translate-y-0.5
+            "
+            >
+            <span>Contact Us</span>
+
+            <span
+                className="
+                    ml-3
+                    w-6 h-6
+                    flex items-center justify-center
+                    rounded-full
+                    border border-current
+                    text-xs leading-none
+                    transition-all duration-200
+                    group-hover:bg-gray-900
+                    group-hover:text-white
+                "
+            >
+                &gt;
+            </span>
+        </a>
+
+
+
+
+        </div>
+
+    </div>
+</section>
         </div>
     )
 }
