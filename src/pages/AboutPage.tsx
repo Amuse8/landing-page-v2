@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 const AboutPage = () => {
     const heroWrapperRef = useRef<HTMLDivElement | null>(null);
     const afterHeroRef = useRef<HTMLDivElement | null>(null);
-
+    
     const [progress, setProgress] = useState(0);
     const [lineProgress, setLineProgress] = useState(0);
 
@@ -36,12 +36,24 @@ const AboutPage = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const ease = (t: number) => 1 - Math.pow(1 - t, 3);
-    const eased = ease(progress);
+    const easedLine = 1 - Math.pow(1 - lineProgress, 3);
 
-    const logoScale = 1 + eased * 2.2;
-    const logoTranslateY = eased * -60;
-    const logoOpacity = 1 - eased * 0.9;
+    const aiOpacity = Math.min(1, easedLine * 2);
+    const aiTranslateY = (1 - aiOpacity) * 20;
+
+    const lineScaleRaw = (easedLine - 0.2) / 0.4;
+    const lineScale = Math.max(0, Math.min(lineScaleRaw, 1));
+
+    const contentOpacityRaw = (easedLine - 0.6) / 0.4;
+    const contentOpacity = Math.max(0, Math.min(contentOpacityRaw, 1));
+    const contentTranslateY = (1 - contentOpacity) * 16;
+
+    const easeHero = (t: number) => 1 - Math.pow(1 - t, 3);
+    const easedHero = easeHero(progress);
+
+    const logoScale = 1 + easedHero * 2.2;
+    const logoTranslateY = easedHero * -60;
+    const logoOpacity = 1 - easedHero * 0.9;
     const whiteOverlayOpacity = progress;
 
     const secondOpacity = Math.max(0, (progress - 0.4) / 0.6);
@@ -105,9 +117,8 @@ const AboutPage = () => {
                         className="
                             absolute inset-0
                             flex flex-col sm:flex-row
-                            items-center sm:items-center
                             justify-center sm:justify-between
-                            px-6 sm:px-12 lg:px-20
+                            items-center px-6 sm:px-12 lg:px-20
                             gap-6 sm:gap-10
                             text-center sm:text-left
                         "
@@ -129,10 +140,7 @@ const AboutPage = () => {
                 </h2>
 
                 <p
-                    className="
-                        mt-4 sm:mt-0
-                        text-gray-800
-                        text-base sm:text-lg
+                    className="text-gray-800 text-base sm:text-lg
                         leading-relaxed
                         w-full sm:max-w-[35%]
                     "
@@ -158,42 +166,56 @@ const AboutPage = () => {
 
             <section
                 ref={afterHeroRef}
-                className="relative min-h-screen bg-white text-gray-900 flex items-center"
+                className="relative min-h-screen bg-white text-gray-900 flex items-start"
             >
                 <div className="absolute inset-0 pointer-events-none">
                     <div
                     className="
                         absolute bottom-10 left-0 right-0
                         h-[1px] bg-black
-                        origin-left
-                        transition-transform duration-300
-                        z-10
-                    "
-                    style={{ transform: `scaleX(${lineProgress})` }}
+                        origin-left transition-transform duration-300 z-10"
+                    style={{ transform: `scaleX(${lineScale})` }}
                     />
                     <div
-                    className="
-                        absolute top-10 bottom-2
-                        left-1/3
-                        w-[1px] bg-black
-                        origin-top
-                        transition-transform duration-300
-                        z-20
-                    "
-                    style={{ transform: `scaleY(${lineProgress})` }}
+                    className="absolute top-10 bottom-2
+                        left-1/3 w-[1px] bg-black
+                        origin-top transition-transform duration-300 z-20"
+                    style={{ transform: `scaleY(${lineScale})` }}
                     />
                 </div>
-
                 <div className="relative w-full max-w-6xl mx-auto px-8 lg:px-12 py-20 lg:py-28 flex flex-col lg:flex-row gap-16">
                     <div className="w-full lg:w-1/3">
-                    <p className="text-6xl font-bold mb-10">AI</p>
-                    <div className=" text-3xl leading-relaxed">
-                        <p className="font-medium">Data discovers</p>
-                        <p className="font-medium">your Possibilities</p>
-                    </div>
+                        <div
+                            className="mb-10 -mt-12"
+                            style={{
+                                opacity: aiOpacity,
+                                transform: `translateY(${aiTranslateY}px)`,
+                                transition: "opacity 300ms ease-out, transform 300ms ease-out",
+                            }}
+                            >
+                            <p className="text-6xl font-bold">AI</p>
+                        </div>
+                        <div
+                            className="text-3xl leading-relaxed"
+                            style={{
+                                opacity: contentOpacity,
+                                transform: `translateY(${contentTranslateY}px)`,
+                                transition: "opacity 400ms ease-out, transform 400ms ease-out",
+                            }}
+                        >
+                            <p className="font-medium">Data discovers</p>
+                            <p className="font-medium">your Possibilities</p>
+                        </div>
                     </div>
 
-                    <div className="w-full lg:w-2/3 space-y-6">
+                    <div
+                        className="w-full lg:w-2/3 space-y-6"
+                        style={{
+                        opacity: contentOpacity,
+                        transform: `translateY(${contentTranslateY}px)`,
+                        transition: "opacity 400ms ease-out, transform 400ms ease-out",
+                        }}
+                    >
                     <h3 className="text-xl sm:text-2xl font-semibold leading-relaxed">
                         AI는 <span className="text-primary font-bold">데이터(Data)</span> 속에 숨은{" "}
                         <span className="text-primary font-bold">가능성(Possibility)</span>을 <br/>현실로 바꾸는 가장 확장적인 기술입니다.
