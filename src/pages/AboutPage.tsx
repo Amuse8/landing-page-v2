@@ -253,7 +253,7 @@ const AboutPage = () => {
                             <p className="text-base lg:text-base leading-relaxed text-white">
                             AI 기술은 빠르게 발전하는데, <br />
                             왜 기업은 여전히 어려움을 겪을까요? <br />
-                            복잡한 데이터와 시스템 속에서 문제를 파악하기 어렵고, <br/>빠르게 발전하는 AI 역시 실제 업무에 어떻게 적용해야 할지 <br/>여전히 불투명하기 때문입니다.
+                            복잡한 데이터와 시스템 속에서 문제를 파악하기 어렵고, <br/>AI의 실제 업무 적용 방식도 명확하지 않기 때문입니다.
                             </p>
                         </div>
                         </div>
