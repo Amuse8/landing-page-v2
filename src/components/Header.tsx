@@ -18,13 +18,13 @@ export default function Header() {
 
     return (
         <header
-      className="
-        fixed top-0 left-0 w-full
-        z-50
-        flex items-center justify-between
-        px-4 sm:px-8 py-3
-      "
-    >
+            className="
+                fixed top-0 left-0 w-full
+                z-50
+                flex items-center justify-between
+                px-4 sm:px-8 py-3 bg-white
+            "
+            >
             <Link to="/" className="flex items-center gap-2">
                 <img src={Logo} alt="회사 로고" className="h-8 w-auto" />
             </Link>
