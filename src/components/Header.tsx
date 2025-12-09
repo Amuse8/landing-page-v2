@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import clsx from "clsx";
-import Logo from "@/assets/logo.svg";
+import Logo from "@/assets/logo.png";
 
 const NAV = [
     { label: "회사소개", href: "/about" },
@@ -17,7 +17,14 @@ export default function Header() {
         location.pathname === href || (href !== "/" && location.pathname.startsWith(href));
 
     return (
-        <header className="flex w-full items-center justify-between py-4 px-4 md:px-6 relative text-black">
+        <header
+      className="
+        fixed top-0 left-0 w-full
+        z-50
+        flex items-center justify-between
+        px-4 sm:px-8 py-3
+      "
+    >
             <Link to="/" className="flex items-center gap-2">
                 <img src={Logo} alt="회사 로고" className="h-8 w-auto" />
             </Link>

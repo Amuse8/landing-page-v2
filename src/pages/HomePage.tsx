@@ -15,12 +15,12 @@ const HomePage = () => {
                 className="
                     relative min-h-screen
                     flex flex-col items-center justify-center
-                    text-center text-white snap-start
+                    text-center text-white snap-start 
                 "
             >
                 <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: "url('src/assets/logo.svg')"}}
+                    className="pointer-events-none absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: "url('src/assets/logo.png')"}}
                 />
                 <div className="absolute inset-0 bg-black/40"/>
                 <div className="relative z-10 flex flex-col items-center">
