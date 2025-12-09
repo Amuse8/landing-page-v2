@@ -167,57 +167,76 @@ const AboutPage = () => {
                     </div>
 
                     <section
-                    className="absolute inset-0 flex items-start"
-                    style={{
-                        opacity: aboutSlideOpacity,
-                        pointerEvents: aboutSlideOpacity > 0.05 ? "auto" : "none",
-                        transform: `translateX(${aboutTranslateX}px)`,
-                        transition: "opacity 400ms ease-out, transform 400ms ease-out",
-                    }}
-                    >
-                    <div className="relative w-full max-w-6xl mx-auto px-8 lg:px-12 py-20 lg:py-28 flex flex-col lg:flex-row gap-16">
-                        <div className="w-full lg:w-1/3">
-                        <div className="mb-10 -mt-12">
-                            <p className="text-6xl font-bold">AI</p>
-                        </div>
-                        <div className="text-3xl leading-relaxed">
-                            <p className="font-medium">Data discovers</p>
-                            <p className="font-medium">your Possibilities</p>
-                        </div>
-                        </div>
+                        className="absolute inset-0 flex items-start"
+                        style={{
+                            opacity: aboutSlideOpacity,
+                            pointerEvents: aboutSlideOpacity > 0.05 ? "auto" : "none",
+                            transform: `translateX(${aboutTranslateX}px)`,
+                            transition: "opacity 400ms ease-out, transform 400ms ease-out",
+                        }}
+                        >
+                        <div
+                            className="
+                            relative w-full max-w-6xl mx-auto
+                            px-4 sm:px-8 lg:px-12
+                            py-12 sm:py-16 lg:py-28
+                            flex flex-col lg:flex-row
+                            gap-10 lg:gap-16
+                            "
+                        >
+                            <div className="w-full lg:w-1/3">
+                            <div className="mb-6 sm:mb-10 -mt-2 sm:-mt-12">
+                                <p className="text-4xl sm:text-5xl md:text-6xl font-bold">AI</p>
+                            </div>
+                            <div className="text-xl sm:text-2xl md:text-3xl leading-snug sm:leading-relaxed">
+                                <p className="font-medium">Data discovers</p>
+                                <p className="font-medium">your Possibilities</p>
+                            </div>
+                            </div>
 
-                        <div className="w-full lg:w-2/3 space-y-6">
-                        <h3 className="text-xl sm:text-2xl font-semibold leading-relaxed">
-                            AI는{" "}
-                            <span className="text-primary font-bold">데이터(Data)</span>{" "}
-                            속에 숨은{" "}
-                            <span className="text-primary font-bold">
-                            가능성(Possibility)
-                            </span>
-                            을 <br />
-                            현실로 바꾸는 가장 확장적인 기술입니다.
-                        </h3>
+                            <div className="w-full lg:w-2/3 space-y-5 sm:space-y-6">
+                            <h3 className="text-base sm:text-xl md:text-2xl font-semibold leading-relaxed">
+                                AI는{" "}
+                                <span className="text-primary font-bold">데이터(Data)</span>{" "}
+                                속에 숨은{" "}
+                                <span className="text-primary font-bold">가능성(Possibility)</span>
+                                을{" "}
+                                <span className="hidden sm:inline">
+                                <br />
+                                </span>
+                                현실로 바꾸는 가장 확장적인 기술입니다.
+                            </h3>
 
-                        <div className="space-y-3 text-sm sm:text-base leading-relaxed text-gray-700">
-                            <p>
-                            오늘의 기업들은 복잡한 데이터와 비효율적인 시스템 속에서
-                            무엇이 문제인지, <br />
-                            어떻게 AI를 적용해야 하는지조차 알기 어려운 상황에 놓여
-                            있습니다.
-                            </p>
-                            <p>Amuse8은 이 간극을 메웁니다.</p>
-                            <p>
-                            우리는 사용자의 경험을 중심에 두고, 정보를 분석해
-                            잠재력을 발견하며 <br />
-                            필요한 순간 바로 활용할 수 있는 AI 제품을 만들어
-                            <br />
-                            모든 기업이 AI의 가능성을 현실로 바꿀 수 있는 세상을
-                            만들어 갑니다.
-                            </p>
+                            <div className="space-y-3 text-xs sm:text-sm md:text-base leading-relaxed text-gray-700">
+                                <p>
+                                오늘의 기업들은 복잡한 데이터와 비효율적인 시스템 속에서
+                                무엇이 문제인지,
+                                <span className="hidden sm:inline">
+                                    <br />
+                                </span>
+                                <span className="inline sm:hidden"> </span>
+                                어떻게 AI를 적용해야 하는지조차 알기 어려운 상황에 놓여 있습니다.
+                                </p>
+                                <p>Amuse8은 이 간극을 메웁니다.</p>
+                                <p>
+                                우리는 사용자의 경험을 중심에 두고, 정보를 분석해 잠재력을
+                                발견하며
+                                <span className="hidden sm:inline">
+                                    <br />
+                                </span>
+                                <span className="inline sm:hidden"> </span>
+                                필요한 순간 바로 활용할 수 있는 AI 제품을 만들어
+                                <span className="hidden sm:inline">
+                                    <br />
+                                </span>
+                                <span className="inline sm:hidden"> </span>
+                                모든 기업이 AI의 가능성을 현실로 바꿀 수 있는 세상을 만들어 갑니다.
+                                </p>
+                            </div>
+                            </div>
                         </div>
-                        </div>
-                    </div>
                     </section>
+
 
                     <section
                     className="absolute inset-0 flex items-stretch z-20"
