@@ -48,7 +48,7 @@ const HomePage = () => {
                         onClick={handleScrollDown}
                         className="
                             
-                            text-white/80 text-xl animate-bounce
+                            text-white/80 text-xl animate-bounce uppercase
                         "
                         >
                         Scroll Down
