@@ -8,6 +8,10 @@ const AboutPage = () => {
     const [sectionProgress, setSectionProgress] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
 
+    const [isCeepExpanded, setIsCeepExpanded] = useState(false);
+    const [isCustomExpanded, setIsCustomExpanded] = useState(false);
+    const [isContactExpanded, setIsContactExpanded] = useState(false);
+
     useEffect(() => {
         const updateIsMobile = () => {
             setIsMobile(window.innerWidth < 1024);
@@ -96,7 +100,7 @@ const AboutPage = () => {
     const infinitePhaseEnd = 1.0;
 
     const rawInfiniteOpacity = (easedSection - infinitePhaseStart) / (infinitePhaseEnd -infinitePhaseStart);
-    const infiniteSlideOpacity = isMobile ? 0 : clamp01(rawInfiniteOpacity);
+    const infiniteSlideOpacity = clamp01(rawInfiniteOpacity);
 
     const possibilitySectionOpacity = isMobile
     ? possibilitySlideOpacity
@@ -191,7 +195,7 @@ const AboutPage = () => {
 
             <div
                 ref={aboutWrapperRef}
-                className="relative bg-white text-gray-900 h-[270vh] lg:h-[260vh]"
+                className="relative bg-white text-gray-900 h-[210vh] lg:h-[200vh]"
             >
                 <div className="relative lg:sticky lg:top-0 lg:h-screen">
                     <div className="pointer-events-none z-10 hidden sm:block lg:absolute lg:inset-0">
@@ -201,7 +205,10 @@ const AboutPage = () => {
                             absolute bottom-10 left-0 right-0
                             h-[1px] bg-black origin-left
                             "
-                            style={{ transform: `scaleX(${lineScale})` }}
+                            style={{
+                                transform: `scaleX(${lineScale * (1 - infiniteSlideOpacity)})`,
+                                opacity: 1 - infiniteSlideOpacity,
+                            }}
                         />
 
                         <div
@@ -210,7 +217,10 @@ const AboutPage = () => {
                             absolute top-10 bottom-2
                             left-1/3 w-[1px] bg-black origin-top
                             "
-                            style={{ transform: `scaleY(${lineScale})` }}
+                            style={{
+                                transform: `scaleY(${lineScale * (1 - infiniteSlideOpacity)})`,
+                                opacity: 1 - infiniteSlideOpacity,
+                            }}
                         />
                     </div>
                     <section
@@ -285,7 +295,7 @@ const AboutPage = () => {
                     </section>
 
                     <section
-                    className="flex items-stretch z-20 lg:absolute lg:inset-0"
+                    className="hidden lg:flex items-stretch lg:absolute lg:inset-0"
                     style={{
                         opacity: possibilitySectionOpacity,
                         pointerEvents: possibilitySectionOpacity > 0.05 ? "auto" : "none",
@@ -414,10 +424,131 @@ const AboutPage = () => {
                             </div>
                         </div>
                     </section>
-                    
+                    <section
+                        className="flex items-stretch lg:absolute lg:inset-0"
+                        style={{
+                            opacity: infiniteSlideOpacity,
+                            pointerEvents: infiniteSlideOpacity > 0.05 ? "auto" : "none",
+                            transform: `translateY(${(1 - infiniteSlideOpacity) * 20}px)`,
+                            transition: "opacity 400ms ease-out, transform 400ms ease-out",
+                        }}
+                    >
+                        <div className="relative w-full max-w-6xl mx-auto py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-0">
+                            <div className="relative rounded-[32px] overflow-hidden bg-black">
+                                <div
+                                    className="absolute inset-0 bg-cover bg-center"
+                                    style={{ backgroundImage: "url('/images/ax-experience-bg.jpg')" }} 
+
+                                />
+                                <div className="absolute inset-0 bg-black/55" />
+
+                                <div className="relative z-10 px-8 sm:px-10 lg:px-12 py-10 lg:py-12 flex flex-col gap-10 lg:gap-12">
+                                    <div className="text-white max-w-xl">
+                                        <p className="text-xs font-medium text-white/60 mb-3">
+                                            Our Product
+                                        </p>
+                                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
+                                            <span className="text-primary">AI∞</span>{" "}
+                                            <span>: Infinite AI <br/>Possibilities</span>
+                                            <br />
+                                            <span>직접 경험해 보세요</span>
+                                        </h2>
+                                        <p className="text-sm sm:text-base text-white/80 leading-relaxed">
+                                            AI로 비즈니스의 한계를 넘어서고 싶다면,<br />
+                                            지금 Amuse8과 함께 <br/> 무한한 AI 경험을 시작해보세요.
+                                        </p>
+                                    </div>
+
+                                    <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+                                        <div className="flex-1">
+                                            <div className="relative h-full rounded-3xl bg-white/95 shadow-xl px-6 py-8 flex flex-col">
+                                                <p className="text-xs font-medium text-primary mb-4">
+                                                    Ceep
+                                                </p>
+                                                <p className="text-base sm:text-lg font-medium leading-relaxed mb-8">
+                                                    흩어진 정보를<br />
+                                                    즉시 활용 가능한 지식으로 바꿉니다.
+                                                </p>
+                                                <button
+                                                    onClick={() => {
+                                                        if (!isCeepExpanded) {
+                                                            setIsCeepExpanded(true);
+                                                        } else {
+                                                            window.location.href = "/services";
+                                                        }
+                                                    }}
+                                                    className={`
+                                                        mt-auto self-start rounded-full border border-gray-900
+                                                        flex items-center justify-center
+                                                        text-xs sm:text-sm font-medium
+                                                        transition-all duration-200
+                                                        ${isCeepExpanded ? "px-4 h-10" : "w-10 h-10 text-xl"}
+                                                    `}
+                                                >
+                                                    {isCeepExpanded ? "Ceep 더 알아보기" : "+"}
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex-1">
+                                            <div className="relative h-full rounded-3xl bg-white/90 shadow-xl px-6 py-8 flex flex-col">
+                                                <p className="text-xs font-medium text-primary mb-4">
+                                                    Custom AI
+                                                </p>
+                                                <p className="text-base sm:text-lg font-medium leading-relaxed mb-8">
+                                                    비즈니스에 필요한 AI를<br />
+                                                    원하는 형태로 만들어 드립니다.
+                                                </p>
+                                                <button
+                                                    onClick={() => {
+                                                        if (!isCustomExpanded) {
+                                                            setIsCustomExpanded(true);
+                                                        } else {
+                                                            window.location.href = "/custom-ai"; 
+                                                        }
+                                                    }}
+                                                    className={`
+                                                        mt-auto self-start rounded-full border border-gray-900
+                                                        flex items-center justify-center
+                                                        text-xs sm:text-sm font-medium
+                                                        transition-all duration-200
+                                                        ${isCustomExpanded ? "px-4 h-10" : "w-10 h-10 text-xl"}
+                                                    `}
+                                                >
+                                                    {isCustomExpanded ? "Custom AI 더 알아보기" : "+"}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        onClick={() => {
+                                            if (!isContactExpanded) {
+                                                setIsContactExpanded(true);
+                                            } else {
+                                                window.location.href = "mailto:supports@amuse8.kr";
+                                            }
+                                        }}
+                                        className={`
+                                            hidden lg:flex
+                                            items-center justify-center
+                                            rounded-full
+                                            bg-primary text-white text-xl font-medium
+                                            shadow-lg
+                                            absolute bottom-8 right-8
+                                            transition-all duration-300
+                                            ${isContactExpanded ? "px-6 h-14 w-auto text-base" : "w-14 h-14"}
+                                        `}
+                                    >
+                                        {isContactExpanded ? "문의하기" : "?"}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
-
+                        
         </div>
     );
 };
