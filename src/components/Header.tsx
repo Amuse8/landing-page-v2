@@ -34,7 +34,10 @@ export default function Header() {
                         key={item.href}
                         to={item.href}
                         className={clsx(
-                            "relative pb-1 hover:text-primary transition-opacity text-gray-600",
+                            "relative pb-1 hover:text-primary transition-opacity",
+                            isActive(item.href)
+                                ? "text-primary font-medium"
+                                : "text-gray-600 hover:text-primary"
                             
                         )}
                         aria-current={isActive(item.href) ? "page" : undefined}
