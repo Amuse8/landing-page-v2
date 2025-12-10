@@ -59,3 +59,45 @@ a {
     animation: fadeUp 0.6s ease forwards;
 }
 
+.tag-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 1.6rem;
+    border-radius: 9999px;
+    border: 1px solid #d5e0ff;
+    background-color: #f5f8ff;
+    color: #2563eb;
+    font-size: 1.5rem;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.06);
+    position: relative;
+}
+
+@media (max-width: 640px) {
+    .tag-chip {
+        font-size: 1rem;
+        padding: 0.55rem 1.3rem;
+    }
+}
+
+@keyframes tagFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.tag-float-1 { animation: tagFloat 4s ease-in-out infinite; }
+.tag-float-2 { animation: tagFloat 4.5s ease-in-out infinite 0.3s; }
+.tag-float-3 { animation: tagFloat 5s ease-in-out infinite 0.6s; }
+.tag-float-4 { animation: tagFloat 4.2s ease-in-out infinite 0.9s; }
+.tag-float-5 { animation: tagFloat 4.8s ease-in-out infinite 1.2s; }
+
+.tag-float-6 { animation: tagFloat 4.6s ease-in-out infinite 0.4s; }
+.tag-float-7 { animation: tagFloat 5.2s ease-in-out infinite 0.7s; }
+.tag-float-8 { animation: tagFloat 4.3s ease-in-out infinite 1s; }
+.tag-float-9 { animation: tagFloat 5s ease-in-out infinite 1.3s; }

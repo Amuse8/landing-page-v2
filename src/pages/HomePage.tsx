@@ -64,7 +64,7 @@ const HomePage = () => {
                     py-32 sm:py-40 snap-start"
             >
                 <div className="w-full max-w-[1600px]">
-                    <p className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-16 leading-snug">
+                    <p className="text-2xl  sm:text-3xl lg:text-4xl font-bold mb-16 leading-snug">
                         정보의 잠재력을 드러내고<br/> 비즈니스에 최적화된 AI를 <br/> 제공합니다.
                     </p>
                     <div className="grid gap-16 md:grid-cols-2">
@@ -137,7 +137,7 @@ const HomePage = () => {
                     py-32 sm:py-40 snap-start"
             >
                     <div className="w-full max-w-[1600px]">
-                    <p className="text-2xl sm:text-2xl lg:text-4xl font-semibold mb-16 leading-snug">
+                    <p className="text-2xl font-bold sm:text-2xl lg:text-4xl mb-16 leading-snug">
                         AI와 정보 혁신을 통해<br/>기업의 운영 방식과 미래 경쟁력을<br/> 재정의하고 있습니다.
                     </p>
                     <div className="grid gap-12 lg:gap-16 md:grid-cols-3">
