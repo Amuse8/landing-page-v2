@@ -247,7 +247,9 @@ const ServicesPage = () => {
                     bg-white text-gray-900
                     snap-start
                     w-full
-                    flex justify-center
+                    min-h-screen
+                    flex items-center      
+                    justify-center
                     px-4 sm:px-10 lg:px-16
                     py-24 sm:py-32
                 "
