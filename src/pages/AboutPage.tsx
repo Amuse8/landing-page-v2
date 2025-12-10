@@ -57,7 +57,7 @@ const AboutPage = () => {
     return (
         <div className="bg-black text-white">
             <div ref={heroWrapperRef} className="relative h-[200vh]">
-                <div className="sticky top-0 h-screen overflow-hidden">
+                <div className="sticky top-0 h-screen">
                     <div
                         className="absolute inset-0 bg-cover bg-center"
                         style={{ backgroundImage: "url('src/assets/logo.png')" }}
@@ -144,7 +144,7 @@ const AboutPage = () => {
                 ref={aboutWrapperRef}
                 className="relative h-[260vh] bg-white text-gray-900"
             >
-                <div className="sticky top-0 h-screen overflow-hidden">
+                <div className="sticky top-0 h-screen">
                     <div className="absolute inset-0 pointer-events-none z-10 hidden sm:block">
 
                     <div
@@ -185,13 +185,13 @@ const AboutPage = () => {
                             "
                         >
                             <div className="w-full lg:w-1/3">
-                            <div className="mb-6 sm:mb-10 -mt-2 sm:-mt-12">
-                                <p className="text-4xl sm:text-5xl md:text-6xl font-bold">AI</p>
-                            </div>
-                            <div className="text-xl sm:text-2xl md:text-3xl leading-snug sm:leading-relaxed">
-                                <p className="font-medium">Data discovers</p>
-                                <p className="font-medium">your Possibilities</p>
-                            </div>
+                                <div className="mb-6 sm:mb-10">
+                                    <p className="text-4xl sm:text-5xl md:text-6xl font-bold">AI</p>
+                                </div>
+                                <div className="text-xl sm:text-2xl md:text-3xl leading-snug sm:leading-relaxed">
+                                    <p className="font-medium">Data discovers</p>
+                                    <p className="font-medium">your Possibilities</p>
+                                </div>
                             </div>
 
                             <div className="w-full lg:w-2/3 space-y-5 sm:space-y-6">
@@ -207,7 +207,7 @@ const AboutPage = () => {
                                 현실로 바꾸는 가장 확장적인 기술입니다.
                             </h3>
 
-                            <div className="space-y-3 text-xs sm:text-sm md:text-base leading-relaxed text-gray-700">
+                            <div className="space-y-3 text-base sm:text-sm md:text-base leading-relaxed text-gray-700">
                                 <p>
                                 오늘의 기업들은 복잡한 데이터와 비효율적인 시스템 속에서
                                 무엇이 문제인지,
@@ -249,7 +249,7 @@ const AboutPage = () => {
                     >
                     <div className="relative w-full max-w-6xl mx-auto px-8 lg:px-12 py-20 lg:py-24 flex flex-col lg:flex-row gap-16">
                         <div className="w-full lg:w-1/3">
-                        <div className="mb-10 -mt-10">
+                        <div className="mb-10">
                             <p className="text-5xl font-bold">Possibility</p>
                         </div>
                         <div className="text-2xl leading-relaxed">
