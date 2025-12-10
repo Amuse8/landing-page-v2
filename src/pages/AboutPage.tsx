@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AboutPage = () => {
     const heroWrapperRef = useRef<HTMLDivElement | null>(null);
     const aboutWrapperRef = useRef<HTMLDivElement | null>(null);
+    
+    const navigate = useNavigate();
     
     const [progress, setProgress] = useState(0);
     const [sectionProgress, setSectionProgress] = useState(0);
@@ -474,7 +477,7 @@ const AboutPage = () => {
                                                         if (!isCeepExpanded) {
                                                             setIsCeepExpanded(true);
                                                         } else {
-                                                            window.location.href = "/services";
+                                                            navigate("/services");
                                                         }
                                                     }}
                                                     className={`
@@ -504,7 +507,7 @@ const AboutPage = () => {
                                                         if (!isCustomExpanded) {
                                                             setIsCustomExpanded(true);
                                                         } else {
-                                                            window.location.href = "/custom-ai"; 
+                                                            navigate("/custom-ai");
                                                         }
                                                     }}
                                                     className={`
