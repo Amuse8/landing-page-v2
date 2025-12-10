@@ -242,7 +242,215 @@ const ServicesPage = () => {
                     </div>
                 </div>
             </section>
+            <section
+                className="
+                    bg-white text-gray-900
+                    snap-start
+                    w-full
+                    flex justify-center
+                    px-4 sm:px-10 lg:px-16
+                    py-24 sm:py-32
+                "
+            >
+                <div className="w-full max-w-6xl grid gap-10 lg:gap-16 lg:grid-cols-2 items-center">
+                    {/* 왼쪽 영역: 모니터 / 버튼 UI 넣을 자리 */}
+                    <div className="flex justify-center">
+                        <div
+                            className="
+                                w-full max-w-md
+                                rounded-3xl shadow-xl bg-white
+                                overflow-hidden
+                            "
+                        >
+                            {/* 예시
+                            <img
+                                src="src/assets/drag-once.png"
+                                alt="Ceep 드래그 정리 데모"
+                                className="w-full h-auto object-contain"
+                            />
+                            */}
+                        </div>
+                    </div>
 
+                    <div
+                        ref={useScrollAnimation()}
+                        className="fade-up text-center lg:text-left"
+                    >
+                        <h2 className="text-3xl text-right sm:text-4xl md:text-5xl font-extrabold mb-6 leading-snug">
+                            한번의 드래그로 <br className="hidden sm:block" />
+                            한번에 정리
+                        </h2>
+                        <p className="text-base font-semibold text-right sm:text-lg md:text-xl text-gray-600 leading-relaxed">
+                            AI가 문서를 분석하고, 적합한 카테고리로 정리합니다. <br className="hidden sm:block" />
+                            더 효율적인 작업 환경을 경험해보세요.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section
+                className="
+                    bg-slate-50 text-gray-900
+                    snap-start
+                    w-full
+                    flex justify-center
+                    px-4 sm:px-10 lg:px-16
+                    py-24 sm:py-32
+                "
+            >
+                <div className="w-full max-w-6xl">
+                    <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-extrabold mb-12 sm:mb-16 leading-snug">
+                        업무 효율을 높이는 똑똑한 솔루션
+                    </h2>
+
+                    <div className="grid gap-8 mb-20">
+                        <article
+                            ref={useScrollAnimation()}
+                            className="
+                                fade-up
+                                bg-white rounded-3xl shadow-xl
+                                px-10 sm:px-14 py-12 sm:py-16
+                                flex items-start gap-8
+                                max-w-4xl mx-auto
+                                border border-gray-100
+                            "
+                        >
+                            <div
+                                className="
+                                    flex items-center justify-center
+                                    w-16 h-16 sm:w-20 sm:h-20
+                                    rounded-3xl bg-blue-100 text-blue-600
+                                    text-3xl sm:text-4xl shrink-0
+                                "
+                            >
+                                📦
+                            </div>
+
+                            <div className="text-left flex-1">
+                                <h3 className="text-2xl sm:text-3xl font-extrabold mb-6 text-gray-900">
+                                    B2B
+                                </h3>
+
+                                <ul className="space-y-3 text-base font-semibold sm:text-lg text-gray-700 leading-relaxed">
+                                    <li className="flex items-center gap-3">
+                                        <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                                        <span>업무 효율 극대화</span>
+                                    </li>
+                                    <li className="flex items-center gap-3">
+                                        <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                                        <span>시간 및 비용 절감</span>
+                                    </li>
+                                    <li className="flex items-center gap-3">
+                                        <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                                        <span>SaaS 관리 간소화 및 다중 결제 문제 해결</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div className="grid gap-6 lg:gap-10 lg:grid-cols-2">
+                        <article
+                            ref={useScrollAnimation()}
+                            className="
+                                fade-up
+                                bg-white rounded-3xl shadow-md
+                                px-6 sm:px-10 py-8 sm:py-10
+                                flex flex-col justify-between
+                            "
+                        >
+                            <p className="text-base sm:text-lg font-semibold text-gray-500 mb-6">
+                                기술력 기반의 확실한 성과
+                            </p>
+                            <div className="flex items-center justify-between gap-6">
+                                <div>
+                                    <p className="text-xs sm:text-sm text-gray-600 mb-1">기존</p>
+                                    <p className="text-2xl sm:text-3xl font-extrabold text-gray-900">
+                                        24시간
+                                    </p>
+                                </div>
+                                <span className="text-2xl sm:text-3xl text-gray-800">→</span>
+                                <div className="text-right">
+                                    <p className="text-xs sm:text-sm text-black mb-1">서비스 도입</p>
+                                    <p className="text-2xl sm:text-3xl font-extrabold text-blue-600">
+                                        약 20분
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article
+                            ref={useScrollAnimation()}
+                            className="
+                                fade-up
+                                bg-white rounded-3xl shadow-md
+                                px-6 sm:px-10 py-8 sm:py-10
+                                flex flex-col justify-between
+                            "
+                        >
+                            <p className="text-base sm:text-lg font-semibold text-gray-500 mb-6">
+                                인건비 감소 또는 대체
+                            </p>
+                            <div className="flex items-center justify-between gap-6">
+                                <div>
+                                    <p className="text-xs sm:text-sm text-gray-600 mb-1">기존</p>
+                                    <p className="text-2xl sm:text-3xl font-extrabold text-gray-900">
+                                        팀 단위
+                                    </p>
+                                </div>
+                                <span className="text-2xl sm:text-3xl text-gray-800">→</span>
+                                <div className="text-right">
+                                    <p className="text-xs sm:text-sm text-black mb-1">서비스 도입</p>
+                                    <p className="text-2xl sm:text-3xl font-extrabold text-blue-600">
+                                        1명
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+            <section
+    className="
+        bg-white text-gray-900
+        snap-start
+        w-full
+        flex justify-center
+        px-4 sm:px-10 lg:px-16
+        py-12 sm:py-16
+    "
+>
+    <div className="w-full max-w-4xl flex flex-col items-center text-center">
+        
+        {/* 더 큰 아이콘 (배경 제거) */}
+        <div className="mb-6 flex items-center justify-center">
+            <svg
+                viewBox="0 0 24 24"
+                className="w-20 h-20 sm:w-24 sm:h-24 text-blue-500"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M12 3L6 5V11C6 14.866 8.686 18.299 12 19C15.314 18.299 18 14.866 18 11V5L12 3Z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                />
+            </svg>
+        </div>
+
+        {/* 상단 문구 */}
+        <p className="text-base sm:text-xl md:text-2xl font-medium text-gray-900 mb-3 leading-snug">
+            자사는 사용자의 데이터 소유권을 <br className="sm:hidden"/><span className="font-extrabold">절대</span> 주장하지 않습니다.
+        </p>
+
+        {/* 하단 문구 */}
+        <p className="text-sm sm:text-base md:text-lg text-gray-900 leading-relaxed">
+            <span className="font-extrabold">Ceep</span>은 사용자의 데이터를 <br className="sm:hidden"/> AI 기능 개선을 위한 용도로만 활용하며, <br className="sm:hidden"/>
+            다른 목적으로 이를 활용하지 않습니다.
+        </p>
+    </div>
+</section>
         </div>
     )
 }
