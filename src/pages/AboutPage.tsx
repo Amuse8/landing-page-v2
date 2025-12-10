@@ -231,7 +231,7 @@ const AboutPage = () => {
                             gap-10 lg:gap-0
                             "
                         >
-                            <div className="w-full lg:w-1/3 pr-0 lg:pr-10">
+                            <div className="w-full lg:w-1/3 pr-0 lg:pr-10 ">
                                 <div className="mb-6 sm:mb-10">
                                     <p className="text-4xl sm:text-5xl md:text-6xl font-bold">AI</p>
                                 </div>
@@ -294,7 +294,7 @@ const AboutPage = () => {
                     }}
                     >
                         <div className="relative w-full max-w-6xl mx-auto  py-20 lg:py-24 flex flex-col lg:flex-row gap-16 lg:gap-0">
-                            <div className="w-full lg:w-1/3 pr-0 lg:pr-10">
+                            <div className="w-full lg:w-1/3 pr-0 lg:pr-10 px-4 sm:px-6 lg:px-0">
                                 <div className="mb-10">
                                     <p className="text-5xl font-bold">Possibility</p>
                                 </div>
@@ -380,7 +380,7 @@ const AboutPage = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="w-full space-y-6 lg:hidden">
+                                <div className="w-full space-y-6 px-4 sm:px-6 lg:hidden">
                                     <div className="bg-black text-white rounded-3xl px-6 py-8">
                                         <div className="inline-flex items-center px-4 py-1 rounded-full bg-white text-black text-xs font-medium mb-4">
                                             Problem
