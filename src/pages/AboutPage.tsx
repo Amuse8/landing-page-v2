@@ -154,7 +154,8 @@ const AboutPage = () => {
                     <div
                         className="
                             absolute inset-0
-                            flex flex-col sm:flex-row
+                            hidden lg:flex
+                            flex-col sm:flex-row
                             justify-center sm:justify-between
                             items-center px-6 sm:px-12 lg:px-20
                             gap-6 sm:gap-10
@@ -195,10 +196,22 @@ const AboutPage = () => {
                     </div>
                 </div>
             </div>
+            <div className="lg:hidden bg-white text-gray-900 px-6 py-12">
+    <div className="max-w-3xl mx-auto text-center">
+        <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight mb-4">
+            <span className="block">AI for Every</span>
+            <span className="block text-primary">Possibility</span>
+        </h2>
+        <p className="text-base sm:text-lg leading-relaxed text-gray-700">
+            문제를 정의하고 AI로 해결하며<br />
+            제품으로 만들어냅니다.
+        </p>
+    </div>
+</div>
 
             <div
                 ref={aboutWrapperRef}
-                className="relative bg-white text-gray-900 h-[210vh] lg:h-[200vh]"
+                className="relative bg-white text-gray-900 lg:h-[200vh]"
             >
                 <div className="relative lg:sticky lg:top-0 lg:h-screen">
                     <div className="pointer-events-none z-10 hidden sm:block lg:absolute lg:inset-0">
@@ -298,7 +311,7 @@ const AboutPage = () => {
                     </section>
 
                     <section
-                    className="hidden lg:flex items-stretch lg:absolute lg:inset-0"
+                    className="flex items-stretch lg:absolute lg:inset-0"
                     style={{
                         opacity: possibilitySectionOpacity,
                         pointerEvents: possibilitySectionOpacity > 0.05 ? "auto" : "none",
