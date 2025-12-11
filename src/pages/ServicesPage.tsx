@@ -307,7 +307,7 @@ const ServicesPage = () => {
                             한번에 정리
                         </h2>
                         <p className="text-base font-semibold text-right sm:text-lg md:text-xl text-gray-600 leading-relaxed">
-                            AI가 문서를 분석하고, 적합한 카테고리로 정리합니다. <br className="hidden sm:block" />
+                            AI가 문서를 분석하고, 적합한 카테고리로 정리합니다. <br />
                             더 효율적인 작업 환경을 경험해보세요.
                         </p>
                     </div>
