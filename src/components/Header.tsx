@@ -1,44 +1,73 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import Logo from "@/assets/logo.png";
+import LogoWhite from "@/assets/logo-white.png";
 
 const NAV = [
     { label: "회사소개", href: "/about" },
     { label: "서비스", href: "/services" },
-    { label: "Custom AI", href: "/custom-ai"},
+    { label: "Custom AI", href: "/custom-ai" },
 ];
 
 export default function Header() {
     const [open, setOpen] = useState(false);
+    const [isHeroVisible, setIsHeroVisible] = useState<boolean>(true);
     const location = useLocation();
 
-    const isActive = (href: string) => 
-        location.pathname === href || (href !== "/" && location.pathname.startsWith(href));
+    const isActive = (href: string) =>
+        location.pathname === href ||
+        (href !== "/" && location.pathname.startsWith(href));
+
+    const isHome = location.pathname === "/";
+    const isTransparent = isHome && isHeroVisible;
+
+    useEffect(() => {
+        const handleHeroVisibility = (event: Event) => {
+            const customEvent = event as CustomEvent<boolean>;
+            if (typeof customEvent.detail === "boolean") {
+                setIsHeroVisible(customEvent.detail);
+            }
+        };
+
+        window.addEventListener("hero-visibility", handleHeroVisibility);
+        return () => {
+            window.removeEventListener("hero-visibility", handleHeroVisibility);
+        };
+    }, []);
 
     return (
         <header
-            className="
-                fixed top-0 left-0 w-full
-                z-50
-                flex items-center justify-between
-                px-4 sm:px-8 py-3 bg-white
-            "
-            >
+            className={clsx(
+                "fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 sm:px-8 py-3 transition-colors duration-300",
+                isTransparent
+                    ? "bg-transparent text-white"
+                    : "bg-white text-gray-900 shadow"
+            )}
+        >
             <Link to="/" className="flex items-center gap-2">
-                <img src={Logo} alt="회사 로고" className="h-8 w-auto" />
+                <img
+                    src={isTransparent ? LogoWhite : Logo}
+                    alt="회사 로고"
+                    className="h-8 w-auto transition-all duration-300"
+                />
             </Link>
+
+            {/* 데스크탑 네비게이션 */}
             <nav className="hidden md:flex flex-row gap-6 text-base">
                 {NAV.map((item) => (
                     <NavLink
                         key={item.href}
                         to={item.href}
                         className={clsx(
-                            "relative pb-1 hover:text-primary transition-opacity",
-                            isActive(item.href)
-                                ? "text-primary font-medium"
-                                : "text-gray-600 hover:text-primary"
-                            
+                            "relative pb-1 transition-opacity",
+                            isTransparent
+                                ? isActive(item.href)
+                                    ? "text-white font-semibold"
+                                    : "text-white/80 hover:text-white"
+                                : isActive(item.href)
+                                    ? "text-primary font-medium"
+                                    : "text-gray-600 hover:text-primary"
                         )}
                         aria-current={isActive(item.href) ? "page" : undefined}
                     >
@@ -46,7 +75,9 @@ export default function Header() {
                     </NavLink>
                 ))}
             </nav>
-            <button 
+
+            {/* 모바일 메뉴 버튼 */}
+            <button
                 type="button"
                 aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
                 aria-expanded={open}
@@ -72,37 +103,33 @@ export default function Header() {
                         stroke="currentColor"
                         strokeWidth="2"
                     >
-                        <path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16"/>
+                        <path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
-                )
-            }
+                )}
             </button>
+
+            {/* 모바일 네비게이션 */}
             <div
                 id="mobile-menu"
                 className={clsx(
-                "md:hidden absolute left-0 right-0 top-[60px] mx-5 overflow-hidden rounded-lg bg-white shadow-md transition-[max-height,opacity] duration-300 ease-out border border-gray-100",
-                open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                    "md:hidden absolute left-0 right-0 top-[60px] mx-5 overflow-hidden rounded-lg bg-white shadow-md transition-[max-height,opacity] duration-300 ease-out border border-gray-100",
+                    open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                 )}
             >
                 <nav className="flex flex-col gap-4 px-5 py-4 text-base">
-                {NAV.map((item) => (
-                    <NavLink
-                    key={item.href}
-                    to={item.href}
-                    onClick={() => setOpen(false)}
-                    className={clsx(
-                        "text-left py-1 hover:text-primary"
-                    )}
-                    aria-current={isActive(item.href) ? "page" : undefined}
-                    >
-                    {item.label}
-                    </NavLink>
-                ))}
+                    {NAV.map((item) => (
+                        <NavLink
+                            key={item.href}
+                            to={item.href}
+                            onClick={() => setOpen(false)}
+                            className="text-left py-1 hover:text-primary"
+                            aria-current={isActive(item.href) ? "page" : undefined}
+                        >
+                            {item.label}
+                        </NavLink>
+                    ))}
                 </nav>
             </div>
         </header>
-    )
-
-    
-};
-
+    );
+}
