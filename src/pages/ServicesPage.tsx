@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useRef } from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 
@@ -6,14 +5,13 @@ const ServicesPage = () => {
     const nextSectionRef = useRef<HTMLDivElement | null>(null);
 
     const handleScrollDown = () => {
-        nextSectionRef.current?.scrollIntoView({behavior: "smooth"});
+        nextSectionRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
     return (
-        <div className="home-page h-screen overflow-y-scroll snap-y snap-mandatory">
+        <div className="h-screen overflow-y-scroll snap-y snap-mandatory">
             <section
-                className="
-                    relative min-h-screen
+                className="relative min-h-screen
                     flex flex-col items-center justify-center
                     text-center text-white snap-start 
                 "
@@ -27,13 +25,11 @@ const ServicesPage = () => {
                     <h1 className="relative z-10 text-3xl sm:text-4xl md:text-5xl font-bold mb-14">
                         자료 관리의 시작과 끝
                     </h1>
-                    <Link
-                        to="/about"
-                        className="group inline-flex items-center text-white text-lg font-medium mb-12 cursor-pointer
-                        px-4 py-2 rounded-full transition hover:bg-white/20">
-                            <span className="mr-3 transition group-hover:opacity-80">Ceep으로 모든 걸 간편하게.</span>
+                    <p className="group inline-flex items-center text-white text-lg font-medium mb-12
+                        px-4 py-2 rounded-full">
+                            <span className="mr-3">Ceep으로 모든 걸 간편하게.</span>
                             
-                    </Link>
+                    </p>
                     <button
                         onClick={handleScrollDown}
                         className="
@@ -62,32 +58,32 @@ const ServicesPage = () => {
                     </p>
                     <div className="grid gap-8 md:gap-12 md:grid-cols-3 mt-16">
                         <article
-        ref={useScrollAnimation()}
-        className="fade-up bg-white rounded-2xl px-10 py-12 flex flex-col items-center text-center shadow-md"
-    >
-        <p className="text-5xl font-bold text-blue-600 mb-4">82%</p>
-        <p className="text-lg font-semibold text-gray-700">
-            직장인이 정보 과잉을 경험
-        </p>
-    </article>
+                            ref={useScrollAnimation()}
+                            className="fade-up bg-white rounded-2xl px-10 py-12 flex flex-col items-center text-center shadow-md"
+                        >
+                            <p className="text-5xl font-bold text-blue-600 mb-4">82%</p>
+                            <p className="text-lg font-semibold text-gray-700">
+                                직장인이 정보 과잉을 경험
+                            </p>
+                        </article>
                         <article
-        ref={useScrollAnimation()}
-        className="fade-up bg-white rounded-2xl px-10 py-12 flex flex-col items-center text-center shadow-md"
-    >
-        <p className="text-5xl font-bold text-blue-600 mb-4">4.5시간</p>
-        <p className="text-lg font-semibold text-gray-700">
-            하루 평균 정보 수집 시간
-        </p>
-    </article>
+                            ref={useScrollAnimation()}
+                            className="fade-up bg-white rounded-2xl px-10 py-12 flex flex-col items-center text-center shadow-md"
+                        >
+                            <p className="text-5xl font-bold text-blue-600 mb-4">4.5시간</p>
+                            <p className="text-lg font-semibold text-gray-700">
+                                하루 평균 정보 수집 시간
+                            </p>
+                        </article>
                         <article
-        ref={useScrollAnimation()}
-        className="fade-up bg-white rounded-2xl px-10 py-12 flex flex-col items-center text-center shadow-md"
-    >
-        <p className="text-5xl font-bold text-blue-600 mb-4">63%</p>
-        <p className="text-lg font-semibold text-gray-700">
-            수집한 정보를 잊어버림
-        </p>
-    </article>
+                            ref={useScrollAnimation()}
+                            className="fade-up bg-white rounded-2xl px-10 py-12 flex flex-col items-center text-center shadow-md"
+                        >
+                            <p className="text-5xl font-bold text-blue-600 mb-4">63%</p>
+                            <p className="text-lg font-semibold text-gray-700">
+                                수집한 정보를 잊어버림
+                            </p>
+                        </article>
                     </div>
                 </div>
             </section>
@@ -412,47 +408,44 @@ const ServicesPage = () => {
                 </div>
             </section>
             <section
-    className="
-        bg-white text-gray-900
-        snap-start
-        w-full
-        flex justify-center
-        px-4 sm:px-10 lg:px-16
-        py-12 sm:py-16
-    "
->
-    <div className="w-full max-w-4xl flex flex-col items-center text-center">
-        
-        {/* 더 큰 아이콘 (배경 제거) */}
-        <div className="mb-6 flex items-center justify-center">
-            <svg
-                viewBox="0 0 24 24"
-                className="w-20 h-20 sm:w-24 sm:h-24 text-blue-500"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+                className="
+                    bg-white text-gray-900
+                    snap-start
+                    w-full
+                    flex justify-center
+                    px-4 sm:px-10 lg:px-16
+                    py-12 sm:py-16
+                "
             >
-                <path
-                    d="M12 3L6 5V11C6 14.866 8.686 18.299 12 19C15.314 18.299 18 14.866 18 11V5L12 3Z"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-            </svg>
-        </div>
+                <div className="w-full max-w-4xl flex flex-col items-center text-center">
+                    
+                    <div className="mb-6 flex items-center justify-center">
+                        <svg
+                            viewBox="0 0 24 24"
+                            className="w-20 h-20 sm:w-24 sm:h-24 text-blue-500"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M12 3L6 5V11C6 14.866 8.686 18.299 12 19C15.314 18.299 18 14.866 18 11V5L12 3Z"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </svg>
+                    </div>
 
-        {/* 상단 문구 */}
-        <p className="text-base sm:text-xl md:text-2xl font-medium text-gray-900 mb-3 leading-snug">
-            자사는 사용자의 데이터 소유권을 <br className="sm:hidden"/><span className="font-extrabold">절대</span> 주장하지 않습니다.
-        </p>
+                    <p className="text-base sm:text-xl md:text-2xl font-medium text-gray-900 mb-3 leading-snug">
+                        자사는 사용자의 데이터 소유권을 <br className="sm:hidden"/><span className="font-extrabold">절대</span> 주장하지 않습니다.
+                    </p>
 
-        {/* 하단 문구 */}
-        <p className="text-sm sm:text-base md:text-lg text-gray-900 leading-relaxed">
-            <span className="font-extrabold">Ceep</span>은 사용자의 데이터를 <br className="sm:hidden"/> AI 기능 개선을 위한 용도로만 활용하며, <br className="sm:hidden"/>
-            다른 목적으로 이를 활용하지 않습니다.
-        </p>
-    </div>
-</section>
+                    <p className="text-sm sm:text-base md:text-lg text-gray-900 leading-relaxed">
+                        <span className="font-extrabold">Ceep</span>은 사용자의 데이터를 <br className="sm:hidden"/> AI 기능 개선을 위한 용도로만 활용하며, <br className="sm:hidden"/>
+                        다른 목적으로 이를 활용하지 않습니다.
+                    </p>
+                </div>
+            </section>
         </div>
     )
 }
