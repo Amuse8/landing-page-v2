@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
+import PageTitle from "../components/PageTitle";
 
 const ServicesPage = () => {
     const nextSectionRef = useRef<HTMLDivElement | null>(null);
@@ -10,6 +11,7 @@ const ServicesPage = () => {
 
     return (
         <div className="h-screen overflow-y-scroll snap-y snap-mandatory">
+            <PageTitle title="Ceep"/>
             <section
                 className="relative min-h-screen
                     flex flex-col items-center justify-center
