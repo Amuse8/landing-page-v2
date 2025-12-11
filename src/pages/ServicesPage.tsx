@@ -1,9 +1,25 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 import PageTitle from "../components/PageTitle";
+import dragVideo from "../assets/drag_video.mp4";
 
 const ServicesPage = () => {
     const nextSectionRef = useRef<HTMLDivElement | null>(null);
+
+    const videoRef = useRef<HTMLVideoElement | null>(null);
+    const [autoplayFailed, setAutoPlayFailed] = useState(false);
+
+    useEffect(() => {
+        if (!videoRef.current) return;
+
+        const playPromise = videoRef.current.play();
+
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                setAutoPlayFailed(true);
+            });
+        }
+    }, []);
 
     const handleScrollDown = () => {
         nextSectionRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -255,7 +271,6 @@ const ServicesPage = () => {
                 <div className="w-full max-w-6xl grid gap-10 lg:gap-16 lg:grid-cols-2 items-center">
                     <div className="flex justify-center">
                         <div className="w-full max-w-md">
-                                {/* 모니터 바디 */}
                                 <div
                                     className="
                                         mx-auto
@@ -266,7 +281,6 @@ const ServicesPage = () => {
                                         px-4 pt-4 pb-6
                                     "
                                 >
-                                    {/* 상단 베젤 + 상태 표시점 */}
                                     <div className="mb-3 flex items-center justify-between">
                                         <div className="flex items-center gap-1.5">
                                             <span className="h-2 w-2 rounded-full bg-red-400" />
@@ -279,18 +293,19 @@ const ServicesPage = () => {
                                     <div className="relative w-full rounded-2xl bg-black overflow-hidden">
                                         <div className="relative w-full pt-[56.25%]">
                                             <video
-                                                src="src/assets/drag_video.mp4"
+                                                ref={videoRef}
+                                                src={dragVideo}
                                                 className="absolute inset-0 h-full w-full object-cover"
                                                 autoPlay
                                                 loop
                                                 muted
                                                 playsInline
+                                                controls={autoplayFailed}
                                             />
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* 모니터 스탠드 */}
                                 <div className="mt-4 flex flex-col items-center gap-1">
                                     <div className="h-1.5 w-10 rounded-full bg-slate-300" />
                                     <div className="h-2.5 w-28 rounded-full bg-slate-200 shadow-inner" />
