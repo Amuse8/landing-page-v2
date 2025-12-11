@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import clsx from "clsx";
-import Logo from "@/assets/logo.png";
-import LogoWhite from "@/assets/logo-white.png";
+import logo from "@/assets/logo.png";
+import logoWhite from "@/assets/logo-white.png";
 
 const NAV = [
     { label: "회사소개", href: "/about" },
@@ -47,7 +47,7 @@ export default function Header() {
         >
             <Link to="/" className="flex items-center gap-2">
                 <img
-                    src={isTransparent ? LogoWhite : Logo}
+                    src={isTransparent ? logoWhite : logo}
                     alt="회사 로고"
                     className="h-8 w-auto transition-all duration-300"
                 />

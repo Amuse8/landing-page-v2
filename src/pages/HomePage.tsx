@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
+import mainCeep from "@/assets/main-ceep.jpg";
+import mainArticle1 from "@/assets/main-article-1.jpg";
+import mainArticle2 from "@/assets/main-article-2.jpg";
+import mainCustom from "@/assets/main-custom.jpg";
+import mainFirstImage from "@/assets/main-first-image.jpg";
 
 const HomePage = () => {
     const heroRef = useRef<HTMLDivElement | null>(null);
@@ -53,7 +58,7 @@ const HomePage = () => {
                     overflow-hidden
                 "
                 style={{
-                    backgroundImage: "url('/src/assets/main-first-image.jpg')",
+                    backgroundImage: `url(${mainFirstImage})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
@@ -167,7 +172,7 @@ const HomePage = () => {
                             ref={useScrollAnimation()}
                             className="fade-up border border-gray-300 rounded-2xl px-10 py-14 flex flex-col shadow-sm">
                             <div className="mb-10">
-                                <img src="/src/assets/main-ceep.jpg" alt="ceep" className="w-full h-72 object-cover rounded-xl"/>
+                                <img src={mainCeep} alt="ceep" className="w-full h-72 object-cover rounded-xl"/>
                             </div>
                             <p className="text-xl leading-relaxed text-gray-700 mb-10">
                                 흩어진 문서를 자동으로 분석해 명확한 구조로 정리해줍니다.
@@ -193,7 +198,7 @@ const HomePage = () => {
                             ref={useScrollAnimation()}
                             className="fade-up border border-gray-300 rounded-2xl px-10 py-14 flex flex-col shadow-sm">
                             <div className="mb-10">
-                                <img src="/src/assets/main-custom.jpg" alt="ceep" className="w-full h-72 object-cover rounded-xl"/>
+                                <img src={mainCustom} alt="custom" className="w-full h-72 object-cover rounded-xl"/>
                             </div>
                             <p className="text-xl leading-relaxed text-gray-700 mb-10">
                                 기업의 문제를 분석해 목적에 맞는 AI 솔루션을 설계·구현합니다.
@@ -238,7 +243,7 @@ const HomePage = () => {
                             className="fade-up flex flex-col items-center">
                             <div className="w-full h-52 sm:h-60 rounded-lg mb-8 overflow-hidden bg-gray-200">
                                 <img
-                                    src="/src/assets/main-article-1.jpg"
+                                    src={mainArticle1}
                                     alt="뉴스 썸네일"
                                     className="w-full h-full object-cover"
                                 />
@@ -256,7 +261,7 @@ const HomePage = () => {
                             className="fade-up flex flex-col items-center">
                             <div className="w-full h-52 sm:h-60 rounded-lg mb-8 overflow-hidden bg-gray-200">
                                 <img
-                                    src="/src/assets/main-article-2.jpg"
+                                    src={mainArticle2}
                                     alt="뉴스 썸네일"
                                     className="w-full h-full object-cover"
                                 />

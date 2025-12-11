@@ -1,4 +1,4 @@
-import Logo from "@/assets/logo.png";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
     return (
@@ -21,7 +21,7 @@ const Footer = () => {
                 </div>
                 <div className="pt-4 border-t border-gray-300 flex flex-col items-start gap-2">
                     <img
-                        src={Logo}
+                        src={logo}
                         alt="Amuse8 Logo"
                         className="h-6 w-auto opacity-80"
                     />
