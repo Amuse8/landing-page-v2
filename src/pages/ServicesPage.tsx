@@ -253,22 +253,48 @@ const ServicesPage = () => {
                 "
             >
                 <div className="w-full max-w-6xl grid gap-10 lg:gap-16 lg:grid-cols-2 items-center">
-                    {/* 왼쪽 영역: 모니터 / 버튼 UI 넣을 자리 */}
                     <div className="flex justify-center">
-                        <div
-                            className="
-                                w-full max-w-md
-                                rounded-3xl shadow-xl bg-white
-                                overflow-hidden
-                            "
-                        >
-                            {/* 예시
-                            <img
-                                src="src/assets/drag-once.png"
-                                alt="Ceep 드래그 정리 데모"
-                                className="w-full h-auto object-contain"
-                            />
-                            */}
+                        <div className="w-full max-w-md">
+                                {/* 모니터 바디 */}
+                                <div
+                                    className="
+                                        mx-auto
+                                        rounded-3xl
+                                        bg-slate-900
+                                        shadow-[0_18px_60px_rgba(15,23,42,0.55)]
+                                        border border-slate-700
+                                        px-4 pt-4 pb-6
+                                    "
+                                >
+                                    {/* 상단 베젤 + 상태 표시점 */}
+                                    <div className="mb-3 flex items-center justify-between">
+                                        <div className="flex items-center gap-1.5">
+                                            <span className="h-2 w-2 rounded-full bg-red-400" />
+                                            <span className="h-2 w-2 rounded-full bg-yellow-400" />
+                                            <span className="h-2 w-2 rounded-full bg-green-400" />
+                                        </div>
+                                        <div className="h-1.5 w-10 rounded-full bg-slate-700" />
+                                    </div>
+
+                                    <div className="relative w-full rounded-2xl bg-black overflow-hidden">
+                                        <div className="relative w-full pt-[56.25%]">
+                                            <video
+                                                src="src/assets/drag_video.mp4"
+                                                className="absolute inset-0 h-full w-full object-cover"
+                                                autoPlay
+                                                loop
+                                                muted
+                                                playsInline
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* 모니터 스탠드 */}
+                                <div className="mt-4 flex flex-col items-center gap-1">
+                                    <div className="h-1.5 w-10 rounded-full bg-slate-300" />
+                                    <div className="h-2.5 w-28 rounded-full bg-slate-200 shadow-inner" />
+                                </div>
                         </div>
                     </div>
 
