@@ -168,8 +168,7 @@ const AboutPage = () => {
                     >
                         <h2 className="text-black font-extrabold text-4xl sm:text-4xl lg:text-5xl
                                 leading-tight w-full sm:max-w-[40%]">
-                            <span className="block">AI for Every</span>
-                            <span className="block text-primary">Possibility</span>
+                            <span className="block">Finding <span className="text-primary">Muse</span> in AI</span>
                         </h2>
 
                         <p
@@ -178,8 +177,8 @@ const AboutPage = () => {
                                 w-full sm:max-w-[35%]
                             "
                         >
-                            문제를 정의하고 AI로 해결하며<br />
-                            제품으로 만들어냅니다.
+                        Amuse8(아뮤즈8)은'정보관리 자동화'를 미션으로,
+                        <br/>우리만의 영감을 담은 AI를 만듭니다.
                         </p>
 
                         <div
@@ -197,17 +196,16 @@ const AboutPage = () => {
                 </div>
             </div>
             <div className="lg:hidden bg-white text-gray-900 px-6 py-12">
-    <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight mb-4">
-            <span className="block">AI for Every</span>
-            <span className="block text-primary">Possibility</span>
-        </h2>
-        <p className="text-base sm:text-lg leading-relaxed text-gray-700">
-            문제를 정의하고 AI로 해결하며<br />
-            제품으로 만들어냅니다.
-        </p>
-    </div>
-</div>
+                <div className="max-w-3xl mx-auto text-center">
+                    <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight mb-4">
+                        <span className="block">Finding <span className="text-primary">Muse</span> in AI</span>
+                    </h2>
+                    <p className="text-base sm:text-lg leading-relaxed text-gray-700">
+                        Amuse8(아뮤즈8)은'정보관리 자동화'를 미션으로,
+                        <br/>우리만의 영감을 담은 AI를 만듭니다.
+                    </p>
+                </div>
+            </div>
 
             <div
                 ref={aboutWrapperRef}
