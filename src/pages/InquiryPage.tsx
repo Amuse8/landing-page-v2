@@ -227,10 +227,14 @@ export default function InquiryPage() {
                     <input value={hp} onChange={(e) => setHp(e.target.value)} />
                 </div>
 
+                {!turnstileToken && (
                 <div className="rounded-xl border p-4">
                     <TurnstileWidget onToken={handleTurnstileToken} />
-                    <p className="mt-2 text-xs text-gray-500">봇 방지를 위해 인증이 필요합니다.</p>
+                    <p className="mt-2 text-xs text-gray-500">
+                    봇 방지를 위해 인증이 필요합니다.
+                    </p>
                 </div>
+                )}
 
                 {notice && (
                     <div className="rounded-xl bg-gray-50 px-4 py-3 text-sm text-gray-700">
