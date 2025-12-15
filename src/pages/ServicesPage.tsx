@@ -3,6 +3,9 @@ import useScrollAnimation from "../hooks/useScrollAnimation";
 import PageTitle from "../components/PageTitle";
 import dragVideo from "../assets/drag-video.mp4";
 import heroVideo from "../assets/services-video.mp4";
+import timeImage from "../assets/services-time-image.jpg";
+import productiveImage from "../assets/services-productive-image.jpg";
+import moneyImage from "../assets/services-money-image.jpg";
 
 const ServicesPage = () => {
     const scrollRootRef = useRef<HTMLDivElement | null>(null);
@@ -185,14 +188,26 @@ const ServicesPage = () => {
                                 className="fade-up flex flex-col items-center text-center"
                             >
                                 <div className="relative w-full h-52 sm:h-60 rounded-2xl overflow-hidden shadow-lg">
-                                    {/* 이미지 영역 */}
                                     <div className="absolute inset-0 bg-gray-200">
-                                        {/* 실제 이미지 사용할 때 이 부분만 교체 */}
-                                        {/* <img
-                                            src="..."
-                                            alt="뉴스 썸네일"
+                                        <img
+                                            src={timeImage}
+                                            alt="시간적 손실을 나타내는 이미지"
                                             className="w-full h-full object-cover"
-                                        /> */}
+                                        />
+                                        <a
+                                            href="https://www.freepik.com"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="
+                                                absolute bottom-2 right-2
+                                                text-[11px] sm:text-xs
+                                                text-white/70 hover:text-white
+                                                px-2 py-0.5 rounded
+                                                transition-colors
+                                            "
+                                        >
+                                            출처 Freepik
+                                        </a>
                                     </div>
 
                                     <div className="absolute inset-0 bg-black/40" />
@@ -210,14 +225,26 @@ const ServicesPage = () => {
                                 className="fade-up flex flex-col items-center text-center"
                             >
                                 <div className="relative w-full h-52 sm:h-60 rounded-2xl overflow-hidden shadow-lg">
-                                    {/* 이미지 영역 */}
                                     <div className="absolute inset-0 bg-gray-200">
-                                        {/* 실제 이미지 사용할 때 이 부분만 교체 */}
-                                        {/* <img
-                                            src="..."
-                                            alt="뉴스 썸네일"
+                                        <img
+                                            src={productiveImage}
+                                            alt="생산적 손실을 나타내는 이미지"
                                             className="w-full h-full object-cover"
-                                        /> */}
+                                        />
+                                        <a
+                                            href="https://www.freepik.com"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="
+                                                absolute bottom-2 right-2
+                                                text-[11px] sm:text-xs
+                                                text-white/70 hover:text-white
+                                                px-2 py-0.5 rounded
+                                                transition-colors
+                                            "
+                                        >
+                                            출처 Freepik
+                                        </a>
                                     </div>
 
                                     <div className="absolute inset-0 bg-black/40" />
@@ -235,14 +262,26 @@ const ServicesPage = () => {
                                 className="fade-up flex flex-col items-center text-center"
                             >
                                 <div className="relative w-full h-52 sm:h-60 rounded-2xl overflow-hidden shadow-lg">
-                                    {/* 이미지 영역 */}
                                     <div className="absolute inset-0 bg-gray-200">
-                                        {/* 실제 이미지 사용할 때 이 부분만 교체 */}
-                                        {/* <img
-                                            src="..."
-                                            alt="뉴스 썸네일"
+                                        <img
+                                            src={moneyImage}
+                                            alt="비용적 손실을 나타내는 이미지"
                                             className="w-full h-full object-cover"
-                                        /> */}
+                                        />
+                                        <a
+                                            href="https://www.freepik.com"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="
+                                                absolute bottom-2 right-2
+                                                text-[11px] sm:text-xs
+                                                text-white/70 hover:text-white
+                                                px-2 py-0.5 rounded
+                                                transition-colors
+                                            "
+                                        >
+                                            출처 Freepik
+                                        </a>
                                     </div>
 
                                     <div className="absolute inset-0 bg-black/40" />
