@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 import PageTitle from "../components/PageTitle";
-import dragVideo from "../assets/drag_video.mp4";
+import dragVideo from "../assets/drag-video.mp4";
 
 const ServicesPage = () => {
     const nextSectionRef = useRef<HTMLDivElement | null>(null);
