@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const AboutPage = () => {
+    const location = useLocation();
     const heroWrapperRef = useRef<HTMLDivElement | null>(null);
     const aboutWrapperRef = useRef<HTMLDivElement | null>(null);
     
@@ -537,7 +538,9 @@ const AboutPage = () => {
                                             if (!isContactExpanded) {
                                                 setIsContactExpanded(true);
                                             } else {
-                                                window.location.href = "mailto:supports@amuse8.kr";
+                                                navigate("/inquiry", {
+                                                    state: { from: location.pathname },
+                                                });
                                             }
                                         }}
                                         className={`

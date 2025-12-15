@@ -2,14 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import { CATEGORIES } from "../constants/customAiCategories";
 import customAiVideo from "../assets/si-video.mp4";
 import { CATEGORY_ICON_LIST } from "../constants/categoryIcons";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const CustomAIPage = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
     const scrollRootRef = useRef<HTMLDivElement | null>(null);
     const nextSectionRef = useRef<HTMLDivElement | null>(null);
     const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
     const [activeCategory, setActiveCategory] = useState<string>(CATEGORIES[0].id);
     const [showScrollTop, setShowScrollTop] = useState(false);
 
+    const goInquiry = () => {
+        navigate("/inquiry", { state: { from: location.pathname }});
+    };
+    
     const handleScrollDown = () => {
         nextSectionRef.current?.scrollIntoView({ behavior: "smooth" });
     };
@@ -17,6 +24,8 @@ const CustomAIPage = () => {
     const handleCategoryClick = (id: string) => {
     const target = sectionRefs.current[id];
     const root = scrollRootRef.current;
+
+    
 
     if (!target || !root) return;
 
@@ -278,6 +287,7 @@ const CustomAIPage = () => {
                             <div className="flex lg:flex-col items-start lg:items-end gap-4">
                                 <button
                                     type="button"
+                                    onClick={goInquiry}
                                     className="
                                         inline-flex items-center
                                         text-base sm:text-lg
