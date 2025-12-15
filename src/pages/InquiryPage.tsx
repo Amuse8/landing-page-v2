@@ -26,7 +26,7 @@ function TurnstileWidget({ onToken }: { onToken: (t: string) => void }) {
             clearInterval(timer);
 
             window.turnstile.render(ref.current, {
-                siteKey: siteKey,
+                sitekey: siteKey,
                 callback: (token: string) => onToken(token),
                 "expired-callback": () => onToken(""),
                 "error-callback": () => onToken(""),
