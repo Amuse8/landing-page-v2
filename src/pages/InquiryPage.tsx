@@ -80,6 +80,7 @@ export default function InquiryPage() {
     const remaining = useMemo(() => 100 - message.length, [message.length]);
 
     const handleTurnstileToken = useCallback((t: string) => {
+        tokenRef.current = t; 
         setTurnstileToken(t);
     }, []);
 
@@ -134,6 +135,7 @@ export default function InquiryPage() {
             setNotice("접수가 완료되었습니다. 빠르게 확인 후 연락드리겠습니다.");
             setEmail(""); setPhone(""); setMessage("");
             setTurnstileToken("");
+            tokenRef.current = "";
         } finally {
             setSubmitting(false);
         }
