@@ -1,5 +1,231 @@
-const InquiryPage = () => {
-    return <h1>Hi</h1>
-};
+import { useEffect, useMemo, useRef, useState } from "react";
+import PrivacyModal from "../components/PrivacyModal";
+import companyImage from "@/assets/logo.png";
 
-export default InquiryPage;
+declare global {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    interface Window { turnstile?: any; }
+}
+
+function TurnstileWidget({ onToken }: { onToken: (t: string) => void }) {
+    const ref = useRef<HTMLDivElement | null>(null);
+    const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY as string;
+
+    useEffect(() => {
+        if (!document.querySelector('script[data-turnstile="1"]')) {
+            const s = document.createElement("script");
+            s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+            s.async = true;
+            s.defer = true;
+            s.dataset.turnstile = "1";
+            document.body.appendChild(s);
+        }
+
+        const timer = setInterval(() => {
+            if (!ref.current || !window.turnstile) return;
+            clearInterval(timer);
+
+            window.turnstile.render(ref.current, {
+                siteKey: siteKey,
+                callback: (token: string) => onToken(token),
+                "expired-callback": () => onToken(""),
+                "error-callback": () => onToken(""),
+            });
+        }, 150);
+        return () => clearInterval(timer);
+    }, [onToken, siteKey]);
+
+    return <div ref={ref}/>;
+}
+
+export default function InquiryPage() {
+    const [openPrivacy, setOpenPrivacy] = useState(false);
+    const [agree, setAgree] = useState(false);
+
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [message, setMessage] = useState("");
+    const [turnstileToken, setTurnstileToken] = useState("");
+    const [hp, setHp] = useState("");
+    const tokenRef = useRef<string>("");
+
+    const [submitting, setSubmitting] = useState(false);
+    const [notice, setNotice] = useState<string | null>(null);
+
+    const remaining = useMemo(() => 100 - message.length, [message.length]);
+
+    const canSubmit = useMemo(() => {
+        const okAgree = agree;
+        const okEmail = email.trim().length > 0;
+        const okPhone = phone.trim().length > 0;
+        const okMessage = message.trim().length > 0 && message.length <= 100;
+        const okTurnstile = turnstileToken.trim().length > 0;
+        const okHp = hp.trim().length === 0;
+
+        return okAgree && okEmail && okPhone && okMessage && okTurnstile && okHp && !submitting;
+    }, [agree, email, phone, message, hp, submitting, turnstileToken]);
+
+    const validate = () => {
+        if (!agree) return "개인정보 수집·이용에 동의해 주세요.";
+        if (!email.trim()) return "이메일을 입력해 주세요.";
+        if (!phone.trim()) return "연락처를 입력해 주세요.";
+        if (!message.trim()) return "문의 내용을 입력해 주세요.";
+        if (message.length > 100) return "문의 내용은 100자 이내로 입력해 주세요.";
+        if (!tokenRef.current) return "봇 방지 인증을 완료해 주세요.";
+        return null;
+    };
+
+    const onSubmit = async () => {
+        setNotice(null);
+        const err = validate();
+        if (err) return setNotice(err);
+        if (hp) return setNotice("요청을 처리할 수 없습니다.");
+
+        setSubmitting(true);
+
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    agree,
+                    email,
+                    phone,
+                    message,
+                    turnstileToken: tokenRef.current,
+                    hp,
+                }),
+            });
+
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) return setNotice(data?.message ?? "전송 실패. 잠시 후 다시 시도해 주세요.");
+
+            setNotice("접수가 완료되었습니다. 빠르게 확인 후 연락드리겠습니다.");
+            setEmail(""); setPhone(""); setMessage("");
+            tokenRef.current = "";
+            setTurnstileToken("");
+            window.turnstile?.reset?.();
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
+    return (
+    <div className="min-h-screen bg-white">
+        <PrivacyModal open={openPrivacy} onClose={() => setOpenPrivacy(false)} />
+
+        <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
+            <div className="relative hidden lg:block">
+            <img
+                src={companyImage}
+                alt="회사 이미지"
+                className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/25" />
+            </div>
+
+            <div className="flex items-center justify-center px-6 py-14">
+            <div className="w-full max-w-xl">
+                <h1 className="text-4xl font-extrabold tracking-tight">문의하기</h1>
+
+                <div className="mt-10 space-y-7">
+                <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium text-gray-900">
+                        개인정보 수집동의 <span className="text-red-500">*</span>
+                        </span>
+                        <button
+                        type="button"
+                        onClick={() => setOpenPrivacy(true)}
+                        className="text-sm text-gray-400 underline underline-offset-4"
+                        >
+                        전문보기
+                        </button>
+                    </div>
+
+                    <label htmlFor="agree" className="flex items-center gap-3 text-sm text-gray-800">
+                        <input
+                        id="agree"
+                        type="checkbox"
+                        checked={agree}
+                        onChange={(e) => setAgree(e.target.checked)}
+                        className="h-5 w-5"
+                        />
+                        동의합니다.
+                    </label>
+                </div>
+
+                <div>
+                    <label className="mb-2 block text-sm font-semibold">
+                    이메일 <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full rounded-xl border bg-white text-black px-4 py-3 outline-none focus:ring"
+                    placeholder="name@company.com"
+                    />
+                </div>
+
+                <div>
+                    <label className="mb-2 block text-sm font-semibold">
+                    연락처 <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="w-full rounded-xl border bg-white text-black px-4 py-3 outline-none focus:ring"
+                    placeholder="010-0000-0000"
+                    />
+                </div>
+
+                <div>
+                    <label className="mb-2 block text-sm font-semibold">
+                    문의 내용 (100자) <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value.slice(0, 100))}
+                    rows={5}
+                    className="w-full resize-none rounded-xl border bg-white text-black px-4 py-3 outline-none focus:ring"
+                    placeholder="100자 이내로 입력해 주세요."
+                    />
+                    <div className="mt-2 text-right text-xs text-gray-400">{remaining}자 남음</div>
+                </div>
+
+                <div className="hidden">
+                    <label>website</label>
+                    <input value={hp} onChange={(e) => setHp(e.target.value)} />
+                </div>
+
+                <div className="rounded-xl border p-4">
+                    <TurnstileWidget
+                        onToken={(t) => {
+                            tokenRef.current = t;
+                            setTurnstileToken(t);
+                        }}
+                    />
+                    <p className="mt-2 text-xs text-gray-500">봇 방지를 위해 인증이 필요합니다.</p>
+                </div>
+
+                {notice && (
+                    <div className="rounded-xl bg-gray-50 px-4 py-3 text-sm text-gray-700">
+                    {notice}
+                    </div>
+                )}
+
+                <button
+                    type="button"
+                    disabled={!canSubmit}
+                    onClick={onSubmit}
+                    className="w-full rounded-xl bg-black py-4 text-white disabled:opacity-60"
+                >
+                    {submitting ? "전송 중..." : "제출하기"}
+                </button>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    );
+}
