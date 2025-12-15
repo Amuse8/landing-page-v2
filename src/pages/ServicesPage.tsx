@@ -2,12 +2,43 @@ import { useEffect, useRef, useState } from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 import PageTitle from "../components/PageTitle";
 import dragVideo from "../assets/drag-video.mp4";
+import heroVideo from "../assets/services-video.mp4";
 
 const ServicesPage = () => {
+    const scrollRootRef = useRef<HTMLDivElement | null>(null);
+    const heroRef = useRef<HTMLElement | null>(null);
     const nextSectionRef = useRef<HTMLDivElement | null>(null);
+
+    const [isHeroVisible, setIsHeroVisible] = useState(true);
 
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [autoplayFailed, setAutoPlayFailed] = useState(false);
+
+    useEffect(() => {
+        const root = scrollRootRef.current;
+        const hero = heroRef.current;
+        if (!root || !hero) return;
+        
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const entry = entries[0];
+                setIsHeroVisible(entry.isIntersecting);
+            },
+            {
+                root,
+                threshold: 0.3
+            }
+        );
+
+        observer.observe(hero);
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        window.dispatchEvent(
+            new CustomEvent("hero-visibility", { detail: isHeroVisible })
+        );
+    }, [isHeroVisible]);
 
     useEffect(() => {
         if (!videoRef.current) return;
@@ -26,19 +57,40 @@ const ServicesPage = () => {
     };
 
     return (
-        <div className="h-screen overflow-y-scroll snap-y snap-mandatory">
+        <div
+            ref={scrollRootRef} 
+            className="h-screen overflow-y-scroll snap-y snap-mandatory">
             <PageTitle title="Ceep"/>
             <section
+                ref={heroRef}
                 className="relative min-h-screen
                     flex flex-col items-center justify-center
                     text-center text-white snap-start 
                 "
             >
-                <div
-                    className="pointer-events-none absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: "url('src/assets/logo.png')"}}
+                <video
+                    className="pointer-events-none absolute inset-0 w-full h-full object-cover"
+                    src={heroVideo}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
                 />
                 <div className="absolute inset-0 bg-black/40"/>
+                <a
+                    href="https://kr.freepik.com/free-video/animation-network-connections-cloud-computing_1916616#fromView=resource_detail&position=0&from_element=related_resources"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="
+                        absolute bottom-4 right-4
+                        text-[11px] sm:text-xs
+                        text-white/60 hover:text-white
+                        transition-colors
+                        z-20
+                    "
+                >
+                    Designed by Freepik · Video by VectorFusionArt
+                </a>
                 <div className="relative z-10 flex flex-col items-center">
                     <h1 className="relative z-10 text-3xl sm:text-4xl md:text-5xl font-bold mb-14">
                         자료 관리의 시작과 끝
@@ -106,7 +158,6 @@ const ServicesPage = () => {
                 </div>
             </section>
             <section
-                ref={nextSectionRef}
                 className="
                     bg-white text-gray-900
                     flex justify-center
@@ -209,7 +260,6 @@ const ServicesPage = () => {
                     </div>
             </section>
             <section
-                ref={nextSectionRef}
                 className="
                     bg-white text-gray-900
                     snap-start

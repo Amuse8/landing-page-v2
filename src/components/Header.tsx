@@ -20,7 +20,11 @@ export default function Header() {
         (href !== "/" && location.pathname.startsWith(href));
 
     const isHome = location.pathname === "/";
-    const isTransparent = isHome && isHeroVisible;
+    const isServices = location.pathname.startsWith("/services");
+
+    const isTransparent = (isHome || isServices) && isHeroVisible;
+
+
 
     useEffect(() => {
         const handleHeroVisibility = (event: Event) => {
