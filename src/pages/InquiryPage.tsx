@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PrivacyModal from "../components/PrivacyModal";
 import companyImage from "@/assets/logo.png";
 
@@ -9,31 +9,56 @@ declare global {
 
 function TurnstileWidget({ onToken }: { onToken: (t: string) => void }) {
     const ref = useRef<HTMLDivElement | null>(null);
+    const widgetIdRef = useRef<string | null>(null);
+    const onTokenRef = useRef(onToken);
+
     const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY as string;
 
     useEffect(() => {
-        if (!document.querySelector('script[data-turnstile="1"]')) {
-            const s = document.createElement("script");
-            s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-            s.async = true;
-            s.defer = true;
-            s.dataset.turnstile = "1";
-            document.body.appendChild(s);
+        onTokenRef.current = onToken;
+    }, [onToken]);
+
+    useEffect(() => {
+    if (!document.querySelector('script[data-turnstile="1"]')) {
+        const s = document.createElement("script");
+        s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+        s.async = true;
+        s.defer = true;
+        s.dataset.turnstile = "1";
+        document.body.appendChild(s);
         }
 
         const timer = setInterval(() => {
-            if (!ref.current || !window.turnstile) return;
-            clearInterval(timer);
+        if (!ref.current || !window.turnstile) return;
 
-            window.turnstile.render(ref.current, {
-                sitekey: siteKey,
-                callback: (token: string) => onToken(token),
-                "expired-callback": () => onToken(""),
-                "error-callback": () => onToken(""),
-            });
+        if (widgetIdRef.current) {
+            clearInterval(timer);
+            return;
+        }
+
+        ref.current.innerHTML = "";
+
+        const widgetId = window.turnstile.render(ref.current, {
+            sitekey: siteKey,
+            callback: (token: string) => onTokenRef.current(token),
+            "expired-callback": () => onTokenRef.current(""),
+            "error-callback": () => onTokenRef.current(""),
+        });
+
+        widgetIdRef.current = widgetId;
+        clearInterval(timer);
         }, 150);
-        return () => clearInterval(timer);
-    }, [onToken, siteKey]);
+
+        return () => {
+        clearInterval(timer);
+
+        if (widgetIdRef.current && window.turnstile?.remove) {
+            window.turnstile.remove(widgetIdRef.current);
+        }
+        widgetIdRef.current = null;
+        };
+    }, [siteKey]);
+
 
     return <div ref={ref}/>;
 }
@@ -54,16 +79,22 @@ export default function InquiryPage() {
 
     const remaining = useMemo(() => 100 - message.length, [message.length]);
 
-    const canSubmit = useMemo(() => {
-        const okAgree = agree;
-        const okEmail = email.trim().length > 0;
-        const okPhone = phone.trim().length > 0;
-        const okMessage = message.trim().length > 0 && message.length <= 100;
-        const okTurnstile = turnstileToken.trim().length > 0;
-        const okHp = hp.trim().length === 0;
+    const handleTurnstileToken = useCallback((t: string) => {
+        setTurnstileToken(t);
+    }, []);
 
-        return okAgree && okEmail && okPhone && okMessage && okTurnstile && okHp && !submitting;
-    }, [agree, email, phone, message, hp, submitting, turnstileToken]);
+    const canSubmit = useMemo(() => {
+    return (
+        agree &&
+        email.trim().length > 0 &&
+        phone.trim().length > 0 &&
+        message.trim().length > 0 &&
+        message.length <= 100 &&
+        turnstileToken.trim().length > 0 &&
+        hp.trim().length === 0 &&
+        !submitting
+        );
+    }, [agree, email, phone, message, turnstileToken, hp, submitting]);
 
     const validate = () => {
         if (!agree) return "개인정보 수집·이용에 동의해 주세요.";
@@ -102,9 +133,7 @@ export default function InquiryPage() {
 
             setNotice("접수가 완료되었습니다. 빠르게 확인 후 연락드리겠습니다.");
             setEmail(""); setPhone(""); setMessage("");
-            tokenRef.current = "";
             setTurnstileToken("");
-            window.turnstile?.reset?.();
         } finally {
             setSubmitting(false);
         }
@@ -199,12 +228,7 @@ export default function InquiryPage() {
                 </div>
 
                 <div className="rounded-xl border p-4">
-                    <TurnstileWidget
-                        onToken={(t) => {
-                            tokenRef.current = t;
-                            setTurnstileToken(t);
-                        }}
-                    />
+                    <TurnstileWidget onToken={handleTurnstileToken} />
                     <p className="mt-2 text-xs text-gray-500">봇 방지를 위해 인증이 필요합니다.</p>
                 </div>
 
