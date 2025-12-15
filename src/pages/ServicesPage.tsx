@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 import PageTitle from "../components/PageTitle";
 import dragVideo from "../assets/drag-video.mp4";
-import heroVideo from "../assets/services-video.mp4";
+import heroVideo from "../assets/service-video.mp4";
 import timeImage from "../assets/services-time-image.jpg";
 import productiveImage from "../assets/services-productive-image.jpg";
 import moneyImage from "../assets/services-money-image.jpg";
@@ -80,20 +80,7 @@ const ServicesPage = () => {
                     playsInline
                 />
                 <div className="absolute inset-0 bg-black/40"/>
-                <a
-                    href="https://kr.freepik.com/free-video/animation-network-connections-cloud-computing_1916616#fromView=resource_detail&position=0&from_element=related_resources"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="
-                        absolute bottom-4 right-4
-                        text-[11px] sm:text-xs
-                        text-white/60 hover:text-white
-                        transition-colors
-                        z-20
-                    "
-                >
-                    Designed by Freepik · Video by VectorFusionArt
-                </a>
+                <a href="https://kr.freepik.com/free-video/%EC%B6%94%EC%83%81-%EA%B8%B0%EC%88%A0-%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4_3730676#fromView=search&page=3&position=9&uuid=587e67d0-f154-463a-a3a6-da2bd462255f">Video: wirestock</a>
                 <div className="relative z-10 flex flex-col items-center">
                     <h1 className="relative z-10 text-3xl sm:text-4xl md:text-5xl font-bold mb-14">
                         자료 관리의 시작과 끝

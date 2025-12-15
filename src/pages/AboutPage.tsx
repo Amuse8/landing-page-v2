@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import aboutPage from "@/assets/about-page.jpg";
 
 const AboutPage = () => {
     const heroWrapperRef = useRef<HTMLDivElement | null>(null);
@@ -115,10 +114,7 @@ const AboutPage = () => {
         <div className="bg-black text-white pt-16 lg:pt-0">
             <div ref={heroWrapperRef} className="relative h-auto lg:h-[200vh]">
                 <div className="min-h-screen lg:sticky lg:top-0 lg:h-screen">
-                    <div
-                        className="absolute inset-0 bg-cover bg-center"
-                        style={{ backgroundImage: `url(${aboutPage})` }}
-                    />
+                    <div className="absolute inset-0 bg-black" />
                     <div className="absolute inset-0 bg-black/40"/>
                     <div
                         className="absolute inset-0 bg-white pointer-events-none"

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { CATEGORIES } from "../constants/customAiCategories";
 import customAiVideo from "../assets/si-video.mp4";
+import { CATEGORY_ICON_LIST } from "../constants/categoryIcons";
 
 const CustomAIPage = () => {
     const scrollRootRef = useRef<HTMLDivElement | null>(null);
@@ -190,22 +191,35 @@ const CustomAIPage = () => {
                                     {cat.label}
                                 </h2>
                                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                                    {cat.examples.map((ex) => (
-                                        <div
+                                    {cat.examples.map((ex, idx) => {
+                                        const icons = CATEGORY_ICON_LIST[cat.id] ?? [];
+                                        const iconSrc = icons.length ? icons[idx % icons.length] : null;
+
+                                        return (
+                                            <div
                                             key={ex.title}
                                             className="rounded-2xl border border-gray-200 px-6 py-8 shadow-sm bg-white"
-                                        >
+                                            >
                                             <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-100 flex items-center justify-center mb-4">
+                                                {iconSrc ? (
+                                                <img
+                                                    src={iconSrc}
+                                                    alt={`${cat.label} 아이콘`}
+                                                    className="w-7 h-7 sm:w-8 sm:h-8 object-contain"
+                                                    loading="lazy"
+                                                />
+                                                ) : (
                                                 <span className="text-gray-400 text-xl">★</span>
+                                                )}
                                             </div>
-                                            <h3 className="text-lg font-semibold mb-2">
-                                                {ex.title}
-                                            </h3>
+
+                                            <h3 className="text-lg font-semibold mb-2">{ex.title}</h3>
                                             <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                                                 {ex.description}
                                             </p>
-                                        </div>
-                                    ))}
+                                            </div>
+                                        );
+                                        })}
                                 </div>
                             </div>
                         ))}
