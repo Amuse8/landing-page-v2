@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CATEGORIES } from "../constants/customAiCategories";
+import customAiVideo from "../assets/si-video.mp4";
 
 const CustomAIPage = () => {
     const scrollRootRef = useRef<HTMLDivElement | null>(null);
@@ -102,10 +103,34 @@ const CustomAIPage = () => {
             <section
                 className="relative min-h-screen
                 flex flex-col items-center justify-center text-center text-white snap-start">
+                <video
+                        className="absolute inset-0 w-full h-full object-cover"
+                        src={customAiVideo}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                    />
+
+                <div className="absolute inset-0 bg-black/40" />
+
                 <div
-                    className="pointer-events-none absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: "url('src/assets/logo.png')"}}
-                />
+                    className="
+                        absolute bottom-4 right-4
+                        text-xs sm:text-sm
+                        text-white/70
+                        z-10
+                    "
+                >
+                    <a
+                        href="https://kr.freepik.com/free-video/%ED%8F%89%ED%8F%89%ED%95%9C-%EB%94%94%EC%9E%90%EC%9D%B8%EC%9D%98-%EA%B8%B0%EC%96%B4%EB%A5%BC-%EA%B0%80%EC%A7%84-%EB%85%B8%EB%9E%80%EC%83%89-%EB%B0%B0%EA%B2%BD%EC%9D%98-%EB%AA%A8%EC%85%98-%EA%B7%B8%EB%9E%98%ED%94%BD_3295223#fromView=search&page=1&position=18&uuid=d8acd457-c461-422e-91d1-6ae79b434123"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline hover:text-white transition-colors"
+                    >
+                        Video: freepik
+                    </a>
+                </div>
                 <div className="absolute inset-0 bg-black/40"/>
                 <div className="relative z-10 flex flex-col items-center">
                     <h1 className="relative z-10 text-3xl sm:text-4xl md:text-5xl font-bold mb-14">
