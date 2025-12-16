@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
-import mainCeep from "@/assets/main-ceep.jpg";
 import mainArticle1 from "@/assets/main-article-1.jpg";
 import mainArticle2 from "@/assets/main-article-2.jpg";
-import mainCustom from "@/assets/main-custom.jpg";
-import mainFirstImage from "@/assets/main-first-image.jpg";
+import mainCustom1200 from "@/assets/main-custom-1200.webp";
+import mainCustom2000 from "@/assets/main-custom-2000.webp";
+import mainCeep1200 from "@/assets/main-ceep-1200.webp";
+import mainCeep2000 from "@/assets/main-ceep-2000.webp";
+import mainFirstImage from "@/assets/main-first-image.webp";
 
 const HomePage = () => {
     const heroRef = useRef<HTMLDivElement | null>(null);
@@ -172,7 +174,15 @@ const HomePage = () => {
                             ref={useScrollAnimation()}
                             className="fade-up border border-gray-300 rounded-2xl px-10 py-14 flex flex-col shadow-sm">
                             <div className="mb-10">
-                                <img src={mainCeep} alt="ceep" className="w-full h-72 object-cover rounded-xl"/>
+                                <img 
+                                    src={mainCeep1200} 
+                                    srcSet={`
+                                        ${mainCeep1200} 1200w,
+                                        ${mainCeep2000} 2000w
+                                    `}
+                                    sizes="(max-width: 768px) 90vw, 1068px"
+                                    alt="custom"
+                                />
                             </div>
                             <p className="text-xl leading-relaxed text-gray-700 mb-10">
                                 흩어진 문서를 자동으로 분석해 명확한 구조로 정리해줍니다.
@@ -198,7 +208,15 @@ const HomePage = () => {
                             ref={useScrollAnimation()}
                             className="fade-up border border-gray-300 rounded-2xl px-10 py-14 flex flex-col shadow-sm">
                             <div className="mb-10">
-                                <img src={mainCustom} alt="custom" className="w-full h-72 object-cover rounded-xl"/>
+                                <img 
+                                    src={mainCustom1200} 
+                                    srcSet={`
+                                        ${mainCustom1200} 1200w,
+                                        ${mainCustom2000} 2000w
+                                    `}
+                                    sizes="(max-width: 768px) 90vw, 1068px"
+                                    alt="custom"
+                                />
                             </div>
                             <p className="text-xl leading-relaxed text-gray-700 mb-10">
                                 기업의 문제를 분석해 목적에 맞는 AI 솔루션을 설계·구현합니다.
