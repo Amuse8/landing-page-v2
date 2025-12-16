@@ -415,7 +415,7 @@ const ServicesPage = () => {
                 "
             >
                 <div className="w-full max-w-6xl">
-                    <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-extrabold mb-12 sm:mb-16 leading-snug">
+                    <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold mb-12 sm:mb-16 leading-snug">
                         업무 효율을 높이는 똑똑한 솔루션
                     </h2>
 
