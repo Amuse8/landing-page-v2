@@ -167,7 +167,7 @@ const AboutPage = () => {
     const verticalLineTopPx = Math.max(0, headerH - 10);
     
     return (
-        <div className="bg-black text-white pt-16 lg:pt-0">
+        <div className="bg-black text-white pt-16 lg:pt-0 overflow-x-hidden">
             <div ref={heroWrapperRef} className="relative h-auto lg:h-[200vh]">
                 <div className="min-h-screen lg:sticky lg:top-0 lg:h-screen">
                     <div className="absolute inset-0 bg-black" />
