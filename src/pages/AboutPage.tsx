@@ -5,6 +5,7 @@ const AboutPage = () => {
     const location = useLocation();
     const heroWrapperRef = useRef<HTMLDivElement | null>(null);
     const aboutWrapperRef = useRef<HTMLDivElement | null>(null);
+    const aboutMeasureRef = useRef<HTMLDivElement | null>(null);
     
     const navigate = useNavigate();
     
@@ -15,6 +16,10 @@ const AboutPage = () => {
     const [isCeepExpanded, setIsCeepExpanded] = useState(false);
     const [isCustomExpanded, setIsCustomExpanded] = useState(false);
     const [isContactExpanded, setIsContactExpanded] = useState(false);
+
+    const [headerH, setHeaderH] = useState(0);
+
+    const [lineLeftPx, setLineLeftPx] = useState<number | null>(null);
 
     useEffect(() => {
         const updateIsMobile = () => {
@@ -54,6 +59,55 @@ const AboutPage = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+        const measure = () => {
+            const headerEl = document.querySelector("header") as HTMLElement | null;
+            if (!headerEl) {
+                setHeaderH(0);
+                return;
+            }
+            const h = headerEl.getBoundingClientRect().height;
+            setHeaderH(Number.isFinite(h) ? h : 0);
+        };
+
+        measure();
+
+        const headerEl = document.querySelector("header") as HTMLElement | null;
+        const ro = new ResizeObserver(() => measure());
+        if (headerEl) ro.observe(headerEl);
+
+        window.addEventListener("resize", measure);
+        return () => {
+            ro.disconnect();
+            window.removeEventListener("resize", measure);
+        };
+    }, []);
+
+    useEffect(() => {
+        const updateLineX = () => {
+            if (window.innerWidth < 1024) {
+                setLineLeftPx(null);
+                return;
+            }
+            const el = aboutMeasureRef.current;
+            if (!el) return;
+
+            const rect = el.getBoundingClientRect();
+            setLineLeftPx(rect.left + rect.width / 3);
+        };
+
+        updateLineX();
+
+        const ro = new ResizeObserver(() => updateLineX());
+        if (aboutMeasureRef.current) ro.observe(aboutMeasureRef.current);
+
+        window.addEventListener("resize", updateLineX);
+        return () => {
+            ro.disconnect();
+            window.removeEventListener("resize", updateLineX);
+        };
+    }, []);
+
     const easeHero = (t: number) => 1 - Math.pow(1 - t, 3);
     const easedHero = easeHero(progress);
 
@@ -66,9 +120,7 @@ const AboutPage = () => {
     const secondTranslateY = (1- secondOpacity) * 20;
 
     const easedSection = 1 - Math.pow(1 - sectionProgress, 3);
-
     const clamp01 = (t: number) => Math.max(0, Math.min(t, 1));
-
 
     const lineScale = Math.max(0, Math.min((easedSection - 0.05) / 0.2, 1));
     const aboutSlideOpacity = easedSection <= 0.5 ? 1 : 1 - (easedSection - 0.5) / 0.2;
@@ -109,7 +161,10 @@ const AboutPage = () => {
     const possibilitySectionOpacity = isMobile
     ? possibilitySlideOpacity
     : possibilitySlideOpacity * (1 - infiniteSlideOpacity);
+
     const possibilitySectionTranslateY = infiniteSlideOpacity * -20;
+
+    const verticalLineTopPx = Math.max(0, headerH - 10);
     
     return (
         <div className="bg-black text-white pt-16 lg:pt-0">
@@ -117,10 +172,7 @@ const AboutPage = () => {
                 <div className="min-h-screen lg:sticky lg:top-0 lg:h-screen">
                     <div className="absolute inset-0 bg-black" />
                     <div className="absolute inset-0 bg-black/40"/>
-                    <div
-                        className="absolute inset-0 bg-white pointer-events-none"
-                        style={{ opacity: whiteOverlayOpacity }}
-                    />
+                    <div className="absolute inset-0 bg-white pointer-events-none" style={{ opacity: whiteOverlayOpacity }}/>
                     <div className="relative z-10 h-full flex flex-col items-center justify-center px-4">
                         <div
                             style={{
@@ -133,13 +185,9 @@ const AboutPage = () => {
                                 AI∞
                             </h1>
                         </div>
-                        <p
-                            className="text-white/80 text-base sm:text-lg md:text-xl tracking-wide mt-4"
-                            style={{ opacity: logoOpacity }}
-                        >
+                        <p className="text-white/80 text-base sm:text-lg md:text-xl tracking-wide mt-4" style={{ opacity: logoOpacity }}>
                             (AI Infinite)
                         </p>
-
                         <button
                             onClick={handleScrollDown}
                             className="mt-10 text-white/70 text-sm tracking-[0.2em] uppercase"
@@ -148,7 +196,6 @@ const AboutPage = () => {
                             Scroll
                         </button>
                     </div>
-
                     <div
                         className="
                             absolute inset-0
@@ -164,21 +211,17 @@ const AboutPage = () => {
                             transform: `translateY(${secondTranslateY}px)`,
                         }}
                     >
-                        <h2 className="text-black font-extrabold text-4xl sm:text-4xl lg:text-5xl
-                                leading-tight w-full sm:max-w-[40%]">
-                            <span className="block">Finding <span className="text-primary">Muse</span> in AI</span>
+                        <h2 className="text-black font-extrabold text-4xl sm:text-4xl lg:text-5xl leading-tight w-full sm:max-w-[40%]">
+                            <span className="block">
+                                Finding <span className="text-primary">Muse</span> in AI
+                            </span>
                         </h2>
 
-                        <p
-                            className="text-gray-800 text-base sm:text-lg
-                                leading-relaxed
-                                w-full sm:max-w-[35%]
-                            "
-                        >
-                        Amuse8(아뮤즈8)은'정보관리 자동화'를 미션으로,
-                        <br/>우리만의 영감을 담은 AI를 만듭니다.
+                        <p className="text-gray-800 text-base sm:text-lg leading-relaxed w-full sm:max-w-[35%]">
+                            Amuse8(아뮤즈8)은'정보관리 자동화'를 미션으로,
+                            <br/>
+                            우리만의 영감을 담은 AI를 만듭니다.
                         </p>
-
                         <div
                             className="
                                 mt-4 sm:mt-0
@@ -196,40 +239,34 @@ const AboutPage = () => {
             <div className="lg:hidden bg-white text-gray-900 px-6 py-12">
                 <div className="max-w-3xl mx-auto text-center">
                     <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight mb-4">
-                        <span className="block">Finding <span className="text-primary">Muse</span> in AI</span>
+                        <span className="block">
+                            Finding <span className="text-primary">Muse</span> in AI
+                        </span>
                     </h2>
                     <p className="text-base sm:text-lg leading-relaxed text-gray-700">
                         Amuse8(아뮤즈8)은'정보관리 자동화'를 미션으로,
-                        <br/>우리만의 영감을 담은 AI를 만듭니다.
+                        <br/>
+                        우리만의 영감을 담은 AI를 만듭니다.
                     </p>
                 </div>
             </div>
-
-            <div
-                ref={aboutWrapperRef}
-                className="relative bg-white text-gray-900 lg:h-[200vh]"
-            >
+            <div ref={aboutWrapperRef} className="relative bg-white text-gray-900 lg:h-[200vh]">
                 <div className="relative lg:sticky lg:top-0 lg:h-screen">
+                    <div className="hidden lg:block absolute inset-0 pointer-events-none">
+                        <div ref={aboutMeasureRef} className="relative w-full max-w-6xl mx-auto px-4 sm:px-8 lg:px-12 h-full"/>
+                    </div>
                     <div className="pointer-events-none z-10 hidden sm:block lg:absolute lg:inset-0">
                         <div
-                            className="
-                            hidden lg:block
-                            absolute bottom-10 left-0 right-0
-                            h-[1px] bg-black origin-left
-                            "
+                            className="hidden lg:block absolute bottom-10 left-0 right-0 h-[1px] bg-black origin-left"
                             style={{
                                 transform: `scaleX(${lineScale * (1 - infiniteSlideOpacity)})`,
                                 opacity: 1 - infiniteSlideOpacity,
                             }}
                         />
-
-                        <div
-                            className="
-                            hidden lg:block
-                            absolute top-10 bottom-2
-                            left-1/3 w-[1px] bg-black origin-top
-                            "
+                        <div className="hidden lg:block absolute bottom-2 w-[1px] bg-black origin-top"
                             style={{
+                                top: `${verticalLineTopPx}px`,
+                                left: lineLeftPx !== null ? `${lineLeftPx}px` : "33.333%",
                                 transform: `scaleY(${lineScale * (1 - infiniteSlideOpacity)})`,
                                 opacity: 1 - infiniteSlideOpacity,
                             }}
@@ -243,7 +280,7 @@ const AboutPage = () => {
                             transform: `translateX(${aboutTranslateX}px)`,
                             transition: "opacity 400ms ease-out, transform 400ms ease-out",
                         }}
-                        >
+                    >
                         <div
                             className="
                             relative w-full max-w-6xl mx-auto
@@ -253,7 +290,7 @@ const AboutPage = () => {
                             gap-10 lg:gap-0
                             "
                         >
-                            <div className="w-full lg:w-1/3 pr-0 lg:pr-10 ">
+                            <div className="w-full lg:w-1/3 pr-0 lg:pr-10 min-w-0">
                                 <div className="mb-6 sm:mb-10">
                                     <p className="text-4xl sm:text-5xl md:text-6xl font-bold">AI</p>
                                 </div>
@@ -263,8 +300,8 @@ const AboutPage = () => {
                                 </div>
                             </div>
 
-                            <div className="w-full lg:w-2/3 space-y-5 sm:space-y-6">
-                            <h3 className="text-base sm:text-xl md:text-2xl font-semibold leading-relaxed">
+                            <div className="w-full lg:w-2/3 space-y-5 sm:space-y-6 min-w-0">
+                            <h3 className="text-base sm:text-xl md:text-2xl font-semibold leading-relaxed break-words">
                                 AI는{" "}
                                 <span className="text-primary font-bold">데이터(Data)</span>{" "}
                                 속에 숨은{" "}
@@ -275,21 +312,18 @@ const AboutPage = () => {
                                 </span>
                                 현실로 바꾸는 가장 확장적인 기술입니다.
                             </h3>
-
-                                <div className="space-y-3 text-base sm:text-sm md:text-base leading-relaxed text-gray-700">
-                                    <p>
-                                    오늘의 기업들은 복잡한 데이터와 비효율적인 시스템 속에서
-                                    무엇이 문제인지,
+                            <div className="space-y-3 text-base sm:text-sm md:text-base leading-relaxed text-gray-700 break-words">
+                                <p>
+                                    오늘의 기업들은 복잡한 데이터와 비효율적인 시스템 속에서 무엇이 문제인지,
                                     <span className="hidden sm:inline">
                                         <br />
                                     </span>
                                     <span className="inline sm:hidden"> </span>
                                     어떻게 AI를 적용해야 하는지조차 알기 어려운 상황에 놓여 있습니다.
-                                    </p>
-                                    <p>Amuse8은 이 간극을 메웁니다.</p>
-                                    <p>
-                                    우리는 사용자의 경험을 중심에 두고, 정보를 분석해 잠재력을
-                                    발견하며
+                                </p>
+                                <p>Amuse8은 이 간극을 메웁니다.</p>
+                                <p>
+                                    우리는 사용자의 경험을 중심에 두고, 정보를 분석해 잠재력을 발견하며
                                     <span className="hidden sm:inline">
                                         <br />
                                     </span>
@@ -300,13 +334,12 @@ const AboutPage = () => {
                                     </span>
                                     <span className="inline sm:hidden"> </span>
                                     모든 기업이 AI의 가능성을 현실로 바꿀 수 있는 세상을 만들어 갑니다.
-                                    </p>
-                                </div>
+                                </p>
                             </div>
                         </div>
-                    </section>
-
-                    <section
+                    </div>
+                </section>
+                <section
                     className="flex items-stretch lg:absolute lg:inset-0"
                     style={{
                         opacity: possibilitySectionOpacity,
@@ -314,22 +347,22 @@ const AboutPage = () => {
                         transform: `translateX(${possTranslateX}px) translateY(${possibilitySectionTranslateY}px)`,
                         transition: "opacity 400ms ease-out, transform 400ms ease-out",
                     }}
-                    >
-                        <div className="relative w-full max-w-6xl mx-auto  py-20 lg:py-24 flex flex-col lg:flex-row gap-16 lg:gap-0">
-                            <div className="w-full lg:w-1/3 pr-0 lg:pr-10 px-4 sm:px-6 lg:px-0">
+                >
+                    <div className="relative w-full max-w-6xl mx-auto py-20 lg:py-24 flex flex-col lg:flex-row gap-16 lg:gap-0 px-4 sm:px-6 lg:px-0">
+                            <div className="w-full lg:w-1/3 pr-0 lg:pr-10 min-w-0">
                                 <div className="mb-10">
                                     <p className="text-5xl font-bold">Possibility</p>
                                 </div>
-                                <div className="text-2xl leading-relaxed">
+                                <div className="text-2xl leading-relaxed break-words">
                                     <p className="font-medium">
-                                    <span className="text-primary font-semibold">Amuse8</span>는 모두가<br /> AI의 가능성을 활용할 수 있는<br /> 미래를 만듭니다.
+                                    <span className="text-primary font-semibold">Amuse8</span>는 모두가<br />
+                                    AI의 가능성을 활용할 수 있는<br /> 
+                                    미래를 만듭니다.
                                     </p>
                                 </div>
                             </div>
-
                             <div className="hidden lg:block w-px" />
-
-                            <div className="w-full lg:w-2/3 flex items-center">
+                            <div className="w-full lg:w-2/3 flex items-center min-w-0">
                                 <div className="relative h-[420px] w-full hidden lg:block">
                                     <div className="relative flex h-[420px] overflow-hidden">
                                         <div
@@ -340,8 +373,7 @@ const AboutPage = () => {
                                                     transform: `translateX(${problemTranslateX}px)`,
                                                     backgroundColor: problemBgColor,
                                                     marginLeft: `${-6 * problemSlideProgress}px`,
-                                                    transition:
-                                                        "width 300ms ease-out, transform 300ms ease-out, background-color 300ms ease-out",
+                                                    transition: "width 300ms ease-out, transform 300ms ease-out, background-color 300ms ease-out",
                                             }}
                                         >
                                             <div className="h-full px-10 py-12 flex flex-col">
@@ -352,22 +384,16 @@ const AboutPage = () => {
                                                     Problem
                                                 </div>
                                                 <div className="mt-auto">
-                                                    <h3
-                                                    className="text-3xl text-white font-semibold mb-4"
-                                                    style={{ opacity: problemTextOpacity }}
-                                                >
+                                                    <h3 className="text-3xl text-white font-semibold mb-4" style={{ opacity: problemTextOpacity }}>
                                                     AI 적용의 난제
-                                                </h3>
-                                                <p
-                                                    className="text-base leading-relaxed text-white"
-                                                    style={{ opacity: problemTextOpacity }}
-                                                >
-                                                    AI 기술은 빠르게 발전하는데, <br />
-                                                    왜 기업은 여전히 어려움을 겪을까요? <br />
-                                                    복잡한 데이터와 시스템 속에서 문제를 파악하기 어렵고,
-                                                    <br />
-                                                    AI의 실제 업무 적용 방식도 명확하지 않기 때문입니다.
-                                                </p>
+                                                    </h3>
+                                                    <p className="text-base leading-relaxed text-white" style={{ opacity: problemTextOpacity }}>
+                                                        AI 기술은 빠르게 발전하는데, <br />
+                                                        왜 기업은 여전히 어려움을 겪을까요? <br />
+                                                        복잡한 데이터와 시스템 속에서 문제를 파악하기 어렵고,
+                                                        <br />
+                                                        AI의 실제 업무 적용 방식도 명확하지 않기 때문입니다.
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -377,12 +403,10 @@ const AboutPage = () => {
                                                     width: `${solutionWidth}%`,
                                                     opacity: solutionOpacity,
                                                     transform: `translateX(${solutionTranslateX}px)`,
-                                                    transition:
-                                                        "width 300ms ease-out, transform 300ms ease-out, opacity 300ms ease-out",
+                                                    transition: "width 300ms ease-out, transform 300ms ease-out, opacity 300ms ease-out",
                                             }}
                                         >
-                                            <div
-                                                className="h-full px-10 py-12 flex flex-col">
+                                            <div className="h-full px-10 py-12 flex flex-col">
                                                     <div className="inline-flex self-start items-center px-5 py-1.5 rounded-full bg-primary text-white text-sm font-medium mb-6">
                                                         Solution
                                                     </div>
@@ -398,172 +422,165 @@ const AboutPage = () => {
                                                             실질적인 AI 경험을 만드는 것이 <br/>우리의 방식입니다.
                                                         </p>
                                                     </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="w-full space-y-6 px-4 sm:px-6 lg:hidden">
-                                    <div className="bg-black text-white rounded-3xl px-6 py-8">
-                                        <div className="inline-flex items-center px-4 py-1 rounded-full bg-white text-black text-xs font-medium mb-4">
-                                            Problem
+                                    <div className="w-full space-y-6 px-4 sm:px-6 lg:hidden">
+                                        <div className="bg-black text-white rounded-3xl px-6 py-8">
+                                            <div className="inline-flex items-center px-4 py-1 rounded-full bg-white text-black text-xs font-medium mb-4">
+                                                Problem
+                                            </div>
+                                            <h3 className="text-xl font-semibold mb-3 text-white">
+                                                막막한 AI 적용
+                                            </h3>
+                                            <p className="text-sm leading-relaxed text-white/90"> 
+                                                AI 기술은 빠르게 발전하는데, <br/>
+                                                    왜 기업은 여전히 어려움을 겪을까요? <br/>
+                                                    복잡한 데이터와 시스템 속에서 문제를 파악하기 어렵고,
+                                                    <br/>
+                                                    AI의 실제 업무 적용 방식도 명확하지 않기 때문입니다.
+                                            </p>
                                         </div>
-                                        <h3 className="text-xl font-semibold mb-3 text-white">
-                                            막막한 AI 적용
-                                        </h3>
-                                        <p className="text-sm leading-relaxed text-white/90"> 
-                                            AI 기술은 빠르게 발전하는데, <br/>
-                                                왜 기업은 여전히 어려움을 겪을까요? <br/>
-                                                복잡한 데이터와 시스템 속에서 문제를 파악하기 어렵고,
-                                                <br/>
-                                                AI의 실제 업무 적용 방식도 명확하지 않기 때문입니다.
-                                        </p>
+                                        <div className="bg-[#F3F3F3] text-black rounded-3xl px-6 py-8">
+                                            <div className="inline-flex items-center px-4 py-1 rounded-full bg-primary text-white text-xs font-medium mb-4">
+                                                Solution
+                                            </div>
+                                            <h3 className="text-xl font-semibold mb-3">
+                                                손쉬운 AI 경험
+                                            </h3>
+                                            <p className="text-sm leading-relaxed text-gray-800">
+                                                Amuse8은 문제를 먼저 정의하고,
+                                                    그에 가장 적합한 AI 해결책을 제품 형태로 제공합니다.
+                                                    <br/>누구나 필요한 순간 바로 사용할 수 있는
+                                                    실질적인 AI 경험을 만드는 것이 우리의 방식입니다.
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div className="bg-[#F3F3F3] text-black rounded-3xl px-6 py-8">
-                                        <div className="inline-flex items-center px-4 py-1 rounded-full bg-primary text-white text-xs font-medium mb-4">
-                                            Solution
+                                </div>
+                            </div>
+                        </section>
+                        <section
+                            className="flex items-stretch lg:absolute lg:inset-0"
+                            style={{
+                                opacity: infiniteSlideOpacity,
+                                pointerEvents: infiniteSlideOpacity > 0.05 ? "auto" : "none",
+                                transform: `translateY(${(1 - infiniteSlideOpacity) * 20}px)`,
+                                transition: "opacity 400ms ease-out, transform 400ms ease-out",
+                            }}
+                        >
+                            <div className="relative w-full max-w-6xl mx-auto py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-0">
+                                <div className="relative rounded-[32px] overflow-hidden bg-black">
+                                    <div
+                                        className="absolute inset-0 bg-cover bg-center"
+                                        style={{ backgroundImage: "url('/images/ax-experience-bg.jpg')" }} 
+
+                                    />
+                                    <div className="absolute inset-0 bg-black/55" />
+                                    <div className="relative z-10 px-8 sm:px-10 lg:px-12 py-10 lg:py-12 flex flex-col gap-10 lg:gap-12">
+                                        <div className="text-white max-w-xl">
+                                            <p className="text-xs font-medium text-white/60 mb-3">
+                                                Our Product
+                                            </p>
+                                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
+                                                <span className="text-primary">AI∞</span>{" "}
+                                                <span>: Infinite AI <br/>Possibilities</span>
+                                                <br />
+                                                <span>직접 경험해 보세요</span>
+                                            </h2>
+                                            <p className="text-sm sm:text-base text-white/80 leading-relaxed">
+                                                AI로 비즈니스의 한계를 넘어서고 싶다면,<br />
+                                                지금 Amuse8과 함께 <br/> 무한한 AI 경험을 시작해보세요.
+                                            </p>
                                         </div>
-                                        <h3 className="text-xl font-semibold mb-3">
-                                            손쉬운 AI 경험
-                                        </h3>
-                                        <p className="text-sm leading-relaxed text-gray-800">
-                                            Amuse8은 문제를 먼저 정의하고,
-                                                그에 가장 적합한 AI 해결책을 제품 형태로 제공합니다.
-                                                <br/>누구나 필요한 순간 바로 사용할 수 있는
-                                                실질적인 AI 경험을 만드는 것이 우리의 방식입니다.
-                                        </p>
+                                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+                                            <div className="flex-1">
+                                                <div className="relative h-full rounded-3xl bg-white/95 shadow-xl px-6 py-8 flex flex-col">
+                                                    <p className="text-xs font-medium text-primary mb-4">Ceep</p>
+                                                    <p className="text-base sm:text-lg font-medium leading-relaxed mb-8">
+                                                        흩어진 정보를<br />
+                                                        즉시 활용 가능한 지식으로 바꿉니다.
+                                                    </p>
+                                                    <button
+                                                        onClick={() => {
+                                                            if (!isCeepExpanded) {
+                                                                setIsCeepExpanded(true);
+                                                            } else {
+                                                                navigate("/services");
+                                                            }
+                                                        }}
+                                                        className={`
+                                                            mt-auto self-start rounded-full border border-gray-900
+                                                            flex items-center justify-center
+                                                            text-xs sm:text-sm font-medium
+                                                            transition-all duration-200
+                                                            ${isCeepExpanded ? "px-4 h-10" : "w-10 h-10 text-xl"}
+                                                        `}
+                                                    >
+                                                        {isCeepExpanded ? "Ceep 더 알아보기" : "+"}
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex-1">
+                                                <div className="relative h-full rounded-3xl bg-white/90 shadow-xl px-6 py-8 flex flex-col">
+                                                    <p className="text-xs font-medium text-primary mb-4">Custom AI</p>
+                                                    <p className="text-base sm:text-lg font-medium leading-relaxed mb-8">
+                                                        비즈니스에 필요한 AI를<br />
+                                                        원하는 형태로 만들어 드립니다.
+                                                    </p>
+                                                    <button
+                                                        onClick={() => {
+                                                            if (!isCustomExpanded) {
+                                                                setIsCustomExpanded(true);
+                                                            } else {
+                                                                navigate("/custom-ai");
+                                                            }
+                                                        }}
+                                                        className={`
+                                                            mt-auto self-start rounded-full border border-gray-900
+                                                            flex items-center justify-center
+                                                            text-xs sm:text-sm font-medium
+                                                            transition-all duration-200
+                                                            ${isCustomExpanded ? "px-4 h-10" : "w-10 h-10 text-xl"}
+                                                        `}
+                                                    >
+                                                        {isCustomExpanded ? "Custom AI 더 알아보기" : "+"}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button
+                                            onClick={() => {
+                                                if (!isContactExpanded) {
+                                                    setIsContactExpanded(true);
+                                                } else {
+                                                    navigate("/inquiry", {
+                                                        state: { from: location.pathname },
+                                                    });
+                                                }
+                                            }}
+                                            className={`
+                                                hidden lg:flex
+                                                items-center justify-center
+                                                rounded-full
+                                                bg-primary text-white text-xl font-medium
+                                                shadow-lg
+                                                absolute bottom-8 right-8
+                                                transition-all duration-300
+                                                ${isContactExpanded ? "px-6 h-14 w-auto text-base" : "w-14 h-14"}
+                                            `}
+                                        >
+                                            {isContactExpanded ? "문의하기" : "?"}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-                    <section
-                        className="flex items-stretch lg:absolute lg:inset-0"
-                        style={{
-                            opacity: infiniteSlideOpacity,
-                            pointerEvents: infiniteSlideOpacity > 0.05 ? "auto" : "none",
-                            transform: `translateY(${(1 - infiniteSlideOpacity) * 20}px)`,
-                            transition: "opacity 400ms ease-out, transform 400ms ease-out",
-                        }}
-                    >
-                        <div className="relative w-full max-w-6xl mx-auto py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-0">
-                            <div className="relative rounded-[32px] overflow-hidden bg-black">
-                                <div
-                                    className="absolute inset-0 bg-cover bg-center"
-                                    style={{ backgroundImage: "url('/images/ax-experience-bg.jpg')" }} 
-
-                                />
-                                <div className="absolute inset-0 bg-black/55" />
-
-                                <div className="relative z-10 px-8 sm:px-10 lg:px-12 py-10 lg:py-12 flex flex-col gap-10 lg:gap-12">
-                                    <div className="text-white max-w-xl">
-                                        <p className="text-xs font-medium text-white/60 mb-3">
-                                            Our Product
-                                        </p>
-                                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
-                                            <span className="text-primary">AI∞</span>{" "}
-                                            <span>: Infinite AI <br/>Possibilities</span>
-                                            <br />
-                                            <span>직접 경험해 보세요</span>
-                                        </h2>
-                                        <p className="text-sm sm:text-base text-white/80 leading-relaxed">
-                                            AI로 비즈니스의 한계를 넘어서고 싶다면,<br />
-                                            지금 Amuse8과 함께 <br/> 무한한 AI 경험을 시작해보세요.
-                                        </p>
-                                    </div>
-
-                                    <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-                                        <div className="flex-1">
-                                            <div className="relative h-full rounded-3xl bg-white/95 shadow-xl px-6 py-8 flex flex-col">
-                                                <p className="text-xs font-medium text-primary mb-4">
-                                                    Ceep
-                                                </p>
-                                                <p className="text-base sm:text-lg font-medium leading-relaxed mb-8">
-                                                    흩어진 정보를<br />
-                                                    즉시 활용 가능한 지식으로 바꿉니다.
-                                                </p>
-                                                <button
-                                                    onClick={() => {
-                                                        if (!isCeepExpanded) {
-                                                            setIsCeepExpanded(true);
-                                                        } else {
-                                                            navigate("/services");
-                                                        }
-                                                    }}
-                                                    className={`
-                                                        mt-auto self-start rounded-full border border-gray-900
-                                                        flex items-center justify-center
-                                                        text-xs sm:text-sm font-medium
-                                                        transition-all duration-200
-                                                        ${isCeepExpanded ? "px-4 h-10" : "w-10 h-10 text-xl"}
-                                                    `}
-                                                >
-                                                    {isCeepExpanded ? "Ceep 더 알아보기" : "+"}
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex-1">
-                                            <div className="relative h-full rounded-3xl bg-white/90 shadow-xl px-6 py-8 flex flex-col">
-                                                <p className="text-xs font-medium text-primary mb-4">
-                                                    Custom AI
-                                                </p>
-                                                <p className="text-base sm:text-lg font-medium leading-relaxed mb-8">
-                                                    비즈니스에 필요한 AI를<br />
-                                                    원하는 형태로 만들어 드립니다.
-                                                </p>
-                                                <button
-                                                    onClick={() => {
-                                                        if (!isCustomExpanded) {
-                                                            setIsCustomExpanded(true);
-                                                        } else {
-                                                            navigate("/custom-ai");
-                                                        }
-                                                    }}
-                                                    className={`
-                                                        mt-auto self-start rounded-full border border-gray-900
-                                                        flex items-center justify-center
-                                                        text-xs sm:text-sm font-medium
-                                                        transition-all duration-200
-                                                        ${isCustomExpanded ? "px-4 h-10" : "w-10 h-10 text-xl"}
-                                                    `}
-                                                >
-                                                    {isCustomExpanded ? "Custom AI 더 알아보기" : "+"}
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button
-                                        onClick={() => {
-                                            if (!isContactExpanded) {
-                                                setIsContactExpanded(true);
-                                            } else {
-                                                navigate("/inquiry", {
-                                                    state: { from: location.pathname },
-                                                });
-                                            }
-                                        }}
-                                        className={`
-                                            hidden lg:flex
-                                            items-center justify-center
-                                            rounded-full
-                                            bg-primary text-white text-xl font-medium
-                                            shadow-lg
-                                            absolute bottom-8 right-8
-                                            transition-all duration-300
-                                            ${isContactExpanded ? "px-6 h-14 w-auto text-base" : "w-14 h-14"}
-                                        `}
-                                    >
-                                        {isContactExpanded ? "문의하기" : "?"}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+                        </section>
+                    </div>
+                </div>         
             </div>
-                        
-        </div>
     );
 };
 
