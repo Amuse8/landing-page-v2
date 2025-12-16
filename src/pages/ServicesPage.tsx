@@ -448,16 +448,18 @@ const ServicesPage = () => {
                                 </h3>
 
                                 <ul className="space-y-3 text-base font-semibold sm:text-lg text-gray-700 leading-relaxed">
-                                    <li className="flex items-center gap-3">
-                                        <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                                    <li className="flex items-start gap-3">
+                                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-blue-500 shrink-0" />
                                         <span>업무 효율 극대화</span>
                                     </li>
-                                    <li className="flex items-center gap-3">
-                                        <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+
+                                    <li className="flex items-start gap-3">
+                                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-blue-500 shrink-0" />
                                         <span>시간 및 비용 절감</span>
                                     </li>
-                                    <li className="flex items-center gap-3">
-                                        <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+
+                                    <li className="flex items-start gap-3">
+                                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-blue-500 shrink-0" />
                                         <span>SaaS 관리 간소화 및 다중 결제 문제 해결</span>
                                     </li>
                                 </ul>
