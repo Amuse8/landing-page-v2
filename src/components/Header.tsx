@@ -16,15 +16,12 @@ export default function Header() {
     const location = useLocation();
 
     const isActive = (href: string) =>
-        location.pathname === href ||
-        (href !== "/" && location.pathname.startsWith(href));
+        location.pathname === href || (href !== "/" && location.pathname.startsWith(href));
 
     const isHome = location.pathname === "/";
     const isServices = location.pathname.startsWith("/services");
 
-    const isTransparent = (isHome || isServices) && isHeroVisible;
-
-
+    const isTransparent = (isHome || isServices) && isHeroVisible && !open;
 
     useEffect(() => {
         const handleHeroVisibility = (event: Event) => {
@@ -44,9 +41,7 @@ export default function Header() {
         <header
             className={clsx(
                 "fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 sm:px-8 py-3 transition-colors duration-300",
-                isTransparent
-                    ? "bg-transparent text-white"
-                    : "bg-white text-gray-900 shadow"
+                isTransparent ? "bg-transparent text-white" : "bg-white text-gray-900 shadow"
             )}
         >
             <Link to="/" className="flex items-center gap-2">
@@ -57,7 +52,6 @@ export default function Header() {
                 />
             </Link>
 
-            {/* 데스크탑 네비게이션 */}
             <nav className="hidden md:flex flex-row gap-6 text-base">
                 {NAV.map((item) => (
                     <NavLink
@@ -79,8 +73,6 @@ export default function Header() {
                     </NavLink>
                 ))}
             </nav>
-
-            {/* 모바일 메뉴 버튼 */}
             <button
                 type="button"
                 aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
@@ -111,8 +103,6 @@ export default function Header() {
                     </svg>
                 )}
             </button>
-
-            {/* 모바일 네비게이션 */}
             <div
                 id="mobile-menu"
                 className={clsx(
@@ -126,7 +116,8 @@ export default function Header() {
                             key={item.href}
                             to={item.href}
                             onClick={() => setOpen(false)}
-                            className="text-left py-1 hover:text-primary"
+                            className={clsx("text-left py-1 transition-colors", isActive(item.href) ? "text-primary font-semibold" : "text-gray-900 hover:text-primary"
+                            )}
                             aria-current={isActive(item.href) ? "page" : undefined}
                         >
                             {item.label}
