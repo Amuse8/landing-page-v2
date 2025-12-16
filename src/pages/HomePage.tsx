@@ -59,13 +59,16 @@ const HomePage = () => {
                     text-center text-white snap-start
                     overflow-hidden
                 "
-                style={{
-                    backgroundImage: `url(${mainFirstImage})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                }}
             >
+                <img
+                    src={mainFirstImage}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 -z-20 h-full w-full object-cover"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                />
                 <div
                     className="
                         absolute inset-0 -z-30
