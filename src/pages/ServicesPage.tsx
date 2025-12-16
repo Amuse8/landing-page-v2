@@ -6,6 +6,7 @@ import heroVideo from "../assets/service-video.mp4";
 import timeImage from "../assets/services-time-image.jpg";
 import productiveImage from "../assets/services-productive-image.jpg";
 import moneyImage from "../assets/services-money-image.jpg";
+import { Box } from "lucide-react";
 
 const ServicesPage = () => {
     const scrollRootRef = useRef<HTMLDivElement | null>(null);
@@ -435,11 +436,12 @@ const ServicesPage = () => {
                                 className="
                                     flex items-center justify-center
                                     w-16 h-16 sm:w-20 sm:h-20
-                                    rounded-3xl bg-blue-100 text-blue-600
-                                    text-3xl sm:text-4xl shrink-0
+                                    rounded-3xl bg-blue-100
+                                    text-blue-600
+                                    shrink-0
                                 "
                             >
-                                📦
+                                <Box className="w-8 h-8 sm:w-10 sm:h-10" />
                             </div>
 
                             <div className="text-left flex-1">
