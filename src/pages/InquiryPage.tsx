@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PrivacyModal from "../components/PrivacyModal";
-import companyImage from "@/assets/logo-black.svg";
+import companyImage from "@/assets/optimized/question-mark-1600.webp";
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
