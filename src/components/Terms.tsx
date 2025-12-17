@@ -1,4 +1,11 @@
+import { useEffect } from "react";
+
 const Terms = () => {
+    
+    useEffect(() => {
+            window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div className="bg-gray-50 min-h-screen">
             <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
