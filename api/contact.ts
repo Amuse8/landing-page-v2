@@ -36,14 +36,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
         // const to = "supports@amuse8.kr";
         const to = "amuse8labs@gmail.com";
-        const subject = `[문의] ${String(email)}`;
-        const text =
-    `담당자 이메일: ${email}
-    담당자 연락처: ${phone}
-
-    문의 내용:
-    ${message}
-    `;
+        const subject = `[랜딩페이지-문의] ${String(email)}`;
+        const text = [
+        `담당자 이메일: ${email}`,
+        `담당자 연락처: ${phone}`,
+        "",
+        "문의 내용:",
+        String(message),
+        "",
+        ].join("\n");
 
         const sendResp = await fetch("https://api.resend.com/emails", {
             method: "POST",
@@ -52,8 +53,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                from: "Amuse8 Contact <onboarding@resend.dev>",
-                /*from: "Amuse8 Contact <supports@amuse8.kr>", */
+                from: "Amuse8 LandingPage Contact <onboarding@resend.dev>",
+                /*from: "Amuse8 LandingPage Contact <supports@amuse8.kr>", */
                 to: [to],
                 subject,
                 text,
