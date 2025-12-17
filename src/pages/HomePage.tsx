@@ -359,8 +359,8 @@ const HomePage = () => {
                         ">
                             Amuse8와 함께 <br/>미래의 서비스를 만들어보세요.
                         </p>
-                        <a
-                        href="mailto:supports@amuse8.kr"
+                        <Link
+                            to="/inquiry"
                         className="
                             group
                             mt-6
@@ -391,7 +391,7 @@ const HomePage = () => {
                         >
                             &gt;
                         </span>
-                    </a>
+                    </Link>
 
 
 
