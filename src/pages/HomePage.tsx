@@ -7,7 +7,7 @@ import mainCustom1200 from "@/assets/main-custom-1200.webp";
 import mainCustom2000 from "@/assets/main-custom-2000.webp";
 import mainCeep1200 from "@/assets/main-ceep-1200.webp";
 import mainCeep2000 from "@/assets/main-ceep-2000.webp";
-import mainFirstImage from "@/assets/main-first-image.webp";
+import mainFirstImage from "@/assets/main-first-image-2000.webp";
 
 const HomePage = () => {
     const heroRef = useRef<HTMLDivElement | null>(null);

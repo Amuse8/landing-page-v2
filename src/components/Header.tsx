@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import clsx from "clsx";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo-black.svg";
 import logoWhite from "@/assets/logo-white.svg";
 
 const NAV = [
