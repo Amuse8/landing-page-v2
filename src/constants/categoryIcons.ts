@@ -1,35 +1,35 @@
-import db1 from "@/assets/category-icons/data-icon.png";
-import db2 from "@/assets/category-icons/business-icon.png";
-import db3 from "@/assets/category-icons/task-automation-icon.png";
+import db1 from "@/assets/category-icons-webp/data-icon.webp";
+import db2 from "@/assets/category-icons-webp/business-icon.webp";
+import db3 from "@/assets/category-icons-webp/task-automation-icon.webp";
 
-import vv1 from "@/assets/category-icons/image-icon.png";
-import vv2 from "@/assets/category-icons/analytics-icon.png";
-import vv3 from "@/assets/category-icons/object-icon.png";
-import vv4 from "@/assets/category-icons/subtitle-icon.png";
+import vv1 from "@/assets/category-icons-webp/image-icon.webp";
+import vv2 from "@/assets/category-icons-webp/analytics-icon.webp";
+import vv3 from "@/assets/category-icons-webp/object-icon.webp";
+import vv4 from "@/assets/category-icons-webp/subtitle-icon.webp";
 
-import rp1 from "@/assets/category-icons/recommend-icon.png";
-import rp2 from "@/assets/category-icons/contents-icon.png";
-import rp3 from "@/assets/category-icons/recommendation-engines-icon.png";
+import rp1 from "@/assets/category-icons-webp/recommend-icon.webp";
+import rp2 from "@/assets/category-icons-webp/contents-icon.webp";
+import rp3 from "@/assets/category-icons-webp/recommendation-engines-icon.webp";
 
-import nv1 from "@/assets/category-icons/documents-icon.png";
-import nv2 from "@/assets/category-icons/chatbot-icon.png";
-import nv3 from "@/assets/category-icons/tts-icon.png";
+import nv1 from "@/assets/category-icons-webp/documents-icon.webp";
+import nv2 from "@/assets/category-icons-webp/chatbot-icon.webp";
+import nv3 from "@/assets/category-icons-webp/tts-icon.webp";
 
-import rb1 from "@/assets/category-icons/root-icon.png";
-import rb2 from "@/assets/category-icons/robotics-icon.png";
-import rb3 from "@/assets/category-icons/task-automation-icon.png";
+import rb1 from "@/assets/category-icons-webp/root-icon.webp";
+import rb2 from "@/assets/category-icons-webp/robotics-icon.webp";
+import rb3 from "@/assets/category-icons-webp/task-automation-icon.webp";
 
-import mm1 from "@/assets/category-icons/data-analysis-icon.png";
-import mm2 from "@/assets/category-icons/advanced-search-icon.png";
-import mm3 from "@/assets/category-icons/response-icon.png";
+import mm1 from "@/assets/category-icons-webp/data-analysis-icon.webp";
+import mm2 from "@/assets/category-icons-webp/advanced-search-icon.webp";
+import mm3 from "@/assets/category-icons-webp/response-icon.webp";
 
-import aw1 from "@/assets/category-icons/ui-icon.png";
-import aw2 from "@/assets/category-icons/user-icon.png";
-import aw3 from "@/assets/category-icons/operation-icon.png";
+import aw1 from "@/assets/category-icons-webp/ui-icon.webp";
+import aw2 from "@/assets/category-icons-webp/user-icon.webp";
+import aw3 from "@/assets/category-icons-webp/operation-icon.webp";
 
-import ce1 from "@/assets/category-icons/segment-icon.png";
-import ce2 from "@/assets/category-icons/supply-chain-icon.png";
-import ce3 from "@/assets/category-icons/forecast-icon.png";
+import ce1 from "@/assets/category-icons-webp/segment-icon.webp";
+import ce2 from "@/assets/category-icons-webp/supply-chain-icon.webp";
+import ce3 from "@/assets/category-icons-webp/forecast-icon.webp";
 
 export const CATEGORY_ICON_LIST: Record<string, string[]> = {
     "data-business": [db1, db2, db3],
