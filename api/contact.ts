@@ -53,8 +53,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                from: "Amuse8 LandingPage Contact <onboarding@resend.dev>",
-                /*from: "Amuse8 LandingPage Contact <supports@amuse8.kr>", */
+                from: "Amuse8 LandingPage Contact <supports@amuse8.kr>", 
                 to: [to],
                 subject,
                 text,
