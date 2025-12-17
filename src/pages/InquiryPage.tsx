@@ -185,7 +185,7 @@ export default function InquiryPage() {
 
             <div className="flex items-center justify-center px-6 py-14">
                 <div className="w-full max-w-xl space-y-7">
-                    <h1 className="text-4xl font-extrabold">문의하기</h1>
+                    <h1 className="mt-3 text-4xl font-extrabold">문의하기</h1>
                     
 
                     <div className="mt-10 space-y-7">
@@ -248,7 +248,7 @@ export default function InquiryPage() {
 
                     <div>
                         <label className="mb-2 block text-sm font-semibold">
-                        문의 내용 (100자) <span className="text-red-500">*</span>
+                        문의 내용 <span className="text-red-500">*</span>
                         </label>
                         <textarea
                         value={message}
