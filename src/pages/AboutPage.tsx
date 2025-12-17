@@ -55,7 +55,7 @@ const AboutPage = () => {
             new CustomEvent("hero-visibility", { detail: isHeroVisible })
         );
     }, [isHeroVisible]);
-    
+
     useEffect(() => {
         const handleScroll = () => {
             const viewportHeight = window.innerHeight;
@@ -78,6 +78,15 @@ const AboutPage = () => {
         window.addEventListener("scroll", handleScroll, { passive: true });
         handleScroll();
         return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    useEffect(() => {
+        return () => {
+            window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        }
     }, []);
 
     const easeHero = (t: number) => 1 - Math.pow(1 - t, 3);
