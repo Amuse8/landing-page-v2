@@ -1,17 +1,21 @@
 import { useEffect, useRef, useState } from "react";
-import { CATEGORIES } from "../constants/customAiCategories";
-import customAiVideo from "../assets/si-video.mp4";
-import { CATEGORY_ICON_LIST } from "../constants/categoryIcons";
 import { useNavigate, useLocation } from "react-router-dom";
+import { CATEGORIES } from "../constants/customAiCategories";
+import { CATEGORY_ICON_LIST } from "../constants/categoryIcons";
+import customAiVideo from "../assets/si-video.mp4";
 
 const CustomAIPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
+
     const scrollRootRef = useRef<HTMLDivElement | null>(null);
+    const heroRef = useRef<HTMLElement | null>(null);
     const nextSectionRef = useRef<HTMLDivElement | null>(null);
     const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
     const [activeCategory, setActiveCategory] = useState<string>(CATEGORIES[0].id);
     const [showScrollTop, setShowScrollTop] = useState(false);
+
+    const [isHeroVisible, setIsHeroVisible] = useState(true);
 
     const goInquiry = () => {
         navigate("/inquiry", { state: { from: location.pathname }});
@@ -22,31 +26,52 @@ const CustomAIPage = () => {
     };
 
     const handleCategoryClick = (id: string) => {
-    const target = sectionRefs.current[id];
-    const root = scrollRootRef.current;
+        const target = sectionRefs.current[id];
+        const root = scrollRootRef.current;
+        if (!target || !root) return;
 
-    
+        if (window.innerWidth < 768) {
+            const rootRect = root.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+            
+            const headerEl = document.querySelector("header");
+            const headerHeight = headerEl instanceof HTMLElement ? headerEl.offsetHeight : 0;
 
-    if (!target || !root) return;
+            const offsetFromRootTop = targetRect.top - rootRect.top;
 
-    if (window.innerWidth < 768) {
-        const rootRect = root.getBoundingClientRect();
-        const targetRect = target.getBoundingClientRect();
+            root.scrollTo({
+                top: root.scrollTop + offsetFromRootTop - headerHeight - 16,
+                behavior: "smooth",
+            });
+        } else {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    };
 
-        const headerEl = document.querySelector("header");
-        const headerHeight =
-            headerEl instanceof HTMLElement ? headerEl.offsetHeight : 0;
+    useEffect(() => {
+        const root = scrollRootRef.current;
+        const hero = heroRef.current;
+        if (!root || !hero) return;
 
-        const offsetFromRootTop = targetRect.top - rootRect.top;
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const entry = entries[0];
+                setIsHeroVisible(entry.isIntersecting);
+            },
+            {
+                root,
+                threshold: 0.3,
+            }
+        );
 
-        root.scrollTo({
-            top: root.scrollTop + offsetFromRootTop - headerHeight - 16,
-            behavior: "smooth",
-        });
-    } else {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-};
+        observer.observe(hero);
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        window.dispatchEvent(new CustomEvent("hero-visibility", { detail: isHeroVisible }));
+    }, [isHeroVisible]);
+
     useEffect(() => {
         const root = scrollRootRef.current;
         if (!root) return;
@@ -76,7 +101,6 @@ const CustomAIPage = () => {
         });
 
         return () => observer.disconnect();
-
     }, []);
 
     useEffect(() => {
@@ -111,6 +135,7 @@ const CustomAIPage = () => {
             className="h-screen overflow-y-scroll snap-y snap-mandatory"
         >
             <section
+                ref={heroRef}
                 className="relative min-h-screen
                 flex flex-col items-center justify-center text-center text-white snap-start">
                 <video

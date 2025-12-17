@@ -11,6 +11,7 @@ const AboutPage = () => {
     const [progress, setProgress] = useState(0);
     const [sectionProgress, setSectionProgress] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
+    const [isHeroVisible, setIsHeroVisible] = useState(true);
 
     const [isCeepExpanded, setIsCeepExpanded] = useState(false);
     const [isCustomExpanded, setIsCustomExpanded] = useState(false);
@@ -30,6 +31,31 @@ const AboutPage = () => {
         aboutWrapperRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
+    useEffect(() => {
+        const hero = heroWrapperRef.current;
+        if (!hero) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const entry = entries[0];
+                setIsHeroVisible(entry.isIntersecting);
+            },
+            {
+                root: null,
+                threshold: 0.3,
+            }
+        );
+
+        observer.observe(hero);
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        window.dispatchEvent(
+            new CustomEvent("hero-visibility", { detail: isHeroVisible })
+        );
+    }, [isHeroVisible]);
+    
     useEffect(() => {
         const handleScroll = () => {
             const viewportHeight = window.innerHeight;

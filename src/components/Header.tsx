@@ -20,8 +20,9 @@ export default function Header() {
 
     const isHome = location.pathname === "/";
     const isServices = location.pathname.startsWith("/services");
-
-    const isTransparent = (isHome || isServices) && isHeroVisible && !open;
+    const isCustomAI = location.pathname.startsWith("/custom-ai");
+    const isAbout = location.pathname.startsWith("/about");
+    const isTransparent = (isHome || isServices || isCustomAI || isAbout) && isHeroVisible && !open;
 
     useEffect(() => {
         const handleHeroVisibility = (event: Event) => {
