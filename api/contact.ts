@@ -23,9 +23,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         if (ip) form.append("remoteip", ip);
 
         const verifyResp = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-        method: "POST",
-        headers: { "content-type": "application/x-www-form-urlencoded" },
-        body: form.toString(),
+            method: "POST",
+            headers: { "content-type": "application/x-www-form-urlencoded" },
+            body: form.toString(),
         });
 
         const verifyData = await verifyResp.json();
@@ -51,21 +51,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                from: "Amuse8 Contact <no-reply@amuse8.kr>", 
+                from: "Amuse8 Contact <onboarding@resend.dev>",
+                /*from: "Amuse8 Contact <supports@amuse8.kr>", */
                 to: [to],
                 subject,
                 text,
                     reply_to: email,
                 }),
-                });
-
-                if (!sendResp.ok) {
+            });
+            if (!sendResp.ok) {
                 const errText = await sendResp.text().catch(() => "");
                 return res.status(500).json({ message: "메일 전송 실패", detail: errText });
-                }
-
-                return res.status(200).json({ ok: true });
-            } catch {
-                return res.status(500).json({ message: "Server error" });
             }
+
+            return res.status(200).json({ ok: true });
+        } catch {
+            return res.status(500).json({ message: "Server error" });
+        }
 }
