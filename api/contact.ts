@@ -34,8 +34,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const resendKey = process.env.RESEND_API_KEY;
         if (!resendKey) return res.status(500).json({ message: "Missing RESEND_API_KEY" });
 
-        // const to = "supports@amuse8.kr";
-        const to = "amuse8labs@gmail.com";
+        const to = "supports@amuse8.kr";
         const subject = `[랜딩페이지-문의] ${String(email)}`;
         const text = [
         `담당자 이메일: ${email}`,
