@@ -1,4 +1,8 @@
 {
+    "redirects": [
+        { "source": "/company", "destination": "/", "permanent": true },
+        { "source": "/company/:path*", "destination": "/", "permanent": true }
+    ],
     "rewrites": [
         { "source": "/(.*)", "destination": "/index.html" }
     ]
