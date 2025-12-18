@@ -11,6 +11,20 @@ import mainArticle7 from "@/assets/main-article-7.webp";
 import mainArticle8 from "@/assets/main-article-8.webp";
 import mainArticle9 from "@/assets/main-article-9.webp";
 import mainArticle10 from "@/assets/main-article-10.webp";
+
+import partnerLogo1 from "@/assets/company-logo/company-1.png";
+import partnerLogo2 from "@/assets/company-logo/company-2.png";
+import partnerLogo3 from "@/assets/company-logo/company-3.svg";
+import partnerLogo4 from "@/assets/company-logo/company-4.png";
+import partnerLogo5 from "@/assets/company-logo/company-5.png";
+import partnerLogo6 from "@/assets/company-logo/company-6.png";
+import partnerLogo7 from "@/assets/company-logo/company-7.png";
+import partnerLogo8 from "@/assets/company-logo/company-8.svg";
+import partnerLogo9 from "@/assets/company-logo/company-9.png";
+import partnerLogo10 from "@/assets/company-logo/company-10.png";
+import partnerLogo11 from "@/assets/company-logo/company-11.png";
+import partnerLogo12 from "@/assets/company-logo/company-12.png";
+
 import mainCustom1200 from "@/assets/main-custom-1200.webp";
 import mainCustom2000 from "@/assets/main-custom-2000.webp";
 import mainCeep1200 from "@/assets/main-ceep-1200.webp";
@@ -40,6 +54,24 @@ const HomePage = () => {
         { id: 8, title: "아뮤즈8, AI 기술 접목한 지능형 데이터 관리 서비스 확대", tags: ["#AI", "#데이터관리서비스"], image: mainArticle8, sourceName: "줌"  },
         { id: 9, title: "아뮤즈8, AI 기반 자동 분류 기술로 정보 관리 방식 혁신", tags: ["#자동분류", "#정보관리"], image: mainArticle9, sourceName: "디시인사이드"  },
         { id: 10, title: "아뮤즈8, AI 기반 데이터 자동 태깅 기술로 정보 관리 효율화", tags: ["#데이터자동태깅", "#효율화"], image: mainArticle10, sourceName: "MSN"  },
+        ],
+        []
+    );
+
+    const PARTNER_LOGOS = useMemo(
+        () => [
+            { id: 1, name: "Partner 1", src: partnerLogo1 },
+            { id: 2, name: "Partner 2", src: partnerLogo2 },
+            { id: 3, name: "Partner 3", src: partnerLogo3 },
+            { id: 4, name: "Partner 4", src: partnerLogo4 },
+            { id: 5, name: "Partner 5", src: partnerLogo5 },
+            { id: 6, name: "Partner 6", src: partnerLogo6 },
+            { id: 7, name: "Partner 7", src: partnerLogo7 },
+            { id: 8, name: "Partner 8", src: partnerLogo8 },
+            { id: 9, name: "Partner 9", src: partnerLogo9 },
+            { id: 10, name: "Partner 10", src: partnerLogo10 },
+            { id: 11, name: "Partner 11", src: partnerLogo11 },
+            { id: 12, name: "Partner 12", src: partnerLogo12 },
         ],
         []
     );
@@ -414,18 +446,28 @@ const HomePage = () => {
                 </h2>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-                    <div
-                    key={i}
-                    className="
-                        h-24 bg-gray-100 rounded-xl
-                        flex items-center justify-center
-                        text-gray-700 text-lg font-semibold
-                    "
-                    >
-                    파트너 {i}
-                    </div>
-                ))}
+                    {PARTNER_LOGOS.map((logo) => (
+                        <div
+                        key={logo.id}
+                        className="
+                            h-24 
+                            flex items-center justify-center
+                            px-4
+                        "
+                        >
+                        <img
+                            src={logo.src}
+                            alt={logo.name}
+                            loading="lazy"
+                            decoding="async"
+                            className="
+                            max-h-full max-w-full
+                            object-contain
+                            opacity-90
+                            "
+                        />
+                        </div>
+                    ))}
                 </div>
             </div>
 
