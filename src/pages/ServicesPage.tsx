@@ -7,6 +7,8 @@ import timeImage from "../assets/services-time-image.jpg";
 import productiveImage from "../assets/services-productive-image.jpg";
 import moneyImage from "../assets/services-money-image.jpg";
 import { Box } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const ServicesPage = () => {
     const scrollRootRef = useRef<HTMLDivElement | null>(null);
@@ -533,6 +535,66 @@ const ServicesPage = () => {
                     </div>
                 </div>
             </section>
+            <section
+                className="
+                    bg-white text-gray-900
+                    snap-start
+                    w-full
+                    flex justify-center
+                    px-4 sm:px-10 lg:px-16
+                    py-14 sm:py-20
+                "
+            >
+                <div className="w-full max-w-6xl">
+                    <div
+                    ref={useScrollAnimation()}
+                    className="
+                        fade-up
+                        rounded-3xl
+                        border border-gray-100
+                        bg-gradient-to-br from-blue-50 via-white to-slate-50
+                        shadow-md
+                        px-6 sm:px-10 lg:px-14
+                        py-10 sm:py-12
+                        flex flex-col lg:flex-row
+                        items-start lg:items-center
+                        justify-between
+                        gap-8
+                    "
+                    >
+                    <div className="text-left">
+                        <p className="text-sm sm:text-base font-semibold text-blue-600 mb-2">
+                        Ceep 도입 문의
+                        </p>
+                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-snug">
+                        우리 회사 시스템에 <span className="text-blue-600">Ceep AI</span> 도입하기
+                        </h3>
+                        <p className="mt-3 text-sm sm:text-base md:text-lg font-semibold text-gray-600 leading-relaxed">
+                        현재 업무 흐름에 맞춰 연동/도입 방식을 함께 설계해드립니다.
+                        </p>
+                    </div>
+
+                    <Link
+                        to="/inquiry"
+                        className="
+                        group
+                        inline-flex items-center justify-center
+                        rounded-2xl
+                        bg-blue-600 text-white
+                        px-6 py-3 sm:px-7 sm:py-3.5
+                        text-sm sm:text-base font-extrabold
+                        shadow-lg shadow-blue-600/20
+                        hover:bg-blue-500
+                        transition-colors
+                        w-full lg:w-auto
+                        "
+                    >
+                        문의하기로 이동
+                        <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                    </div>
+                </div>
+                </section>
             <section
                 className="
                     bg-white text-gray-900
