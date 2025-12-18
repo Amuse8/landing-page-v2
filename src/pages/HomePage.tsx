@@ -545,6 +545,7 @@ const HomePage = () => {
             </div>
             </div>
         </section>
+        <div className="bg-white h-16 sm:h-24" />
         <Footer/>
         </div>
     );

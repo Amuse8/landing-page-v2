@@ -65,6 +65,13 @@ const CustomAIPage = () => {
         }
     };
 
+    const activeCategoryRef = useRef(activeCategory);
+    useEffect(() => {
+        activeCategoryRef.current = activeCategory;
+    }, [activeCategory]);
+
+    const activeCategoryRafRef = useRef<number | null>(null);
+
     useEffect(() => {
         const root = scrollRootRef.current;
         const hero = heroRef.current;
@@ -92,14 +99,23 @@ const CustomAIPage = () => {
 
         const observer = new IntersectionObserver(
         (entries) => {
-            const visible = entries
-            .filter((e) => e.isIntersecting)
-            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+            if (activeCategoryRafRef.current) return;
+            activeCategoryRafRef.current = requestAnimationFrame(() => {
+            activeCategoryRafRef.current = null;
 
-            if (visible) {
+            const visible = entries
+                .filter((e) => e.isIntersecting)
+                .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+
+            if (!visible) return;
+
             const id = visible.target.getAttribute("data-category-id");
-            if (id) setActiveCategory(id);
+            if (!id) return;
+
+            if (activeCategoryRef.current !== id) {
+                setActiveCategory(id);
             }
+            });
         },
         {
             root,
@@ -112,18 +128,33 @@ const CustomAIPage = () => {
         if (el) observer.observe(el);
         });
 
-        return () => observer.disconnect();
+        return () => {
+        observer.disconnect();
+        if (activeCategoryRafRef.current) cancelAnimationFrame(activeCategoryRafRef.current);
+        };
     }, []);
 
     useEffect(() => {
         const root = scrollRootRef.current;
         if (!root) return;
 
-        const handleScroll = () => setShowScrollTop(root.scrollTop > 300);
+        let ticking = false;
 
-        root.addEventListener("scroll", handleScroll);
-        handleScroll();
-        return () => root.removeEventListener("scroll", handleScroll);
+        const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+
+        requestAnimationFrame(() => {
+            ticking = false;
+            const next = root.scrollTop > 300;
+            setShowScrollTop((prev) => (prev === next ? prev : next));
+        });
+        };
+
+        root.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        return () => root.removeEventListener("scroll", onScroll);
     }, []);
 
     const handleScrollToTop = () => {
@@ -162,9 +193,8 @@ const CustomAIPage = () => {
     return (
         <div
         ref={scrollRootRef}
-        className="h-screen overflow-y-scroll overflow-x-hidden overscroll-contain snap-y snap-mandatory"
+        className="h-screen overflow-y-scroll overflow-x-hidden overscroll-contain snap-y snap-proximity"
         >
-        {/* HERO */}
         <section
             ref={heroRef}
             className="relative min-h-screen overflow-hidden flex flex-col items-center justify-center text-center text-white snap-start"
@@ -196,10 +226,7 @@ const CustomAIPage = () => {
             <p className="group inline-flex items-center text-white text-lg font-medium mb-12 px-4 py-2 rounded-full">
                 <span className="mr-3">원하시는 기능만큼, 원하는 형태로 제작해 드립니다.</span>
             </p>
-            <button
-                onClick={handleScrollDown}
-                className="text-white/80 text-base animate-bounce uppercase"
-            >
+            <button onClick={handleScrollDown} className="text-white/80 text-base animate-bounce uppercase">
                 Scroll Down
             </button>
             </div>
@@ -220,9 +247,7 @@ const CustomAIPage = () => {
                         type="button"
                         onClick={() => handleCategoryClick(cat.id)}
                         className={`px-3 py-1.5 rounded-full text-base sm:text-lg transition-colors ${
-                        isActive
-                            ? "bg-primary text-white"
-                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                        isActive ? "bg-primary text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                         }`}
                     >
                         {cat.label}
@@ -261,6 +286,7 @@ const CustomAIPage = () => {
                                 alt={`${cat.label} 아이콘`}
                                 className="w-7 h-7 sm:w-8 sm:h-8 object-contain"
                                 loading="lazy"
+                                decoding="async"
                                 />
                             ) : (
                                 <span className="text-gray-400 text-xl">★</span>
@@ -290,7 +316,10 @@ const CustomAIPage = () => {
             </button>
         )}
 
-        <section ref={processSectionRef} className="relative snap-start overflow-hidden bg-[#EEF3FF] text-gray-900">
+        <section
+            ref={processSectionRef}
+            className="relative snap-start overflow-hidden bg-[#EEF3FF] text-gray-900"
+        >
             <div className="pointer-events-none absolute inset-0">
             <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-blue-400/15 blur-3xl" />
             <div className="absolute -bottom-28 -left-28 h-80 w-80 rounded-full bg-indigo-400/15 blur-3xl" />
@@ -333,6 +362,7 @@ const CustomAIPage = () => {
                                 alt={`${step.id} 단계 아이콘`}
                                 className="w-8 h-8 object-contain"
                                 loading="lazy"
+                                decoding="async"
                             />
                             ) : (
                             <div className="w-8 h-8 rounded-xl bg-blue-200/60 border border-blue-200/60" />
@@ -341,9 +371,7 @@ const CustomAIPage = () => {
                         </div>
 
                         <div className="flex items-baseline gap-3 mb-3">
-                        <span className="text-lg font-semibold text-[#3762E3] leading-none">
-                            {step.id}
-                        </span>
+                        <span className="text-lg font-semibold text-[#3762E3] leading-none">{step.id}</span>
                         <h3 className="text-xl font-bold leading-none">{step.title}</h3>
                         </div>
 
@@ -420,15 +448,9 @@ const CustomAIPage = () => {
                                     remarkPlugins={[remarkGfm]}
                                     components={{
                                     p: ({ children }) => <p className="mb-0 last:mb-0">{children}</p>,
-                                    strong: ({ children }) => (
-                                        <strong className="font-semibold">{children}</strong>
-                                    ),
-                                    ul: ({ children }) => (
-                                        <ul className="list-disc pl-5 space-y-1">{children}</ul>
-                                    ),
-                                    ol: ({ children }) => (
-                                        <ol className="list-decimal pl-5 space-y-1">{children}</ol>
-                                    ),
+                                    strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                                    ul: ({ children }) => <ul className="list-disc pl-5 space-y-1">{children}</ul>,
+                                    ol: ({ children }) => <ol className="list-decimal pl-5 space-y-1">{children}</ol>,
                                     li: ({ children }) => <li>{children}</li>,
                                     a: ({ children, ...props }) => (
                                         <a
@@ -493,6 +515,7 @@ const CustomAIPage = () => {
             </div>
             </div>
         </section>
+
         <section className="snap-start bg-white">
             <Footer />
         </section>
