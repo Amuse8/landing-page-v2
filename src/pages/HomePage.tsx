@@ -44,15 +44,15 @@ const HomePage = () => {
 
     const ARTICLES = useMemo(
         () => [
-        { id: 1, title: "AI 기반 스마트 클라우드 서비스를 제공하는 기업 ‘아뮤즈8’", tags: ["#AI", "#클라우드"], image: mainArticle1, sourceName: "모바일한경" },
-        { id: 2, title: "아뮤즈8 “AI 데이터 자동 태깅 기술로 정보관리, 데이터 처리 혁신”", tags: ["#정보관리", "#데이터"], image: mainArticle2, sourceName: "IT동아"  },
+        { id: 1, title: "AI 기반 스마트 클라우드 서비스를 제공하는 기업 ‘아뮤즈8’", tags: ["#AI", "#클라우드"], image: mainArticle1, sourceName: "한국경제" },
+        { id: 2, title: "아뮤즈8 “AI 데이터 자동 태깅 기술로 정보관리, 데이터 처리 혁신”", tags: ["#정보관리", "#데이터"], image: mainArticle2, sourceName: "스포츠 동아"  },
         { id: 3, title: "기업 내부 데이터 관리 패러다임 전환, AI 자동화 기술 앞세운 아뮤즈8", tags: ["#패러다임", "#AI자동화"], image: mainArticle3, sourceName: "동아일보"  },
-        { id: 4, title: "아뮤즈8, AI 기반 데이터 자동 태깅 기술로 정보 관리 효율화", tags: ["#AI", "#정보관리"], image: mainArticle4, sourceName: "네이버뉴스"  },
-        { id: 5, title: "자료관리 자동화 킵, 모든 자료와 정보를 기억해줄 수 있는 AI 패러다임 바꿔나간다.", tags: ["#Ceep", "#AI패러다임"], image: mainArticle5, sourceName: "뉴스픽"  },
-        { id: 6, title: "베스트셀러 '대표라면 반드시 알아야 할 창업의 기술' 추천사 신동민 대표", tags: ["#창업의기술", "#추천사"], image: mainArticle6, sourceName: "추천사"  },
-        { id: 7, title: "AI 자동 태깅으로 사내 자료 관리 혁신 이끄는 아뮤즈8", tags: ["#자동태깅", "#사내자료관리"], image: mainArticle7, sourceName: "네이트뉴스"  },
-        { id: 8, title: "아뮤즈8, AI 기술 접목한 지능형 데이터 관리 서비스 확대", tags: ["#AI", "#데이터관리서비스"], image: mainArticle8, sourceName: "줌"  },
-        { id: 9, title: "아뮤즈8, AI 기반 자동 분류 기술로 정보 관리 방식 혁신", tags: ["#자동분류", "#정보관리"], image: mainArticle9, sourceName: "디시인사이드"  },
+        { id: 4, title: "아뮤즈8, AI 기반 데이터 자동 태깅 기술로 정보 관리 효율화", tags: ["#AI", "#정보관리"], image: mainArticle4, sourceName: "한국미디어뉴스통신"  },
+        { id: 5, title: "자료관리 자동화 킵, 모든 자료와 정보를 기억해줄 수 있는 AI 패러다임 바꿔나간다.", tags: ["#Ceep", "#AI패러다임"], image: mainArticle5, sourceName: "한국경제"  },
+        { id: 6, title: "베스트셀러 '대표라면 반드시 알아야 할 창업의 기술' 추천사 신동민 대표", tags: ["#창업의기술", "#추천사"], image: mainArticle6, sourceName: "플랫잇"  },
+        { id: 7, title: "AI 자동 태깅으로 사내 자료 관리 혁신 이끄는 아뮤즈8", tags: ["#자동태깅", "#사내자료관리"], image: mainArticle7, sourceName: "동아일보"  },
+        { id: 8, title: "아뮤즈8, AI 기술 접목한 지능형 데이터 관리 서비스 확대", tags: ["#AI", "#데이터관리서비스"], image: mainArticle8, sourceName: "AI포스트"  },
+        { id: 9, title: "아뮤즈8, AI 기반 자동 분류 기술로 정보 관리 방식 혁신", tags: ["#자동분류", "#정보관리"], image: mainArticle9, sourceName: "광주광역시"  },
         { id: 10, title: "아뮤즈8, AI 기반 데이터 자동 태깅 기술로 정보 관리 효율화", tags: ["#데이터자동태깅", "#효율화"], image: mainArticle10, sourceName: "MSN"  },
         ],
         []
