@@ -113,12 +113,20 @@ const AboutPage = () => {
     const aboutTranslateX = -(1 - aboutSlideOpacity) * 40;
     const possTranslateX = (1 - possibilitySlideOpacity) * 40;
 
-    const problemPhaseStart = 0.7;
-    const problemPhaseEnd = 0.85;
+    const problemPhaseStart = 0.66;
+    const problemPhaseEnd = 0.97;
+
+    const problemHoldRatio = 0.45;
 
     const problemRaw = (easedSection - problemPhaseStart) / (problemPhaseEnd - problemPhaseStart);
     const problemT = clamp01(problemRaw);
-    const problemSlideProgress = 1 - Math.pow(1 - problemT, 3);
+
+    const moveT = 
+        problemT <= problemHoldRatio
+            ? 0
+            : (problemT - problemHoldRatio) / (1 - problemHoldRatio);
+
+    const problemSlideProgress = 1 - Math.pow(1 - moveT, 3);
 
     const maxProblemWidth = 100;
     const minProblemWidth = 0;
@@ -129,18 +137,18 @@ const AboutPage = () => {
 
     const problemBgColor = "#111111";
     const problemTextOpacity =
-        problemSlideProgress <= 0.2
+        problemSlideProgress <= 0.5
             ? 1
-            : Math.max(0, 1 - (problemSlideProgress - 0.2) / 0.6);
+            : Math.max(0, 1 - (problemSlideProgress - 0.5) / 0.5);
 
     const problemTranslateX = -problemSlideProgress * 40;
     const solutionTranslateX = (1 - problemSlideProgress) * 20;
     const solutionOpacity =
-        problemSlideProgress <= 0.3
+        problemSlideProgress <= 0.6
             ? 0
-            : Math.max(0, (problemSlideProgress - 0.3) / 0.7);
+            : Math.max(0, (problemSlideProgress - 0.6) / 0.4);
 
-    const infinitePhaseStart = 0.95;
+    const infinitePhaseStart = 0.985;
     const infinitePhaseEnd = 1.0;
 
     const rawInfiniteOpacity =
@@ -271,7 +279,7 @@ const AboutPage = () => {
                         </div>
 
                         <section
-                            className="flex items-start lg:absolute lg:inset-0"
+                            className="flex items-start lg:items-center lg:absolute lg:inset-0"
                             style={{
                                 opacity: aboutSlideOpacity,
                                 pointerEvents: aboutSlideOpacity > 0.05 ? "auto" : "none",
@@ -341,7 +349,7 @@ const AboutPage = () => {
                         </section>
 
                         <section
-                            className="flex items-stretch lg:absolute lg:inset-0"
+                            className="flex items-stretch lg:items-center lg:absolute lg:inset-0"
                             style={{
                                 opacity: possibilitySectionOpacity,
                                 pointerEvents: possibilitySectionOpacity > 0.05 ? "auto" : "none",
@@ -358,7 +366,7 @@ const AboutPage = () => {
                                     gap-16 lg:gap-0
                                 "
                             >
-                                <div className="w-full lg:w-1/3 pr-0 lg:pr-10 min-w-0">
+                                <div className="w-full lg:w-1/3 pr-0 lg:pr-10 min-w-0 flex flex-col justify-center lg:translate-y-[2px]">
                                     <div className="mb-10">
                                         <p className="text-5xl font-bold">Possibility</p>
                                     </div>
@@ -385,7 +393,7 @@ const AboutPage = () => {
                                                     backgroundColor: problemBgColor,
                                                     marginLeft: `${-6 * problemSlideProgress}px`,
                                                     transition:
-                                                        "width 300ms ease-out, transform 300ms ease-out, background-color 300ms ease-out",
+                                                        "width 300ms ease-out, transform 600ms ease-out, background-color 300ms ease-out",
                                                 }}
                                             >
                                                 <div className="h-full px-10 py-12 flex flex-col">
@@ -423,7 +431,7 @@ const AboutPage = () => {
                                                     opacity: solutionOpacity,
                                                     transform: `translateX(${solutionTranslateX}px)`,
                                                     transition:
-                                                        "width 300ms ease-out, transform 300ms ease-out, opacity 300ms ease-out",
+                                                        "width 500ms ease-out, transform 500ms ease-out, opacity 500ms ease-out",
                                                 }}
                                             >
                                                 <div className="h-full px-10 py-12 flex flex-col">
