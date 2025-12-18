@@ -14,7 +14,7 @@ const Layout = ({ children }: LayoutProps) => {
 
     let icon = homeIcon;
 
-    if (pathname.startsWith("/services")) {
+    if (pathname.startsWith("/ceep-ai")) {
         icon = ceepIcon;
     }
 

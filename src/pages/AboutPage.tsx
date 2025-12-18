@@ -576,7 +576,7 @@ const AboutPage = () => {
                                                             if (!isCeepExpanded) {
                                                                 setIsCeepExpanded(true);
                                                             } else {
-                                                                navigate("/services");
+                                                                navigate("/ceep-ai");
                                                             }
                                                         }}
                                                         className={`
@@ -587,7 +587,7 @@ const AboutPage = () => {
                                                             ${isCeepExpanded ? "px-4 h-10" : "w-10 h-10 text-xl"}
                                                         `}
                                                     >
-                                                        {isCeepExpanded ? "Ceep 더 알아보기" : "+"}
+                                                        {isCeepExpanded ? "Ceep AI 더 알아보기" : "+"}
                                                     </button>
                                                 </div>
                                             </div>

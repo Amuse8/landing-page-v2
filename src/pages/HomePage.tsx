@@ -299,14 +299,14 @@ const HomePage = () => {
                 </p>
 
                 <Link
-                    to="/services"
+                    to="/ceep-ai"
                     className="
                     mt-auto inline-flex items-center justify-center
                     text-xl font-semibold text-gray-900
                     hover:opacity-70
                     "
                 >
-                    <span>Ceep 알아보기</span>
+                    <span>Ceep AI 알아보기</span>
                     <span className="ml-2 text-2xl">→</span>
                 </Link>
                 </article>

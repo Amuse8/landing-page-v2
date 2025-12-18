@@ -2,15 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 import PageTitle from "../components/PageTitle";
 import dragVideo from "../assets/drag-video.mp4";
-import heroVideo from "../assets/service-video.mp4";
-import timeImage from "../assets/services-time-image.jpg";
-import productiveImage from "../assets/services-productive-image.jpg";
-import moneyImage from "../assets/services-money-image.jpg";
+import heroVideo from "../assets/ceepai-video.mp4";
+import timeImage from "../assets/ceepai-time-image.jpg";
+import productiveImage from "../assets/ceepai-productive-image.jpg";
+import moneyImage from "../assets/ceepai-money-image.jpg";
 import { Box } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
-const ServicesPage = () => {
+const CeepAIPage = () => {
     const scrollRootRef = useRef<HTMLDivElement | null>(null);
     const heroRef = useRef<HTMLElement | null>(null);
     const nextSectionRef = useRef<HTMLDivElement | null>(null);
@@ -564,7 +564,7 @@ const ServicesPage = () => {
                     >
                     <div className="text-left">
                         <p className="text-sm sm:text-base font-semibold text-blue-600 mb-2">
-                        Ceep 도입 문의
+                        Ceep AI 도입 문의
                         </p>
                         <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-snug">
                         우리 회사 시스템에 <span className="text-blue-600">Ceep AI</span> 도입하기
@@ -637,4 +637,4 @@ const ServicesPage = () => {
         </div>
     )
 }
-export default ServicesPage;
+export default CeepAIPage;
