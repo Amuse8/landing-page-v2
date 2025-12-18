@@ -55,8 +55,8 @@ const HomePage = () => {
         { id: 6, title: "베스트셀러 '대표라면 반드시 알아야 할 창업의 기술' 추천사 신동민 대표", tags: ["#창업의기술", "#추천사"], image: mainArticle6, sourceName: "플랫잇"  },
         { id: 7, title: "AI 자동 태깅으로 사내 자료 관리 혁신 이끄는 아뮤즈8", tags: ["#자동태깅", "#사내자료관리"], image: mainArticle7, sourceName: "동아일보"  },
         { id: 8, title: "아뮤즈8, AI 기술 접목한 지능형 데이터 관리 서비스 확대", tags: ["#AI", "#데이터관리서비스"], image: mainArticle8, sourceName: "AI포스트"  },
-        { id: 9, title: "아뮤즈8, AI 기반 자동 분류 기술로 정보 관리 방식 혁신", tags: ["#자동분류", "#정보관리"], image: mainArticle9, sourceName: "광주광역시"  },
-        { id: 10, title: "아뮤즈8, AI 기반 데이터 자동 태깅 기술로 정보 관리 효율화", tags: ["#데이터자동태깅", "#효율화"], image: mainArticle10, sourceName: "MSN"  },
+        { id: 9, title: "아뮤즈8, 광주광역시와 업무협약 및 기술협약", tags: ["#자동분류", "#정보관리"], image: mainArticle9, sourceName: "광주광역시"  },
+        { id: 10, title: "아뮤즈8, AI기반 데이터 자동 태깅 기술 비전 AI에 최초 적용", tags: ["#데이터자동태깅", "#효율화"], image: mainArticle10, sourceName: "MSN"  },
         ],
         []
     );

@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { CATEGORIES } from "../constants/customAiCategories";
 import { CATEGORY_ICON_LIST } from "../constants/categoryIcons";
+import { PROCESS_STEPS } from "../constants/processSteps";
+import { PROCESS_ICON_LIST } from "../constants/processIcons";
 import customAiVideo from "../assets/si-video.mp4";
 
 const CustomAIPage = () => {
@@ -11,11 +13,15 @@ const CustomAIPage = () => {
     const scrollRootRef = useRef<HTMLDivElement | null>(null);
     const heroRef = useRef<HTMLElement | null>(null);
     const nextSectionRef = useRef<HTMLDivElement | null>(null);
+
     const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
     const [activeCategory, setActiveCategory] = useState<string>(CATEGORIES[0].id);
     const [showScrollTop, setShowScrollTop] = useState(false);
 
     const [isHeroVisible, setIsHeroVisible] = useState(true);
+
+    const processSectionRef = useRef<HTMLElement | null>(null);
+    const [processVisible, setProcessVisible] = useState(false);
 
     const goInquiry = () => {
         navigate("/inquiry", { state: { from: location.pathname }});
@@ -129,6 +135,32 @@ const CustomAIPage = () => {
         }
     };
 
+    useEffect(() => {
+        const root = scrollRootRef.current;
+        const target = processSectionRef.current;
+        if (!root || !target) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const entry = entries[0];
+
+                if (entry.isIntersecting) {
+                    setProcessVisible(true);
+                } else {
+                    setProcessVisible(false);
+                }
+            },
+            {
+                root,
+                threshold: 0.2,
+                rootMargin: "-10% 0px -10% 0px",
+            }
+        );
+
+        observer.observe(target);
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <div
             ref={scrollRootRef}
@@ -146,9 +178,6 @@ const CustomAIPage = () => {
                         loop
                         playsInline
                     />
-
-
-
                 <div
                     className="
                         absolute bottom-4 right-4
@@ -275,6 +304,69 @@ const CustomAIPage = () => {
                     ↑
                 </button>
             )}
+            <section ref={processSectionRef} className="relative snap-start overflow-hidden bg-[#EEF3FF] text-gray-900">
+                <div className="pointer-events-none absolute inset-0">
+                    <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-blue-400/15 blur-3xl" />
+                    <div className="absolute -bottom-28 -left-28 h-80 w-80 rounded-full bg-indigo-400/15 blur-3xl" />
+                </div>
+
+                <div className="relative flex justify-center px-4 sm:px-10 lg:px-16 py-24 sm:py-32">
+                    <div className="w-full max-w-6xl">
+                        <div
+                            className={[
+                                "mb-10 sm:mb-12 transition-all duration-700 ease-out",
+                                processVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
+                            ].join(" ")}
+                        >
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-snug">
+                            프로세스는
+                            <br />
+                            이렇게 진행됩니다.
+                        </h2>
+                        </div>
+
+                        <div className="grid gap-6 sm:gap-7 md:grid-cols-2 lg:grid-cols-4">
+                        {PROCESS_STEPS.map((step, idx) => {
+                            const iconSrc = PROCESS_ICON_LIST[step.id] ?? null;
+
+                            return (
+                            <div
+                                key={step.id}
+                                style={{ transitionDelay: processVisible ? `${idx * 80}ms` : "0ms" }}
+                                className={[
+                                "rounded-3xl bg-white/60 backdrop-blur border border-white/70 shadow-sm px-6 py-7 min-h-[190px] flex flex-col",
+                                "transition-all duration-700 ease-out",
+                                processVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
+                                ].join(" ")}
+                            >
+                                <div className="mb-5">
+                                <div className="w-14 h-14 rounded-2xl bg-white/70 border border-white shadow-sm flex items-center justify-center">
+                                    {iconSrc ? (
+                                    <img
+                                        src={iconSrc}
+                                        alt={`${step.id} 단계 아이콘`}
+                                        className="w-8 h-8 object-contain"
+                                        loading="lazy"
+                                    />
+                                    ) : (
+                                    <div className="w-8 h-8 rounded-xl bg-blue-200/60 border border-blue-200/60" />
+                                    )}
+                                </div>
+                                </div>
+
+                                <div className="flex items-baseline gap-3 mb-3">
+                                <span className="text-lg font-semibold text-[#3762E3] leading-none">{step.id}</span>
+                                <h3 className="text-xl font-bold leading-none">{step.title}</h3>
+                                </div>
+
+                                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{step.desc}</p>
+                            </div>
+                            );
+                        })}
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section className="bg-white text-gray-900 flex justify-center px-4 sm:px-10 lg:px-16 py-24 sm:py-32 snap-start">
                 <div className="w-full max-w-6xl">
                     <div
@@ -289,7 +381,6 @@ const CustomAIPage = () => {
                     >
                         <div className="flex flex-col gap-10 sm:gap-12 lg:flex-row lg:items-end lg:justify-between">
                             
-                            {/* 텍스트 영역 */}
                             <div className="space-y-6 max-w-3xl text-left">
                                 <p className="text-sm sm:text-base tracking-wide text-[#3762E3] font-semibold">
                                     상담이 필요하신가요?
@@ -308,7 +399,6 @@ const CustomAIPage = () => {
                                 </p>
                             </div>
 
-                            {/* 버튼 영역 */}
                             <div className="flex lg:flex-col items-start lg:items-end gap-4">
                                 <button
                                     type="button"
