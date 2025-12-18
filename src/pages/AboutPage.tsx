@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ceepIcon from "@/assets/about-icons/Ceep-icon.png";
 import customAiIcon from "@/assets/about-icons/Wrench-icon.png";
+import Footer from "../components/Footer";
 
 const AboutPage = () => {
     const location = useLocation();
@@ -668,6 +669,7 @@ const AboutPage = () => {
                         </section>
                     </div>
                 </div>
+                <Footer/>                                
             </div>
         </div>
     );

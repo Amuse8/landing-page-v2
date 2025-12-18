@@ -33,6 +33,7 @@ import mainCustom2000 from "@/assets/main-custom-2000.webp";
 import mainCeep1200 from "@/assets/main-ceep-1200.webp";
 import mainCeep2000 from "@/assets/main-ceep-2000.webp";
 import mainFirstImage from "@/assets/main-first-image-2000.webp";
+import Footer from "../components/Footer";
 
 const HomePage = () => {
     const scrollRootRef = useRef<HTMLDivElement | null>(null);
@@ -83,9 +84,8 @@ const HomePage = () => {
     );
 
     useEffect(() => {
-        const root = scrollRootRef.current;
         const hero = heroRef.current;
-        if (!root || !hero) return;
+        if (!hero) return;
 
         const observer = new IntersectionObserver(
         (entries) => {
@@ -93,7 +93,7 @@ const HomePage = () => {
             setIsHeroVisible(entry.isIntersecting);
             }
         },
-        { root, threshold: 0.6 }
+        { threshold: 0.6 }
         );
 
         observer.observe(hero);
@@ -110,10 +110,10 @@ const HomePage = () => {
     }, []);
 
     useEffect(() => {
-        const root = scrollRootRef.current;
-        if (!root) return;
+        const rootEl = scrollRootRef.current;
+        if (!rootEl) return;
 
-        const targets = Array.from(root.querySelectorAll<HTMLElement>(".fade-up"));
+        const targets = Array.from(rootEl.querySelectorAll<HTMLElement>(".fade-up"));
         if (targets.length === 0) return;
 
         const io = new IntersectionObserver(
@@ -123,7 +123,6 @@ const HomePage = () => {
             });
         },
         {
-            root,
             threshold: 0.15,
             rootMargin: "0px 0px -10% 0px",
         }
@@ -138,11 +137,7 @@ const HomePage = () => {
     };
 
     return (
-        <div
-        ref={scrollRootRef}
-        className="home-page h-screen overflow-y-scroll snap-y snap-mandatory"
-        >
-        {/* HERO */}
+        <div ref={scrollRootRef} className="home-page snap-y snap-mandatory">
         <section
             ref={heroRef}
             className="
@@ -153,34 +148,33 @@ const HomePage = () => {
             "
         >
             <img
-            src={mainFirstImage}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 -z-20 h-full w-full object-cover"
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
+                src={mainFirstImage}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 -z-20 h-full w-full object-cover"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
             />
 
             <div
-            className="
-                absolute inset-0 -z-30
-                flex items-start justify-center
-                pointer-events-none select-none
-            "
-            >
-            <span
                 className="
-                mt-16
-                text-white font-extrabold tracking-wide leading-none
-                text-[180px] sm:text-[230px] md:text-[280px] lg:text-[340px]
-                opacity-10
+                    absolute inset-0 -z-30
+                    flex items-start justify-center
+                    pointer-events-none select-none
                 "
             >
-                Amuse8
-            </span>
+                <span
+                    className="
+                        mt-16
+                        text-white font-extrabold tracking-wide leading-none
+                        text-[180px] sm:text-[230px] md:text-[280px] lg:text-[340px]
+                        opacity-10
+                    "
+                >
+                    Amuse8
+                </span>
             </div>
-
             <div className="absolute inset-0 bg-black/40 -z-10" />
 
             <div className="relative z-10 flex flex-col items-center">
@@ -195,12 +189,12 @@ const HomePage = () => {
                 "
             >
                 <span
-                className={`
-                    absolute inset-0
-                    flex items-center justify-center
-                    transition-all duration-700
-                    ${showAmuseTitle ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}
-                `}
+                    className={`
+                        absolute inset-0
+                        flex items-center justify-center
+                        transition-all duration-700
+                        ${showAmuseTitle ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}
+                    `}
                 >
                 Amuse8
                 </span>
@@ -403,41 +397,41 @@ const HomePage = () => {
 
             <div className="hidden md:grid gap-8 lg:gap-10 md:grid-cols-3">
                 {ARTICLES.map((a) => (
-                <article
-                    key={a.id}
-                    className="
-                    fade-up
-                    border border-gray-200 rounded-2xl
-                    p-6
-                    bg-white
-                    shadow-sm
-                    flex flex-col
-                    "
-                >
-                    <div className="w-full h-56 rounded-xl mb-6 overflow-hidden bg-gray-200">
-                    <img
-                        src={a.image}
-                        alt="뉴스 썸네일"
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                    />
-                    </div>
+                    <article
+                        key={a.id}
+                        className="
+                        fade-up
+                        border border-gray-200 rounded-2xl
+                        p-6
+                        bg-white
+                        shadow-sm
+                        flex flex-col
+                        "
+                    >
+                        <div className="w-full h-56 rounded-xl mb-6 overflow-hidden bg-gray-200">
+                        <img
+                            src={a.image}
+                            alt="뉴스 썸네일"
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                        />
+                        </div>
 
-                    <h3 className="text-lg lg:text-xl font-semibold leading-snug mb-4">
-                    {a.id === 5 ? `"${a.title}"` : a.title}
-                    </h3>
-                    <div className="mb-4 text-sm text-gray-500 font-medium">
-                        {a.sourceName}
-                    </div>
+                        <h3 className="text-lg lg:text-xl font-semibold leading-snug mb-4">
+                        {a.id === 5 ? `"${a.title}"` : a.title}
+                        </h3>
+                        <div className="mb-4 text-sm text-gray-500 font-medium">
+                            {a.sourceName}
+                        </div>
 
-                    <div className="mt-auto flex flex-wrap gap-2 text-base text-primary">
-                    {a.tags.map((t) => (
-                        <span key={t}>{t}</span>
+                        <div className="mt-auto flex flex-wrap gap-2 text-base text-primary">
+                        {a.tags.map((t) => (
+                            <span key={t}>{t}</span>
+                        ))}
+                        </div>
+                    </article>
                     ))}
-                    </div>
-                </article>
-                ))}
-            </div>
+                </div>
             </div>
         </section>
 
@@ -551,6 +545,7 @@ const HomePage = () => {
             </div>
             </div>
         </section>
+        <Footer/>
         </div>
     );
 };

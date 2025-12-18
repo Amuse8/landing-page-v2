@@ -8,6 +8,7 @@ import { FAQ_LIST } from "../constants/faqList";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import customAiVideo from "../assets/si-video.mp4";
+import Footer from "../components/Footer";
 
 const CustomAIPage = () => {
     const navigate = useNavigate();
@@ -491,6 +492,9 @@ const CustomAIPage = () => {
                 </div>
             </div>
             </div>
+        </section>
+        <section className="snap-start bg-white">
+            <Footer />
         </section>
         </div>
     );

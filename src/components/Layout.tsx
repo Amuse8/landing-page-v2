@@ -1,5 +1,4 @@
 import Header from "./Header";
-import Footer from "./Footer";
 import { type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -24,7 +23,6 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="app">
             <Header />
             <main className="page-container">{children}</main>
-            <Footer />
         </div>
     );
 };

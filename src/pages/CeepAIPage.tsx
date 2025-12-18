@@ -9,6 +9,7 @@ import moneyImage from "../assets/ceepai-money-image.jpg";
 import { Box } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import Footer from "../components/Footer";
 
 const CeepAIPage = () => {
     const scrollRootRef = useRef<HTMLDivElement | null>(null);
@@ -634,6 +635,7 @@ const CeepAIPage = () => {
                     </p>
                 </div>
             </section>
+            <Footer/>
         </div>
     )
 }
