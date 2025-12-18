@@ -3,8 +3,8 @@ import Footer from "./Footer";
 import { type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 
-import homeIcon from "../assets/amuse-favicon-32x32.png";
-import ceepIcon from "../assets/ceep-favicon-32x32.png";
+import homeIcon from "../assets/amuse-favicon.svg";
+import ceepIcon from "../assets/ceep-favicon.svg";
 import useFavicon from "../hooks/useFavicon";
 
 type LayoutProps = { children: ReactNode };
