@@ -343,10 +343,11 @@ const HomePage = () => {
             "
         >
             <div className="w-full max-w-[1600px]">
+            <p className="text-sm sm:text-base font-semibold text-gray-400 mb-4">
+                Our History
+            </p>
             <p className="text-2xl font-bold sm:text-2xl lg:text-4xl mb-16 leading-snug">
-                AI와 정보 혁신을 통해<br />
-                기업의 운영 방식과 미래 경쟁력을<br />
-                재정의하고 있습니다.
+                기업의 운영 방식과 미래 경쟁력을 <br/>재정의합니다.
             </p>
 
             <div className="md:hidden">
