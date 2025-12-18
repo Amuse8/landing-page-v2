@@ -264,6 +264,9 @@ const HomePage = () => {
             "
         >
             <div className="w-full max-w-[1600px]">
+                <p className="text-sm sm:text-base font-semibold text-gray-400 mb-4">
+                Our Mission
+            </p>
             <p className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-16 leading-snug">
                 정보의 잠재력을 드러내고<br /> 비즈니스에 최적화된 AI를 <br /> 제공합니다.
             </p>
