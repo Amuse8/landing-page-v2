@@ -235,9 +235,17 @@ const AboutPage = () => {
                             </h2>
 
                             <p className="text-gray-800 text-base sm:text-lg leading-relaxed w-full sm:max-w-[35%]">
-                                Amuse8(아뮤즈8)은'정보관리 자동화'를 미션으로,
-                                <br />
-                                우리만의 영감을 담은 AI를 만듭니다.
+                                <span className="block">
+                                    At Amuse8, we build AI inspired by our own muse, 
+                                    <br />
+                                    with the mission of automating information management.
+                                </span>
+
+                                <span className="block mt-4">
+                                    Amuse8(아뮤즈8)은 ‘정보관리 자동화’를 미션으로,
+                                    <br />
+                                    우리만의 영감을 담은 AI를 만듭니다.
+                                </span>
                             </p>
                             <div
                                 className="mt-4 sm:mt-0 text-gray-800 text-sm sm:text-base
@@ -257,9 +265,17 @@ const AboutPage = () => {
                             </span>
                         </h2>
                         <p className="text-base sm:text-lg leading-relaxed text-gray-700">
-                            Amuse8(아뮤즈8)은'정보관리 자동화'를 미션으로,
-                            <br />
-                            우리만의 영감을 담은 AI를 만듭니다.
+                            <span className="block">
+                                At Amuse8, we build AI inspired by our own muse, 
+                                <br />
+                                with the mission of automating information management.
+                            </span>
+
+                            <span className="block mt-4">
+                                Amuse8(아뮤즈8)은 ‘정보관리 자동화’를 미션으로,
+                                <br />
+                                우리만의 영감을 담은 AI를 만듭니다.
+                            </span>
                         </p>
                     </div>
                 </div>
