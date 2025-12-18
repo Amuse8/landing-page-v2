@@ -116,17 +116,25 @@ const AboutPage = () => {
     const problemPhaseStart = 0.66;
     const problemPhaseEnd = 0.97;
 
-    const problemHoldRatio = 0.45;
+    const problemHoldRatio = 0.65;
+    
+    const solutionHoldRatio = 0.25;
 
     const problemRaw = (easedSection - problemPhaseStart) / (problemPhaseEnd - problemPhaseStart);
-    const problemT = clamp01(problemRaw);
+    const t = clamp01(problemRaw);
 
-    const moveT = 
-        problemT <= problemHoldRatio
-            ? 0
-            : (problemT - problemHoldRatio) / (1 - problemHoldRatio);
+    let moveT = 0;
 
-    const problemSlideProgress = 1 - Math.pow(1 - moveT, 3);
+    if (t <= problemHoldRatio) {
+        moveT = 0;
+    } else if (t >= 1 - solutionHoldRatio) {
+        moveT = 1;
+    } else {
+        moveT = (t - problemHoldRatio) / ((1 - solutionHoldRatio) - problemHoldRatio);
+    }
+
+    const smoothstep = (t: number) => t * t * (3 - 2 * t);
+    const problemSlideProgress = smoothstep(moveT);
 
     const maxProblemWidth = 100;
     const minProblemWidth = 0;
@@ -141,14 +149,14 @@ const AboutPage = () => {
             ? 1
             : Math.max(0, 1 - (problemSlideProgress - 0.5) / 0.5);
 
-    const problemTranslateX = -problemSlideProgress * 40;
-    const solutionTranslateX = (1 - problemSlideProgress) * 20;
+    const problemTranslateX = -problemSlideProgress * 22;
+    const solutionTranslateX = (1 - problemSlideProgress) * 12;
     const solutionOpacity =
         problemSlideProgress <= 0.6
             ? 0
             : Math.max(0, (problemSlideProgress - 0.6) / 0.4);
 
-    const infinitePhaseStart = 0.985;
+    const infinitePhaseStart = 0.995;
     const infinitePhaseEnd = 1.0;
 
     const rawInfiniteOpacity =
