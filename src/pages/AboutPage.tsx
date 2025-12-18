@@ -563,7 +563,7 @@ const AboutPage = () => {
                                                         />
                                                     </div>
 
-                                                    <p className="text-xs font-medium text-primary mb-4">Ceep</p>
+                                                    <p className="text-xs font-medium text-primary mb-4">Ceep AI</p>
 
                                                     <p className="text-base sm:text-lg font-medium leading-relaxed mb-8 pr-14">
                                                         흩어진 정보를
