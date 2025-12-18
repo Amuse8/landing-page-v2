@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import ceepIcon from "@/assets/about-icons/Ceep-icon.png";
+import customAiIcon from "@/assets/about-icons/Wrench-icon.png";
 
 const AboutPage = () => {
     const location = useLocation();
@@ -545,13 +547,30 @@ const AboutPage = () => {
 
                                         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
                                             <div className="flex-1">
-                                                <div className="relative h-full rounded-3xl bg-white/95 shadow-xl px-6 py-8 flex flex-col">
+                                                <div className="relative h-full rounded-3xl bg-white/95 shadow-xl px-6 py-8 flex flex-col overflow-hidden">
+                                                    <div
+                                                        className="
+                                                            absolute right-6 top-6
+                                                            w-12 h-12
+                                                            flex items-center justify-center
+                                                            pointer-events-none
+                                                        "
+                                                        >
+                                                        <img
+                                                            src={ceepIcon}
+                                                            alt="Ceep Icon"
+                                                            className="w-full h-full object-contain opacity-90"
+                                                        />
+                                                    </div>
+
                                                     <p className="text-xs font-medium text-primary mb-4">Ceep</p>
-                                                    <p className="text-base sm:text-lg font-medium leading-relaxed mb-8">
+
+                                                    <p className="text-base sm:text-lg font-medium leading-relaxed mb-8 pr-14">
                                                         흩어진 정보를
                                                         <br />
                                                         즉시 활용 가능한 지식으로 바꿉니다.
                                                     </p>
+
                                                     <button
                                                         onClick={() => {
                                                             if (!isCeepExpanded) {
@@ -574,13 +593,30 @@ const AboutPage = () => {
                                             </div>
 
                                             <div className="flex-1">
-                                                <div className="relative h-full rounded-3xl bg-white/90 shadow-xl px-6 py-8 flex flex-col">
+                                                <div className="relative h-full rounded-3xl bg-white/90 shadow-xl px-6 py-8 flex flex-col overflow-hidden">
+                                                    <div
+                                                        className="
+                                                            absolute right-6 top-6
+                                                            w-10 h-10
+                                                            flex items-center justify-center
+                                                            pointer-events-none
+                                                        "
+                                                        >
+                                                        <img
+                                                            src={customAiIcon}
+                                                            alt="Custom AI Icon"
+                                                            className="w-full h-full object-contain opacity-90"
+                                                        />
+                                                    </div>
+
                                                     <p className="text-xs font-medium text-primary mb-4">Custom AI</p>
-                                                    <p className="text-base sm:text-lg font-medium leading-relaxed mb-8">
+
+                                                    <p className="text-base sm:text-lg font-medium leading-relaxed mb-8 pr-14">
                                                         비즈니스에 필요한 AI를
                                                         <br />
                                                         원하는 형태로 만들어 드립니다.
                                                     </p>
+
                                                     <button
                                                         onClick={() => {
                                                             if (!isCustomExpanded) {

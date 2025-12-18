@@ -264,12 +264,20 @@ const HomePage = () => {
             "
         >
             <div className="w-full max-w-[1600px]">
-                <p className="text-sm sm:text-base font-semibold text-gray-400 mb-4">
-                Our Mission
+                <p className="text-xs sm:text-sm font-semibold text-gray-400 mb-4">
+                Our Products
             </p>
-            <p className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-16 leading-snug">
-                정보의 잠재력을 드러내고<br /> 비즈니스에 최적화된 AI를 <br /> 제공합니다.
-            </p>
+            <div className="mb-16 flex flex-col gap-2">
+                <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
+                    We unlock the full potential of data<br />
+                    and provide AI optimized for your business.
+                </p>
+                <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
+                    정보의 잠재력을 드러내고
+                    비즈니스에 최적화된 AI를
+                    제공합니다.
+                </p>
+            </div>
 
             <div className="grid gap-16 md:grid-cols-2">
                 <article className="fade-up border border-gray-300 rounded-2xl px-10 py-14 flex flex-col shadow-sm">
@@ -346,7 +354,7 @@ const HomePage = () => {
             "
         >
             <div className="w-full max-w-[1600px]">
-            <p className="text-sm sm:text-base font-semibold text-gray-400 mb-4">
+            <p className="text-xs sm:text-sm font-semibold text-gray-400 mb-4">
                 Our History
             </p>
             <p className="text-2xl font-bold sm:text-2xl lg:text-4xl mb-16 leading-snug">
