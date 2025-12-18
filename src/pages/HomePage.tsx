@@ -24,6 +24,9 @@ import partnerLogo9 from "@/assets/company-logo/company-9.png";
 import partnerLogo10 from "@/assets/company-logo/company-10.png";
 import partnerLogo11 from "@/assets/company-logo/company-11.png";
 import partnerLogo12 from "@/assets/company-logo/company-12.png";
+import partnerLogo13 from "@/assets/company-logo/company-13.png";
+import partnerLogo14 from "@/assets/company-logo/company-14.png";
+import partnerLogo15 from "@/assets/company-logo/company-15.png";
 
 import mainCustom1200 from "@/assets/main-custom-1200.webp";
 import mainCustom2000 from "@/assets/main-custom-2000.webp";
@@ -72,6 +75,9 @@ const HomePage = () => {
             { id: 10, name: "Partner 10", src: partnerLogo10 },
             { id: 11, name: "Partner 11", src: partnerLogo11 },
             { id: 12, name: "Partner 12", src: partnerLogo12 },
+            { id: 13, name: "Partner 13", src: partnerLogo13 },
+            { id: 14, name: "Partner 14", src: partnerLogo14 },
+            { id: 15, name: "Partner 15", src: partnerLogo15 },
         ],
         []
     );
