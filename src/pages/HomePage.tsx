@@ -442,7 +442,7 @@ const HomePage = () => {
                 "
             >
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-10">
-                Our Partners
+                    Trusted by many leading business
                 </h2>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6">
