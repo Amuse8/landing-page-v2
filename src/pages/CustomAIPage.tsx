@@ -132,11 +132,11 @@ const CustomAIPage = () => {
     return (
         <div
             ref={scrollRootRef}
-            className="h-screen overflow-y-scroll snap-y snap-mandatory"
+            className="h-screen overflow-y-scroll overflow-x-hidden overscroll-contain snap-y snap-mandatory"
         >
             <section
                 ref={heroRef}
-                className="relative min-h-screen
+                className="relative min-h-screen overflow-hidden
                 flex flex-col items-center justify-center text-center text-white snap-start">
                 <video
                         className="absolute inset-0 w-full h-full object-cover"
@@ -147,7 +147,7 @@ const CustomAIPage = () => {
                         playsInline
                     />
 
-                <div className="absolute inset-0 bg-black/40" />
+
 
                 <div
                     className="
@@ -264,7 +264,7 @@ const CustomAIPage = () => {
                 <button
                     onClick={handleScrollToTop}
                     className="
-                        fixed right-5 bottom-6
+                        fixed right-5 bottom-6 z-50
                         flex items-center justify-center
                         w-11 h-11 rounded-full
                         bg-primary text-white

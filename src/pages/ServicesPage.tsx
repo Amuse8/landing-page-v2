@@ -63,7 +63,7 @@ const ServicesPage = () => {
     return (
         <div
             ref={scrollRootRef} 
-            className="h-screen overflow-y-scroll snap-y snap-mandatory">
+            className="h-screen overflow-y-scroll snap-y snap-mandatory overscroll-contain">
             <PageTitle title="Ceep"/>
             <section
                 ref={heroRef}
@@ -81,7 +81,10 @@ const ServicesPage = () => {
                     playsInline
                 />
                 <div className="absolute inset-0 bg-black/40"/>
-                <a href="https://kr.freepik.com/free-video/%EC%B6%94%EC%83%81-%EA%B8%B0%EC%88%A0-%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4_3730676#fromView=search&page=3&position=9&uuid=587e67d0-f154-463a-a3a6-da2bd462255f">Video: wirestock</a>
+                <a className="absolute bottom-4 right-4 z-20 text-xs text-white/70"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://kr.freepik.com/free-video/%EC%B6%94%EC%83%81-%EA%B8%B0%EC%88%A0-%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4_3730676#fromView=search&page=3&position=9&uuid=587e67d0-f154-463a-a3a6-da2bd462255f">Video: wirestock</a>
                 <div className="relative z-10 flex flex-col items-center">
                     <h1 className="relative z-10 text-3xl sm:text-4xl md:text-5xl font-bold mb-14">
                         자료 관리의 시작과 끝
