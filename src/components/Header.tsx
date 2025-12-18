@@ -6,7 +6,7 @@ import logoWhite from "@/assets/logo-white.svg";
 
 const NAV = [
     { label: "회사소개", href: "/about" },
-    { label: "서비스", href: "/services" },
+    { label: "Ceep AI", href: "/services" },
     { label: "Custom AI", href: "/custom-ai" },
 ];
 
