@@ -5,7 +5,7 @@ import logo from "@/assets/logo-black.svg";
 import logoWhite from "@/assets/logo-white.svg";
 
 const NAV = [
-    { label: "회사소개", href: "/about" },
+    { label: "Amuse8", href: "/about" },
     { label: "Ceep AI", href: "/ceep-ai" },
     { label: "Custom AI", href: "/custom-ai" },
 ];
