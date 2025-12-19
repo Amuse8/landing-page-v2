@@ -699,7 +699,7 @@ const CustomAIPage = () => {
                     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-snug text-gray-900">
                     어떤 AI가 필요한지 모르셔도
                     <br className="sm:block" />
-                    괜찮습니다.
+                    괜찮습니다
                     </h2>
 
                     <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed">
