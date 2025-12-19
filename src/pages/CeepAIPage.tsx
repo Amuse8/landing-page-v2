@@ -89,12 +89,15 @@ const CeepAIPage = () => {
                     rel="noopener noreferrer"
                     href="https://kr.freepik.com/free-video/%EC%B6%94%EC%83%81-%EA%B8%B0%EC%88%A0-%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4_3730676#fromView=search&page=3&position=9&uuid=587e67d0-f154-463a-a3a6-da2bd462255f">Video: wirestock</a>
                 <div className="relative z-10 flex flex-col items-center">
-                    <h1 className="relative z-10 text-3xl sm:text-4xl md:text-5xl font-bold mb-14">
-                        자료 관리의 시작과 끝
+                    <h1 className="relative z-10 text-3xl sm:text-4xl md:text-5xl font-bold mb-7">
+                        흩어진 정보를, 쓸 수 있는 자산으로
                     </h1>
+                    <p className="text-base sm:text-lg md:text-xl text-white/80 mb-10 text-center">
+                        Turning scattered information into usable assets
+                    </p>
                     <p className="group inline-flex items-center text-white text-lg font-medium mb-12
                         px-4 py-2 rounded-full">
-                            <span className="mr-3">Ceep으로 모든 걸 간편하게.</span>
+                            <span className="mr-3">우리 회사 시스템에 Ceep AI 도입하기</span>
                             
                     </p>
                     <button
