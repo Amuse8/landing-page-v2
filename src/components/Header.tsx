@@ -10,7 +10,7 @@ const NAV = [
     { label: "Custom AI", href: "/custom-ai" },
     {
         label: "WallWall AI",
-        href: "https://amuse8.github.io/wallwall/download",
+        href: "https://wallwall.amuse8.kr/",
         external: true,
     }
 ];
