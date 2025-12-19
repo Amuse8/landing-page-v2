@@ -3,8 +3,14 @@ import { useNavigate, useLocation } from "react-router-dom";
 import ceepIcon from "@/assets/about-icons/Ceep-icon.png";
 import customAiIcon from "@/assets/about-icons/Wrench-icon.png";
 import Footer from "../components/Footer";
+import { useSeo } from "../hooks/useSeo";
 
 const AboutPage = () => {
+    useSeo({
+    title: "About Amuse8 | Our Vision & Team",
+    description: "Amuse8의 비전과 히스토리, 그리고 우리가 만드는 AI 제품/솔루션을 소개합니다.",
+    canonicalPath: "/about",
+    });
     const location = useLocation();
     const navigate = useNavigate();
 

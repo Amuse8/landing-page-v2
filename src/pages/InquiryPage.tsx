@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PrivacyModal from "../components/PrivacyModal";
 import companyImage from "@/assets/optimized/question-mark-1600.webp";
+import { useSeo } from "../hooks/useSeo";
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -99,6 +100,11 @@ const CUSTOM_AI_CATEGORY_OPTIONS: { value: CustomAiCategory; label: string }[] =
 ];
 
 export default function InquiryPage() {
+    useSeo({
+    title: "Contact Amuse8 | AI Partnership & Inquiry",
+    description: "Amuse8과의 협업, AI 도입 및 제품·솔루션 관련 문의를 남겨주세요. 요구사항을 바탕으로 적합한 AI 방향을 제안드립니다.",
+    canonicalPath: "/contact",
+    });
     const [openPrivacy, setOpenPrivacy] = useState(false);
     const [agree, setAgree] = useState(false);
 

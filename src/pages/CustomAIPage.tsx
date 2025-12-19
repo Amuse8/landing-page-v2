@@ -11,8 +11,15 @@ import customAiVideo from "../assets/si-video.mp4";
 import Footer from "../components/Footer";
 import { REASONS } from "../constants/reasonItem";
 import { AlertTriangle, CheckCircle2 } from "lucide-react";
+import { useSeo } from "../hooks/useSeo";
 
 const CustomAIPage = () => {
+    useSeo({
+    title: "Custom AI Solutions | Amuse8",
+    description: "Amuse8은 기업의 목적과 환경에 맞춰 모델, 데이터, 시스템을 설계하고 실서비스에 적용 가능한 맞춤형 AI 솔루션을 제공합니다.",
+    canonicalPath: "/custom-ai",
+    });
+
     const navigate = useNavigate();
     const location = useLocation();
 

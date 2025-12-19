@@ -10,8 +10,14 @@ import { Box } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Footer from "../components/Footer";
+import { useSeo } from "../hooks/useSeo";
 
 const CeepAIPage = () => {
+    useSeo({
+    title: "Ceep AI | AI Document Intelligence by Amuse8",
+    description: "Ceep은 문서와 데이터를 자동으로 정리·태깅하고, 필요한 정보를 빠르게 찾을 수 있도록 돕는 AI 기반 문서·데이터 관리 시스템입니다.",
+    canonicalPath: "/ceep-ai",
+    });
     const scrollRootRef = useRef<HTMLDivElement | null>(null);
     const heroRef = useRef<HTMLElement | null>(null);
     const nextSectionRef = useRef<HTMLDivElement | null>(null);
