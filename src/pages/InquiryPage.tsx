@@ -19,31 +19,31 @@ function TurnstileWidget({ onToken }: { onToken: (t: string) => void }) {
     }, [onToken]);
 
     useEffect(() => {
-    if (!document.querySelector('script[data-turnstile="1"]')) {
-        const s = document.createElement("script");
-        s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-        s.async = true;
-        s.defer = true;
-        s.dataset.turnstile = "1";
-        document.body.appendChild(s);
+        if (!document.querySelector('script[data-turnstile="1"]')) {
+            const s = document.createElement("script");
+            s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+            s.async = true;
+            s.defer = true;
+            s.dataset.turnstile = "1";
+            document.body.appendChild(s);
         }
 
-        const timer = setInterval(() => {
-            if (!ref.current || !window.turnstile) return;
+    const timer = setInterval(() => {
+        if (!ref.current || !window.turnstile) return;
 
-            if (widgetIdRef.current) {
-                clearInterval(timer);
-                return;
-            }
+        if (widgetIdRef.current) {
+            clearInterval(timer);
+            return;
+        }
 
-            ref.current.innerHTML = "";
+        ref.current.innerHTML = "";
 
-            const widgetId = window.turnstile.render(ref.current, {
-                sitekey: siteKey,
-                callback: (token: string) => onTokenRef.current(token),
-                "expired-callback": () => onTokenRef.current(""),
-                "error-callback": () => onTokenRef.current(""),
-            });
+        const widgetId = window.turnstile.render(ref.current, {
+            sitekey: siteKey,
+            callback: (token: string) => onTokenRef.current(token),
+            "expired-callback": () => onTokenRef.current(""),
+            "error-callback": () => onTokenRef.current(""),
+        });
 
             widgetIdRef.current = widgetId;
             clearInterval(timer);
@@ -68,9 +68,43 @@ type NoticeState = { type: NoticeType; text: string } | null;
 const isValidEmail = (v: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
+type InquiryType = "ceep" | "wallwall" | "custom";
+type CustomAiCategory = 
+    | "data_business"
+    | "vision_video"
+    | "recommend_personalize"
+    | "nlp_voice"
+    | "robotics"
+    | "multimodal"
+    | "app_web"
+    | "crm_erp"
+    | "etc";
+
+const INQUIRY_TYPE_OPTIONS: { value: InquiryType; label: string }[] = [
+    { value: "ceep", label: "Ceep AI 문의"},
+    { value: "wallwall", label: "WallWall AI 문의" },
+    { value: "custom", label: "Custom AI 문의" },
+];
+
+const CUSTOM_AI_CATEGORY_OPTIONS: { value: CustomAiCategory; label: string }[] = [
+    { value: "data_business", label: "1. 데이터/비즈니스" },
+    { value: "vision_video", label: "2. 비전/영상" },
+    { value: "recommend_personalize", label: "3. 추천/개인화" },
+    { value: "nlp_voice", label: "4. 자연어/음성" },
+    { value: "robotics", label: "5. 로보틱스" },
+    { value: "multimodal", label: "6. 멀티모달" },
+    { value: "app_web", label: "7. APP/WEB" },
+    { value: "crm_erp", label: "8. CRM/ERP" },
+    { value: "etc", label: "9. 기타 : 직접 입력" },
+];
+
 export default function InquiryPage() {
     const [openPrivacy, setOpenPrivacy] = useState(false);
     const [agree, setAgree] = useState(false);
+
+    const [inquiryType, setInquiryType] = useState<InquiryType | "">("");
+    const [customAiCategory, setCustomAiCategory] = useState<CustomAiCategory | "">("");
+    const [customAiEtcText, setCustomAiEtcText] = useState("");
 
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -106,9 +140,31 @@ export default function InquiryPage() {
         setTurnstileToken(t);
     }, []);
 
+    useEffect(() => {
+        if (inquiryType !== "custom") {
+            setCustomAiCategory("");
+            setCustomAiEtcText("");
+        }
+    }, [inquiryType]);
+
+    useEffect(() => {
+        if (customAiCategory !== "etc") {
+            setCustomAiEtcText("");
+        }
+    }, [customAiCategory]);
+
+    const isCustomSubValid = useMemo(() => {
+        if (inquiryType !== "custom") return true;
+        if (!customAiCategory) return false;
+        if (customAiCategory === "etc") return customAiEtcText.trim().length > 0;
+        return true;
+    }, [inquiryType, customAiCategory, customAiEtcText]);
+
     const canSubmit = useMemo(() => {
     return (
         agree &&
+        inquiryType !== "" &&
+        isCustomSubValid &&
         email.trim().length > 0 &&
         phone.trim().length > 0 &&
         message.trim().length > 0 &&
@@ -118,10 +174,16 @@ export default function InquiryPage() {
         hp.trim().length === 0 &&
         !submitting
         );
-    }, [agree, email, phone, message, turnstileToken, hp, submitting]);
+    }, [agree, inquiryType, isCustomSubValid, email, phone, message, turnstileToken, hp, submitting]);
 
     const validate = () => {
         if (!agree) return "개인정보 수집·이용에 동의해 주세요.";
+        if (!inquiryType) return "문의 유형을 선택해 주세요.";
+        if (inquiryType == "custom") {
+            if (!customAiCategory) return "Custom AI 문의 항목을 선택해 주세요.";
+            if (customAiCategory === "etc" && !customAiEtcText.trim()) return "기타 항목을 입력해 주세요.";
+        }
+
         if (!email.trim()) return "이메일을 입력해 주세요.";
         if (!isValidEmail(email)) return "올바른 이메일 형식으로 입력해 주세요.";
         if (!phone.trim()) return "연락처를 입력해 주세요.";
@@ -152,6 +214,9 @@ export default function InquiryPage() {
                     message,
                     turnstileToken: tokenRef.current,
                     hp,
+                    inquiryType,
+                    customAiCategory: inquiryType === "custom" ? customAiCategory : null,
+                    customAiEtcText: inquiryType === "custom" && customAiCategory === "etc" ? customAiEtcText : null,
                 }),
             });
 
@@ -161,7 +226,7 @@ export default function InquiryPage() {
 
             showNotice("success", "접수가 완료되었습니다. 빠르게 확인 후 연락드리겠습니다.");
 
-            setEmail(""); setPhone(""); setMessage("");
+            setEmail(""); setPhone(""); setMessage(""); setInquiryType(""); setCustomAiCategory(""); setCustomAiEtcText("");
             setTurnstileToken("");
             tokenRef.current = "";
         } finally {
@@ -214,7 +279,63 @@ export default function InquiryPage() {
                             동의합니다.
                         </label>
                     </div>
+                    <div>
+                        <label className="mb-2 block text-sm font-semibold">
+                        문의 유형 <span className="text-red-500">*</span>
+                        </label>
 
+                        <select
+                        value={inquiryType}
+                        onChange={(e) => setInquiryType(e.target.value as InquiryType | "")}
+                        className="w-full rounded-xl border bg-white text-black px-4 py-3 outline-none focus:ring"
+                        >
+                        <option value="">선택해 주세요</option>
+                        {INQUIRY_TYPE_OPTIONS.map((opt) => (
+                            <option key={opt.value} value={opt.value}>
+                            {opt.label}
+                            </option>
+                        ))}
+                        </select>
+
+                        <p className="mt-1 text-xs text-gray-400">문의 목적에 맞는 항목을 선택해 주세요.</p>
+                    </div>
+
+                    {inquiryType === "custom" && (
+                        <div className="space-y-3">
+                        <div>
+                            <label className="mb-2 block text-sm font-semibold">
+                            Custom AI 문의 항목 <span className="text-red-500">*</span>
+                            </label>
+
+                            <select
+                            value={customAiCategory}
+                            onChange={(e) => setCustomAiCategory(e.target.value as CustomAiCategory | "")}
+                            className="w-full rounded-xl border bg-white text-black px-4 py-3 outline-none focus:ring"
+                            >
+                            <option value="">선택해 주세요</option>
+                            {CUSTOM_AI_CATEGORY_OPTIONS.map((opt) => (
+                                <option key={opt.value} value={opt.value}>
+                                {opt.label}
+                                </option>
+                            ))}
+                            </select>
+                        </div>
+
+                        {customAiCategory === "etc" && (
+                            <div>
+                            <label className="mb-2 block text-sm font-semibold">
+                                기타 내용 <span className="text-red-500">*</span>
+                            </label>
+                            <input
+                                value={customAiEtcText}
+                                onChange={(e) => setCustomAiEtcText(e.target.value)}
+                                className="w-full rounded-xl border bg-white text-black px-4 py-3 outline-none focus:ring"
+                                placeholder="예) 사내 문서 자동 분류/권한 기반 검색 등"
+                            />
+                            </div>
+                        )}
+                    </div>
+                    )}
                     <div>
                         <label className="mb-2 block text-sm font-semibold">
                         이메일 <span className="text-red-500">*</span>
