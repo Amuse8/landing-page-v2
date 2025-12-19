@@ -33,7 +33,6 @@ const Footer = () => {
                     <p>사업자등록번호 : 225-10-15800</p>
                     <p>이메일 : dongmin@amuse8.kr</p>
                     <p>본사 : 서울특별시 중구 퇴계로36길 2, HAI START TOWN 1, B250호</p>
-                    <p>지사 : 서울특별시 양천구 목동동로 309 13층</p>
                 </div>
                 <div className="pt-4 border-t border-gray-300 flex flex-col items-start gap-2">
                     <img
