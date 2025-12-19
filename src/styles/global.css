@@ -120,13 +120,15 @@ a {
 }
 
 .fade-up {
-    opacity: 0;
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    opacity: 0.001;
+    transform: translate3d(0, 12px, 0);
+    will-change: transform, opacity;
 }
 
 .fade-up.show {
     opacity: 1;
-    animation: fadeUp 0.6s ease forwards;
+    transform: translate3d(0, 0, 0);
+    transition: transform 600ms ease, opacity 600ms ease;
 }
 
 .tag-chip {

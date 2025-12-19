@@ -274,66 +274,81 @@ const HomePage = () => {
             </div>
 
             <div className="grid gap-16 md:grid-cols-2">
-                <article className="fade-up border border-gray-300 rounded-2xl px-10 py-14 flex flex-col shadow-sm">
-                <div className="mb-10">
-                    <img
-                    src={mainCeep1200}
-                    srcSet={`${mainCeep1200} 1200w, ${mainCeep2000} 2000w`}
-                    sizes="(max-width: 768px) 90vw, 1068px"
-                    alt="Ceep"
-                    loading="lazy"
-                    />
+                <article className="border border-gray-300 rounded-2xl px-10 py-14 flex flex-col shadow-sm">
+                <div className="mb-10 overflow-hidden aspect-[16/9] [transform:translateZ(0)]">
+                    <picture>
+                        <source media="(max-width: 768px)" srcSet={mainCeep1200}/>
+                        <img
+                            src={mainCeep1200}
+                            srcSet={`${mainCeep1200} 1200w, ${mainCeep2000} 2000w`}
+                            sizes="1068px"
+                            alt="Ceep"
+                            loading="eager"
+                            decoding="async"
+                            className="block h-full w-full object-cover [backface-visibility:hidden] [transform:translateZ(0)]"
+                            draggable={false}
+                        />
+                    </picture>
                 </div>
 
-                <p className="text-xl leading-relaxed text-gray-700 mb-10">
+                <div className="fade-up flex flex-col flex-1">
+                    <p className="text-xl leading-relaxed text-gray-700 mb-10">
                     흩어진 문서를 자동으로 분석해 명확한 구조로 정리해줍니다.
                     <br />
                     Ceep을 통해 복잡한 자료 관리 없이 필요한 순간 <br /> 즉시 활용할 수 있는
                     업무 환경을 경험해보세요.
-                </p>
+                    </p>
 
-                <Link
-                    to="/ceep-ai"
-                    className="
-                    mt-auto inline-flex items-center justify-center
-                    text-xl font-semibold text-gray-900
-                    hover:opacity-70
-                    "
-                >
-                    <span>Ceep AI 알아보기</span>
-                    <span className="ml-2 text-2xl">→</span>
-                </Link>
+                    <Link
+                        to="/ceep-ai"
+                        className="
+                        mt-auto inline-flex items-center justify-center
+                        text-xl font-semibold text-gray-900
+                        hover:opacity-70
+                        "
+                    >
+                        <span>Ceep AI 알아보기</span>
+                        <span className="ml-2 text-2xl">→</span>
+                    </Link>
+                </div>
                 </article>
 
-                <article className="fade-up border border-gray-300 rounded-2xl px-10 py-14 flex flex-col shadow-sm">
-                <div className="mb-10">
-                    <img
-                    src={mainCustom1200}
-                    srcSet={`${mainCustom1200} 1200w, ${mainCustom2000} 2000w`}
-                    sizes="(max-width: 768px) 90vw, 1068px"
-                    alt="Custom AI"
-                    loading="lazy"
-                    />
+                <article className="border border-gray-300 rounded-2xl px-10 py-14 flex flex-col shadow-sm">
+                <div className="mb-10 overflow-hidden aspect-[16/9] [transform:translateZ(0)]">
+                    <picture>
+                        <source media="(max-width: 768px)" srcSet={mainCustom1200}/>
+                        <img
+                            src={mainCustom1200}
+                            srcSet={`${mainCustom1200} 1200w, ${mainCustom2000} 2000w`}
+                            sizes="1068px"
+                            alt="Custom"
+                            loading="eager"
+                            decoding="async"
+                            className="block h-full w-full object-cover [backface-visibility:hidden] [transform:translateZ(0)]"
+                            draggable={false}
+                        />
+                    </picture>
                 </div>
 
-                <p className="text-xl leading-relaxed text-gray-700 mb-10">
+                <div className="fade-up flex flex-col flex-1">
+                    <p className="text-xl leading-relaxed text-gray-700 mb-10">
                     기업의 문제를 분석해 목적에 맞는 AI 솔루션을 설계·구현합니다.
                     <br />
                     Custom AI를 통해 복잡한 업무를 자동화하고,<br /> 실제 현장에서 바로 적용
                     가능한 AI 경험을 만들어 보세요.
-                </p>
-
-                <Link
-                    to="/custom-ai"
-                    className="
-                    mt-auto inline-flex items-center justify-center
-                    text-xl font-semibold text-gray-900
-                    hover:opacity-70
-                    "
-                >
-                    <span>Custom AI 알아보기</span>
-                    <span className="ml-2 text-2xl">→</span>
-                </Link>
+                    </p>
+                    <Link
+                        to="/custom-ai"
+                        className="
+                        mt-auto inline-flex items-center justify-center
+                        text-xl font-semibold text-gray-900
+                        hover:opacity-70
+                        "
+                    >
+                        <span>Custom AI 알아보기</span>
+                        <span className="ml-2 text-2xl">→</span>
+                    </Link>
+                </div>
                 </article>
             </div>
             </div>
