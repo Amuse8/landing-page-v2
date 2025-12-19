@@ -16,10 +16,7 @@ const NAV = [
 ];
 
 const handleExternalLink = (href: string) => {
-    const ok = window.confirm("WallWall AI 랜딩페이지로 넘어갑니다.");
-    if (ok) {
-        window.open(href, "_blank", "noopener,noreferrer");
-    }
+    window.open(href, "_blank", "noopener,noreferrer");
 };
 
 export default function Header() {
