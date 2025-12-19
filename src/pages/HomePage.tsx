@@ -503,24 +503,24 @@ const HomePage = () => {
                 bg-gray-50
                 "
             >
-                <h3
-                className="
-                    font-bold text-gray-900 leading-snug
-                    text-2xl sm:text-3xl md:text-4xl
-                "
-                >
-                AI로 확장되는<br />새로운 비즈니스 기회
-                </h3>
-
-                <p
-                className="
-                    text-gray-600 font-semibold leading-relaxed mt-5
-                    text-lg sm:text-xl md:text-2xl
-                "
-                >
-                Amuse8와 함께 <br />
-                미래의 서비스를 만들어보세요.
+                
+                <div className="mb-16 flex flex-col gap-2">
+                <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
+                    New business opportunities expanded by AI
                 </p>
+                <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
+                    AI로 확장되는 새로운 비즈니스 기회
+                </p>
+            </div>
+
+            <div className="mb-16 flex flex-col gap-2">
+                <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
+                    Create the services of the future with Amuse8.
+                </p>
+                <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
+                    Amuse8와 함께 미래의 서비스를 만들어보세요.
+                </p>
+            </div>
 
                 <Link
                 to="/inquiry"
