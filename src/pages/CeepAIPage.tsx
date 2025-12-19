@@ -173,7 +173,7 @@ const CeepAIPage = () => {
                                 직장인 <span className="font-bold text-red-500">72.6%</span>가 업무 자료 관리에<br className="sm:hidden"/> 어려움을 겪고 있으며
                             </p>
                             <p className="font-semibold text-base sm:text-xl text-gray-700 leading-relaxed">
-                                관리되지 않은 수많은 자료로 인해 <span className="font-bold text-red-500"><br className="sm:hidden"/>35.8%</span>의 업무 효율이 저하되고 있습니다
+                                관리되지 않은 수많은 자료로 인해 <span className="font-bold text-red-500"><br className="sm:hidden"/>35.8%</span>의 업무 효율이 저하되고 있습니다.
                             </p>
                         </div>
                         <p className="text-center text-2xl sm:text-3xl lg:text-4xl font-bold mb-16 leading-snug">
@@ -337,7 +337,7 @@ const CeepAIPage = () => {
 
                         <p className="text-base sm:text-lg md:text-xl font-semibold text-gray-600 leading-relaxed">
                             AI가 자동으로 분류하고 정리하여 <br />
-                            필요한 정보를 더 쉽게 찾을 수 있습니다
+                            필요한 정보를 더 쉽게 찾을 수 있습니다.
                         </p>
                     </div>
                 </div>

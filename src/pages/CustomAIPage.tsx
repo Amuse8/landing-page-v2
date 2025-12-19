@@ -384,7 +384,7 @@ const CustomAIPage = () => {
                     <p className="mt-6 text-center text-2xl sm:text-3xl md:text-4xl font-bold leading-snug text-gray-900">
                         Amuse8은
                         <br />
-                        상황에 맞는 AI를 설계합니다.
+                        상황에 맞는 AI를 설계합니다
                     </p>
 
                     <p className="mt-5 text-center text-sm sm:text-base md:text-lg leading-relaxed text-gray-600">
@@ -544,7 +544,7 @@ const CustomAIPage = () => {
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-snug">
                     프로세스는
                     <br />
-                    이렇게 진행됩니다.
+                    이렇게 진행됩니다
                 </h2>
                 </div>
 
