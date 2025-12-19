@@ -348,12 +348,19 @@ const HomePage = () => {
             "
         >
             <div className="w-full max-w-[1600px]">
-            <p className="text-xs sm:text-sm font-semibold text-gray-400 mb-4">
-                Our History
-            </p>
-            <p className="text-2xl font-bold sm:text-2xl lg:text-4xl mb-16 leading-snug">
-                기업의 운영 방식과 미래 경쟁력을 <br/>재정의합니다.
-            </p>
+                <p className="text-xs sm:text-sm font-semibold text-gray-400 mb-4">
+                    Our History
+                </p>
+                <div className="mb-16 flex flex-col gap-2">
+                    <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
+                        We redefine how businesses operate<br />
+                        and their future competitiveness.
+                    </p>
+                    <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
+                        기업의 운영 방식과 미래 경쟁력을 재정의합니다.
+                    </p>
+                </div>
+                
 
             <div className="md:hidden">
                 <div className="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 snap-x snap-mandatory">
@@ -448,14 +455,19 @@ const HomePage = () => {
             <div className="w-full grid grid-cols-1 lg:grid-cols-2">
             <div
                 className="
-                flex flex-col justify-center
+                flex flex-col justify-start
                 px-6 sm:px-12 lg:px-20
                 py-16
                 "
             >
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-10">
-                    Trusted by many leading business
-                </h2>
+                <div className="mb-16 flex flex-col gap-2">
+                    <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
+                        Trusted by many leading businesses
+                    </p>
+                    <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
+                        아뮤즈8은 많은 주요 기업들이 신뢰하는 기업입니다.
+                    </p>
+                </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6">
                     {PARTNER_LOGOS.map((logo) => (
@@ -485,7 +497,7 @@ const HomePage = () => {
 
             <div
                 className="
-                flex flex-col justify-center
+                flex flex-col justify-start
                 px-6 sm:px-12 lg:px-20
                 py-16
                 bg-gray-50
