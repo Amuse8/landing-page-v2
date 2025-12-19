@@ -8,6 +8,11 @@ const NAV = [
     { label: "Amuse8", href: "/about" },
     { label: "Ceep AI", href: "/ceep-ai" },
     { label: "Custom AI", href: "/custom-ai" },
+    {
+        label: "WallWall AI",
+        href: "https://amuse8.github.io/wallwall/download",
+        external: true,
+    }
 ];
 
 export default function Header() {
