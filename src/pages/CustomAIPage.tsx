@@ -390,7 +390,7 @@ const CustomAIPage = () => {
                     <p className="mt-5 text-center text-sm sm:text-base md:text-lg leading-relaxed text-gray-600">
                         특정 모델/기능에 갇히지 않고,
                         <br className="hidden sm:block" />
-                        목표·데이터·예산·일정에 맞춰 가장 현실적인 조합으로 구현합니다.
+                        목표·데이터·예산·일정에 맞춰 가장 적합한 조합으로 구현합니다.
                     </p>
 
                     <div className="mt-10 grid gap-3 sm:gap-4 sm:grid-cols-3">
