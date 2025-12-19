@@ -15,6 +15,13 @@ const NAV = [
     }
 ];
 
+const handleExternalLink = (href: string) => {
+    const ok = window.confirm("WallWall AI 랜딩페이지로 넘어갑니다.");
+    if (ok) {
+        window.open(href, "_blank", "noopener,noreferrer");
+    }
+};
+
 export default function Header() {
     const [open, setOpen] = useState(false);
     const [isHeroVisible, setIsHeroVisible] = useState<boolean>(true);
@@ -59,25 +66,41 @@ export default function Header() {
             </Link>
 
             <nav className="hidden md:flex flex-row gap-6 text-base">
-                {NAV.map((item) => (
-                    <NavLink
-                        key={item.href}
-                        to={item.href}
-                        className={clsx(
-                            "relative pb-1 transition-opacity",
-                            isTransparent
-                                ? isActive(item.href)
-                                    ? "text-white font-semibold"
-                                    : "text-white/80 hover:text-white"
-                                : isActive(item.href)
-                                    ? "text-primary font-medium"
+                {NAV.map((item) =>
+                    item.external ? (
+                        <button
+                            key={item.href}
+                            type="button"
+                            onClick={() => handleExternalLink(item.href)}
+                            className={clsx(
+                                "relative pb-1 transition-opacity",
+                                isTransparent
+                                    ? "text-white/80 hover:text-white"
                                     : "text-gray-600 hover:text-primary"
-                        )}
-                        aria-current={isActive(item.href) ? "page" : undefined}
-                    >
-                        {item.label}
-                    </NavLink>
-                ))}
+                            )}
+                        >
+                            {item.label}
+                        </button>
+                    ) : (
+                        <NavLink
+                            key={item.href}
+                            to={item.href}
+                            className={clsx(
+                                "relative pb-1 transition-opacity",
+                                isTransparent
+                                    ? isActive(item.href)
+                                        ? "text-white font-semibold"
+                                        : "text-white/80 hover:text-white"
+                                    : isActive(item.href)
+                                        ? "text-primary font-medium"
+                                        : "text-gray-600 hover:text-primary"
+                            )}
+                            aria-current={isActive(item.href) ? "page" : undefined}
+                        >
+                            {item.label}
+                        </NavLink>
+                    )
+                )}
             </nav>
             <button
                 type="button"
@@ -117,18 +140,36 @@ export default function Header() {
                 )}
             >
                 <nav className="flex flex-col gap-4 px-5 py-4 text-base">
-                    {NAV.map((item) => (
-                        <NavLink
-                            key={item.href}
-                            to={item.href}
-                            onClick={() => setOpen(false)}
-                            className={clsx("text-left py-1 transition-colors", isActive(item.href) ? "text-primary font-semibold" : "text-gray-900 hover:text-primary"
-                            )}
-                            aria-current={isActive(item.href) ? "page" : undefined}
-                        >
-                            {item.label}
-                        </NavLink>
-                    ))}
+                    {NAV.map((item) =>
+                        item.external ? (
+                            <button
+                                key={item.href}
+                                type="button"
+                                onClick={() => {
+                                    setOpen(false);
+                                    handleExternalLink(item.href);
+                                }}
+                                className="text-left py-1 text-gray-900 hover:text-primary transition-colors"
+                            >
+                                {item.label}
+                            </button>
+                        ) : (
+                            <NavLink
+                                key={item.href}
+                                to={item.href}
+                                onClick={() => setOpen(false)}
+                                className={clsx(
+                                    "text-left py-1 transition-colors",
+                                    isActive(item.href)
+                                        ? "text-primary font-semibold"
+                                        : "text-gray-900 hover:text-primary"
+                                )}
+                                aria-current={isActive(item.href) ? "page" : undefined}
+                            >
+                                {item.label}
+                            </NavLink>
+                        )
+                    )}
                 </nav>
             </div>
         </header>
