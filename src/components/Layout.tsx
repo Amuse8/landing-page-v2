@@ -1,5 +1,5 @@
 import Header from "./Header";
-import { type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import useFavicon, { type FaviconSet } from "../hooks/useFavicon";
 
@@ -13,7 +13,6 @@ const Layout = ({ children }: LayoutProps) => {
 
     const amuse8FaviconSet: FaviconSet = {
         icons: [
-            { href: `/amuse8-favicon.svg?v=${ICON_V}`, type: "image/svg+xml" },
             { href: `/amuse8-favicon-32x32.png?v=${ICON_V}`, type: "image/png", sizes: "32x32" },
             { href: `/amuse8-favicon-16x16.png?v=${ICON_V}`, type: "image/png", sizes: "16x16" },
         ],
@@ -24,7 +23,6 @@ const Layout = ({ children }: LayoutProps) => {
 
     const ceepFaviconSet: FaviconSet = {
         icons: [
-            { href: `/ceep-favicon.svg?v=${ICON_V}`, type: "image/svg+xml" },
             { href: `/ceep-favicon-32x32.png?v=${ICON_V}`, type: "image/png", sizes: "32x32" },
             { href: `/ceep-favicon-16x16.png?v=${ICON_V}`, type: "image/png", sizes: "16x16" },
         ],
