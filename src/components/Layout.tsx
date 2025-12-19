@@ -1,5 +1,5 @@
 import Header from "./Header";
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import useFavicon, { type FaviconSet } from "../hooks/useFavicon";
 
