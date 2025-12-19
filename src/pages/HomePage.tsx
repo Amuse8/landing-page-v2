@@ -137,7 +137,10 @@ const HomePage = () => {
     };
 
     return (
-        <div ref={scrollRootRef} className="home-page snap-y snap-mandatory">
+        <div 
+            id="home-scroll-root"
+            ref={scrollRootRef} 
+            className="home-page snap-y snap-mandatory">
         <section
             ref={heroRef}
             className="

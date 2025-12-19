@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import logo from "@/assets/logo-black.svg";
 import logoWhite from "@/assets/logo-white.svg";
@@ -25,7 +25,9 @@ const handleExternalLink = (href: string) => {
 export default function Header() {
     const [open, setOpen] = useState(false);
     const [isHeroVisible, setIsHeroVisible] = useState<boolean>(true);
+
     const location = useLocation();
+    const navigate = useNavigate();
 
     const isActive = (href: string) =>
         location.pathname === href || (href !== "/" && location.pathname.startsWith(href));
@@ -50,6 +52,33 @@ export default function Header() {
         };
     }, []);
 
+    const scrollToTop = () => {
+        const homeRoot = document.getElementById("home-scroll-root");
+
+        if (homeRoot) {
+            const canScroll = homeRoot.scrollHeight > homeRoot.clientHeight;
+            if (canScroll) {
+            homeRoot.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+            }
+        }
+
+        const scrollingEl = document.scrollingElement;
+        if (scrollingEl) scrollingEl.scrollTo({ top: 0, behavior: "smooth" });
+        else window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    const handleLogoClick = () => {
+    if (open) setOpen(false);
+
+    if (location.pathname === "/") {
+        requestAnimationFrame(() => scrollToTop());
+        return;
+    }
+
+    navigate("/");
+    };
+
     return (
         <header
             className={clsx(
@@ -57,13 +86,18 @@ export default function Header() {
                 isTransparent ? "bg-transparent text-white" : "bg-white text-gray-900 shadow"
             )}
         >
-            <Link to="/" className="flex items-center gap-2">
+            <button 
+                type="button"
+                onClick={handleLogoClick}
+                className="flex items-center gap-2"
+                aria-label="홈으로 이동"
+            >
                 <img
                     src={isTransparent ? logoWhite : logo}
                     alt="회사 로고"
                     className="h-8 w-auto transition-all duration-300"
                 />
-            </Link>
+            </button>
 
             <nav className="hidden md:flex flex-row gap-6 text-base">
                 {NAV.map((item) =>
