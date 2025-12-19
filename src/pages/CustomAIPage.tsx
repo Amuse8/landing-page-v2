@@ -9,6 +9,8 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import customAiVideo from "../assets/si-video.mp4";
 import Footer from "../components/Footer";
+import { REASONS } from "../constants/reasonItem";
+import { AlertTriangle, CheckCircle2 } from "lucide-react";
 
 const CustomAIPage = () => {
     const navigate = useNavigate();
@@ -16,7 +18,11 @@ const CustomAIPage = () => {
 
     const scrollRootRef = useRef<HTMLDivElement | null>(null);
     const heroRef = useRef<HTMLElement | null>(null);
-    const nextSectionRef = useRef<HTMLDivElement | null>(null);
+    const reasonsSectionRef = useRef<HTMLElement | null>(null);
+    const categoriesSectionRef = useRef<HTMLDivElement | null>(null);
+    const handleScrollToCategories = () => {
+        categoriesSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
 
     const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
     const [activeCategory, setActiveCategory] = useState<string>(CATEGORIES[0].id);
@@ -28,6 +34,7 @@ const CustomAIPage = () => {
     const [processVisible, setProcessVisible] = useState(false);
 
     const [activeFaqId, setActiveFaqId] = useState<string | null>(null);
+    const [activeReasonId, setActiveReasonId] = useState<string | null>(null);
 
     const canHover = useMemo(() => {
         if (typeof window === "undefined") return false;
@@ -39,7 +46,7 @@ const CustomAIPage = () => {
     };
 
     const handleScrollDown = () => {
-        nextSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+        reasonsSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     };
 
     const handleCategoryClick = (id: string) => {
@@ -144,11 +151,11 @@ const CustomAIPage = () => {
         if (ticking) return;
         ticking = true;
 
-        requestAnimationFrame(() => {
-            ticking = false;
-            const next = root.scrollTop > 300;
-            setShowScrollTop((prev) => (prev === next ? prev : next));
-        });
+            requestAnimationFrame(() => {
+                ticking = false;
+                const next = root.scrollTop > 300;
+                setShowScrollTop((prev) => (prev === next ? prev : next));
+            });
         };
 
         root.addEventListener("scroll", onScroll, { passive: true });
@@ -158,7 +165,7 @@ const CustomAIPage = () => {
     }, []);
 
     const handleScrollToTop = () => {
-        nextSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        reasonsSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     };
 
     useEffect(() => {
@@ -186,8 +193,14 @@ const CustomAIPage = () => {
     const closeFaq = (id: string) => {
         setActiveFaqId((prev) => (prev === id ? null : prev));
     };
+
     const toggleFaq = (id: string) => {
         setActiveFaqId((prev) => (prev === id ? null : id));
+    };
+
+    const toggleReason = (id: string) => {
+        if (canHover) return;
+        setActiveReasonId((prev) => (prev === id ? null : id));
     };
 
     return (
@@ -231,9 +244,204 @@ const CustomAIPage = () => {
             </button>
             </div>
         </section>
+        <section
+            ref={reasonsSectionRef}
+            className="relative snap-start overflow-hidden bg-white text-gray-900"
+        >
+            <div className="relative flex justify-center px-4 sm:px-10 lg:px-16 py-24 sm:py-32">
+                <div className="w-full max-w-6xl">
+                    <div className="flex flex-col items-center text-center gap-6">
+                        <div className="space-y-3">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
+                                Custom AI가 필요한 이유는 분명합니다
+                            </h2>
+                            
+                        </div>
+                    </div>
+                    <div className="mt-12 grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
+                        {REASONS.map((item) => {
+                            const isActiveMobile = !canHover && activeReasonId === item.id;
+
+                            return (
+                                <button
+                                    key={item.id}
+                                    type="button"
+                                    onClick={() => toggleReason(item.id)}
+                                    className={[
+                                        "group relative rounded-3xl border border-gray-200 bg-white shadow-sm",
+                                        "px-5 py-6 sm:px-6 sm:py-7",
+                                        "transition-all duration-200 hover:shadow-lg hover:shadow-black/5 hover:-translate-y-0.5",
+                                        "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3762E3]/40",
+                                        "text-center flex flex-col items-center",
+                                        !canHover ? "cursor-pointer" : "cursor-default",
+                                    ].join(" ")}
+                                    aria-pressed={!canHover ? isActiveMobile : undefined}
+                                    >
+
+                                    <div className="relative w-full min-h-[92px] flex items-center justify-center">
+                                        <div
+                                        className={[
+                                            "absolute inset-0 transition-all duration-200",
+                                            "flex items-center justify-center",
+                                            canHover
+                                            ? "opacity-100 translate-y-0 group-hover:opacity-0 group-hover:-translate-y-1"
+                                            : isActiveMobile
+                                            ? "opacity-0 -translate-y-1 pointer-events-none"
+                                            : "opacity-100 translate-y-0",
+                                        ].join(" ")}
+                                        >
+                                        <div className="flex flex-col items-center">
+                                            <span className="mb-2 inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 px-2.5 py-1 rounded-full bg-gray-100 border border-gray-200">
+                                                <AlertTriangle className="w-3.5 h-3.5 text-gray-500" />
+                                                문제 상황
+                                            </span>
+
+                                            <div className="text-base sm:text-lg font-semibold leading-snug text-gray-900 whitespace-pre-line">
+                                            {item.problem}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        <div
+                                        className={[
+                                            "absolute inset-0 transition-all duration-200",
+                                            "flex items-center justify-center",
+                                            canHover
+                                            ? "opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0"
+                                            : isActiveMobile
+                                            ? "opacity-100 translate-y-0"
+                                            : "opacity-0 translate-y-1 pointer-events-none",
+                                        ].join(" ")}
+                                        >
+                                        <div className="flex flex-col items-center">
+                                            <span className="mb-2 inline-flex items-center gap-1.5 text-xs font-semibold text-[#3762E3] px-2.5 py-1 rounded-full bg-[#3762E3]/10 border border-[#3762E3]/20">
+                                                <CheckCircle2 className="w-3.5 h-3.5 text-[#3762E3]" />
+                                                해결 방안
+                                            </span>
+
+                                            <div className="text-base sm:text-lg font-bold leading-snug text-gray-900 whitespace-pre-line">
+                                                {item.solution}
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-8 pt-4  border-gray-100 w-full flex justify-center">
+                                        <span
+                                        className={[
+                                            "inline-flex items-center gap-2",
+                                            "text-xs sm:text-sm text-gray-500",
+                                            "px-3 py-1.5 rounded-full bg-gray-50 border border-gray-200",
+                                            "transition-colors duration-200",
+                                            canHover ? "group-hover:opacity-0 group-hover:translate-y-1" : "",
+                                            !canHover && isActiveMobile ? "opacity-0 translate-y-1 pointer-events-none" : "",
+                                        ].join(" ")}
+                                        >
+                                        {canHover ? "마우스를 올려보세요" : "탭해서 내용을 확인해보세요"}
+                                        </span>
+                                    </div>
+                                    </button>
+                            )
+                        })}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section className="relative snap-start overflow-hidden bg-[#F6F7FB] text-gray-900">
+            <div className="pointer-events-none absolute inset-0">
+                <div className="absolute -top-28 -left-28 h-[420px] w-[420px] rounded-full bg-[#3762E3]/15 blur-3xl" />
+                <div className="absolute -bottom-32 -right-32 h-[460px] w-[460px] rounded-full bg-indigo-400/15 blur-3xl" />
+
+                <div className="absolute inset-0 opacity-[0.55]">
+                <div
+                    className="absolute inset-0"
+                    style={{
+                    backgroundImage:
+                        "radial-gradient(circle at 1px 1px, rgba(55,98,227,0.18) 1px, transparent 1px)",
+                    backgroundSize: "18px 18px",
+                    }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/10 to-white/60" />
+                </div>
+            </div>
+
+            <div className="relative flex justify-center px-4 sm:px-10 lg:px-16 py-28 sm:py-36">
+                <div className="w-full max-w-6xl">
+                <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-white/70 backdrop-blur shadow-sm px-6 sm:px-10 lg:px-16 py-16 sm:py-20">
+                    <div className="pointer-events-none absolute inset-0">
+                    <div className="absolute -top-16 -right-14 h-56 w-56 rounded-full bg-[#3762E3]/10 blur-2xl" />
+                    <div className="absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-blue-400/10 blur-2xl" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/40 to-white/70" />
+                    </div>
+
+                    <div className="relative">
+                    <div className="flex justify-center">
+                        <span className="inline-flex items-center gap-2 rounded-full border border-[#3762E3]/20 bg-[#3762E3]/10 px-3 py-1 text-xs sm:text-sm font-semibold text-[#3762E3]">
+                        Custom AI by Amuse8
+                        </span>
+                    </div>
+
+                    <p className="mt-6 text-center text-2xl sm:text-3xl md:text-4xl font-bold leading-snug text-gray-900">
+                        Amuse8은
+                        <br />
+                        상황에 맞는 AI를 설계합니다.
+                    </p>
+
+                    <p className="mt-5 text-center text-sm sm:text-base md:text-lg leading-relaxed text-gray-600">
+                        특정 모델/기능에 갇히지 않고,
+                        <br className="hidden sm:block" />
+                        목표·데이터·예산·일정에 맞춰 가장 현실적인 조합으로 구현합니다.
+                    </p>
+
+                    <div className="mt-10 grid gap-3 sm:gap-4 sm:grid-cols-3">
+                        {[
+                        ["목표 중심 설계", "필요한 성과부터 정의합니다."],
+                        ["빠른 PoC", "검증 후 확장으로 리스크를 줄입니다."],
+                        ["운영까지 고려", "배포·모니터링·개선까지 연결합니다."],
+                        ].map(([title, desc]) => (
+                        <div
+                            key={title}
+                            className="rounded-2xl border border-gray-200 bg-white/70 backdrop-blur px-5 py-4 shadow-sm"
+                        >
+                            <div className="text-sm sm:text-base font-semibold text-gray-900">
+                            {title}
+                            </div>
+                            <div className="mt-1 text-xs sm:text-sm text-gray-600 leading-relaxed">
+                            {desc}
+                            </div>
+                        </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-12 flex justify-center">
+                        <button
+                        type="button"
+                        onClick={handleScrollToCategories}
+                        className={[
+                            "group inline-flex items-center gap-2 rounded-full",
+                            "border border-gray-200 bg-white/70 backdrop-blur",
+                            "px-5 py-2.5 text-sm sm:text-base font-semibold text-gray-700",
+                            "shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all",
+                            "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3762E3]/40",
+                        ].join(" ")}
+                        >
+                        <span className="text-gray-700">Scroll Down</span>
+                        <span className="animate-bounce text-[#3762E3]">↓</span>
+                        </button>
+                    </div>
+                    </div>
+                </div>
+
+                <div className="mt-10 flex justify-center">
+                    <div className="h-px w-40 bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+                </div>
+                </div>
+            </div>
+            </section>
+
 
         <section
-            ref={nextSectionRef}
+            ref={categoriesSectionRef}
             className="bg-white text-gray-900 flex justify-center px-4 sm:px-10 lg:px-16 py-32 sm:py-40 snap-start"
         >
             <div className="w-full max-w-6xl">
