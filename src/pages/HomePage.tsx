@@ -11,6 +11,12 @@ import mainArticle7 from "@/assets/main-article-7.webp";
 import mainArticle8 from "@/assets/main-article-8.webp";
 import mainArticle9 from "@/assets/main-article-9.webp";
 import mainArticle10 from "@/assets/main-article-10.webp";
+import mainArticle11 from "@/assets/main-article-11.webp";
+import mainArticle12 from "@/assets/main-article-12.webp";
+import mainArticle13 from "@/assets/main-article-13.webp";
+import mainArticle14 from "@/assets/main-article-14.webp";
+import mainArticle15 from "@/assets/main-article-15.webp";
+import mainArticle16 from "@/assets/main-article-16.webp";
 
 import partnerLogo1 from "@/assets/company-logo/company-1.png";
 import partnerLogo2 from "@/assets/company-logo/company-2.png";
@@ -61,16 +67,24 @@ const HomePage = () => {
     const ARTICLES = useMemo(
         () => [
         { id: 1, title: "AI 기반 스마트 클라우드 서비스를 제공하는 기업 ‘아뮤즈8’", tags: ["#AI", "#클라우드"], image: mainArticle1, sourceName: "한국경제" },
-        { id: 2, title: "아뮤즈8 “AI 데이터 자동 태깅 기술로 정보관리, 데이터 처리 혁신”", tags: ["#정보관리", "#데이터"], image: mainArticle2, sourceName: "스포츠 동아"  },
-        { id: 3, title: "기업 내부 데이터 관리 패러다임 전환, AI 자동화 기술 앞세운 아뮤즈8", tags: ["#패러다임", "#AI자동화"], image: mainArticle3, sourceName: "동아일보"  },
-        { id: 4, title: "아뮤즈8, AI 기반 데이터 자동 태깅 기술로 정보 관리 효율화", tags: ["#AI", "#정보관리"], image: mainArticle4, sourceName: "한국미디어뉴스통신"  },
-        { id: 5, title: "자료관리 자동화 킵, 모든 자료와 정보를 기억해줄 수 있는 AI 패러다임 바꿔나간다.", tags: ["#Ceep", "#AI패러다임"], image: mainArticle5, sourceName: "한국경제"  },
-        { id: 6, title: "베스트셀러 '대표라면 반드시 알아야 할 창업의 기술' 추천사 신동민 대표", tags: ["#창업의기술", "#추천사"], image: mainArticle6, sourceName: "플랫잇"  },
+        { id: 2, title: "아뮤즈8 '2024 품질만족지수 1위 기업 및 혁신기술 대상' 선정", tags: ["#품질만족지수", "#아뮤즈8"], image: mainArticle2, sourceName: "스포츠 동아"  },
+        { id: 3, title: "아뮤즈8 '2025 전략기술 딥테크 창업촉진 사업' 최종 선정", tags: ["#전략기술", "#딥테크"], image: mainArticle3, sourceName: "과학기술정보통신부"  },
+        { id: 4, title: "아뮤즈8 '2025 D.V.S 드림벤처스타' 최종선정", tags: ["#D.V.S", "#드림벤처스타"], image: mainArticle4, sourceName: "대전창조경제혁신센터"  },
+        { id: 5, title: "아뮤즈8 '2024 HAI START 창업 경진대회’ 딥테크 부문 수상", tags: ["#동국대", "#딥테크"], image: mainArticle5, sourceName: "동국대학교"  },
+        { id: 6, title: "아뮤즈8 '예비창업패키지 우수졸업'", tags: ["#예비창업패키지"], image: mainArticle6, sourceName: "중소벤처기업부"  },
         { id: 7, title: "AI 자동 태깅으로 사내 자료 관리 혁신 이끄는 아뮤즈8", tags: ["#자동태깅", "#사내자료관리"], image: mainArticle7, sourceName: "동아일보"  },
         { id: 8, title: "아뮤즈8, AI 기술 접목한 지능형 데이터 관리 서비스 확대", tags: ["#AI", "#데이터관리서비스"], image: mainArticle8, sourceName: "AI포스트"  },
         { id: 9, title: "아뮤즈8, 광주광역시와 업무협약 및 기술협약", tags: ["#자동분류", "#정보관리"], image: mainArticle9, sourceName: "광주광역시"  },
         { id: 10, title: "아뮤즈8, AI기반 데이터 자동 태깅 기술 비전 AI에 최초 적용", tags: ["#데이터자동태깅", "#효율화"], image: mainArticle10, sourceName: "MSN"  },
-        ],
+        { id: 11, title: "베스트셀러 '대표라면 반드시 알아야 할 창업의 기술' 추천사 신동민 대표", tags: ["#창업의기술", "#추천사"], image: mainArticle11, sourceName: "플랫잇"  },
+        { id: 12, title: "자료관리 자동화 킵, 모든 자료와 정보를 기억해줄 수 있는 AI 패러다임 바꿔나간다.", tags: ["#Ceep", "#AI패러다임"], image: mainArticle12, sourceName: "한국경제"  },
+        { id: 13, title: "기업 내부 데이터 관리 패러다임 전환, AI 자동화 기술 앞세운 아뮤즈8", tags: ["#패러다임", "#AI자동화"], image: mainArticle13, sourceName: "동아일보"  },
+        { id: 14, title: "아뮤즈8, AI 기반 데이터 자동 태깅 기술로 정보 관리 효율화", tags: ["#AI", "#정보관리"], image: mainArticle14, sourceName: "한국미디어뉴스통신"  },
+        { id: 15, title: "아뮤즈8 '청년창업사관학교 15기 졸업'", tags: ["#청년창업사관학교", "청창사"], image: mainArticle15, sourceName: "중소벤처기업부"  },
+        { id: 16, title: "아뮤즈8 '2024 동국대학교 캠퍼스타운’ 우수기업 선정", tags: ["#동국대", "#캠퍼스타운", "#우수기업"], image: mainArticle16, sourceName: "동국대학교"  },
+
+        
+    ],
         []
     );
 
@@ -417,7 +431,7 @@ const HomePage = () => {
                     </div>
 
                     <h3 className="text-base sm:text-lg font-semibold leading-snug mb-3">
-                        {a.id === 5 ? `"${a.title}"` : a.title}
+                        {a.title}
                     </h3>
                     <div className="mb-3 text-xs sm:text-sm text-gray-500 font-medium">
                         {a.sourceName}
@@ -455,7 +469,7 @@ const HomePage = () => {
                         </div>
 
                         <h3 className="text-lg lg:text-xl font-semibold leading-snug mb-4">
-                        {a.id === 5 ? `"${a.title}"` : a.title}
+                        {a.title}
                         </h3>
                         <div className="mb-4 text-sm text-gray-500 font-medium">
                             {a.sourceName}
