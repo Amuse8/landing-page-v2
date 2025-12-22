@@ -87,7 +87,7 @@ export default function Header() {
             >
                 <img
                     src={isTransparent ? logoWhite : logo}
-                    alt="회사 로고"
+                    alt="Amuse8"
                     className="h-8 w-auto transition-all duration-300"
                 />
             </button>
