@@ -547,9 +547,9 @@ const HomePage = () => {
                 bg-gray-50
                 "
             >
-                <p className="text-xs sm:text-sm font-semibold text-gray-400 mb-4">
+                <h1 className="text-3xl sm:text-2xl font-semibold text-gray-400 mb-4">
                     Shaping the Future with Amuse8
-                </p>
+                </h1>
                 <div className="mb-16 flex flex-col gap-2">
 
                 <p className="text-sm sm:text-base lg:text-lg font-semibold text-black leading-snug">
@@ -568,40 +568,49 @@ const HomePage = () => {
                     Amuse8와 함께 미래의 서비스를 만들어보세요.
                 </p>
             </div>
+            <Link
+            to="/inquiry"
+            className="
+                group relative overflow-hidden
+                mt-8 inline-flex items-center
+                px-8 py-3.5 rounded-full
+                bg-primary text-white text-lg font-medium w-fit
+                transition-all duration-300 ease-out
+                hover:bg-white hover:text-gray-900 hover:shadow-lg hover:-translate-y-1
+                focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30
+                motion-reduce:transition-none motion-reduce:hover:transform-none
+            "
+            >
+            {/* shine */}
+            <span
+                aria-hidden="true"
+                className="
+                pointer-events-none absolute inset-0
+                translate-x-[-120%]
+                bg-gradient-to-r from-transparent via-white/30 to-transparent
+                transition-transform duration-700 ease-out
+                group-hover:translate-x-[120%]
+                motion-reduce:hidden
+                "
+            />
 
-                <Link
-                    to="/inquiry"
-                    className="
-                        group
-                        mt-8
-                        inline-flex items-center
-                        px-8 py-3.5
-                        rounded-full
-                        bg-primary text-white text-lg font-medium
-                        w-fit
-                        transition-all duration-200
-                        hover:bg-white hover:text-gray-900
-                        hover:shadow-lg hover:-translate-y-0.5
-                    "
-                    >
-                    <span>Contact Us</span>
+            <span className="relative z-10">Contact Us</span>
 
-                    <span
-                        className="
-                        ml-4
-                        w-7 h-7
-                        flex items-center justify-center
-                        rounded-full
-                        border border-current
-                        text-sm leading-none
-                        transition-all duration-200
-                        group-hover:bg-gray-900
-                        group-hover:text-white
-                        "
-                    >
-                        &gt;
-                    </span>
-                    </Link>
+            <span
+                className="
+                relative z-10 ml-4
+                w-7 h-7 flex items-center justify-center
+                rounded-full border border-current
+                text-sm leading-none
+                transition-all duration-300 ease-out
+                group-hover:bg-gray-900 group-hover:text-white group-hover:scale-105
+                "
+            >
+                <span className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5">
+                &gt;
+                </span>
+            </span>
+            </Link>
             </div>
             </div>
         </section>
