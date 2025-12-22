@@ -396,7 +396,7 @@ const HomePage = () => {
                     Our History
                 </p>
                 <div className="mb-16 flex flex-col gap-2">
-                    <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
+                    <p className="text-sm sm:text-base lg:text-lg font-semibold text-black leading-snug">
                         We redefine how businesses operate<br />
                         and their future competitiveness.
                     </p>
@@ -505,7 +505,7 @@ const HomePage = () => {
                 "
             >
                 <div className="mb-16 flex flex-col gap-2">
-                    <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
+                    <p className="text-sm sm:text-base lg:text-lg font-semibold text-black leading-snug">
                         Trusted by many leading businesses
                     </p>
                     <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
@@ -549,7 +549,7 @@ const HomePage = () => {
             >
                 
                 <div className="mb-16 flex flex-col gap-2">
-                <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
+                <p className="text-sm sm:text-base lg:text-lg font-semibold text-black leading-snug">
                     New business opportunities expanded by AI
                 </p>
                 <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
@@ -558,7 +558,7 @@ const HomePage = () => {
             </div>
 
             <div className="mb-16 flex flex-col gap-2">
-                <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
+                <p className="text-sm sm:text-base lg:text-lg font-semibold text-black leading-snug">
                     Create the services of the future with Amuse8.
                 </p>
                 <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
@@ -567,37 +567,38 @@ const HomePage = () => {
             </div>
 
                 <Link
-                to="/inquiry"
-                className="
-                    group
-                    mt-6
-                    inline-flex items-center
-                    px-6 py-2.5
-                    rounded-full
-                    bg-primary text-white text-base
-                    w-fit
-                    transition-all duration-200
-                    hover:bg-white hover:text-gray-900
-                    hover:shadow-lg hover:-translate-y-0.5
-                "
-                >
-                <span>Contact Us</span>
-                <span
+                    to="/inquiry"
                     className="
-                    ml-3
-                    w-6 h-6
-                    flex items-center justify-center
-                    rounded-full
-                    border border-current
-                    text-xs leading-none
-                    transition-all duration-200
-                    group-hover:bg-gray-900
-                    group-hover:text-white
+                        group
+                        mt-8
+                        inline-flex items-center
+                        px-8 py-3.5
+                        rounded-full
+                        bg-primary text-white text-lg font-medium
+                        w-fit
+                        transition-all duration-200
+                        hover:bg-white hover:text-gray-900
+                        hover:shadow-lg hover:-translate-y-0.5
                     "
-                >
-                    &gt;
-                </span>
-                </Link>
+                    >
+                    <span>Contact Us</span>
+
+                    <span
+                        className="
+                        ml-4
+                        w-7 h-7
+                        flex items-center justify-center
+                        rounded-full
+                        border border-current
+                        text-sm leading-none
+                        transition-all duration-200
+                        group-hover:bg-gray-900
+                        group-hover:text-white
+                        "
+                    >
+                        &gt;
+                    </span>
+                    </Link>
             </div>
             </div>
         </section>

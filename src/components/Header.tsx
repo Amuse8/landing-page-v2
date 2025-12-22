@@ -98,6 +98,8 @@ export default function Header() {
                         <a
                             key={item.href}
                             href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className={clsx(
                                 "relative pb-1 transition-opacity",
                                 isTransparent
@@ -171,6 +173,8 @@ export default function Header() {
                         <a
                             key={item.href}
                             href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             onClick={() => setOpen(false)}
                             className="text-left py-1 text-gray-900 hover:text-primary transition-colors"
                         >
