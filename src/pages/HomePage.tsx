@@ -547,15 +547,18 @@ const HomePage = () => {
                 bg-gray-50
                 "
             >
-                
+                <p className="text-xs sm:text-sm font-semibold text-gray-400 mb-4">
+                    Shaping the Future with Amuse8
+                </p>
                 <div className="mb-16 flex flex-col gap-2">
+
                 <p className="text-sm sm:text-base lg:text-lg font-semibold text-black leading-snug">
                     New business opportunities expanded by AI
                 </p>
                 <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
                     AI로 확장되는 새로운 비즈니스 기회
                 </p>
-            </div>
+                </div>
 
             <div className="mb-16 flex flex-col gap-2">
                 <p className="text-sm sm:text-base lg:text-lg font-semibold text-black leading-snug">
