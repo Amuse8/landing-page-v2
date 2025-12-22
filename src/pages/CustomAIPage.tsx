@@ -15,7 +15,7 @@ import { useSeo } from "../hooks/useSeo";
 
 const CustomAIPage = () => {
     useSeo({
-    title: "Custom AI | Amuse8",
+    title: "Custom AI | Adaptive AI Solutions by Amuse8",
     description: "Amuse8은 기업의 목적과 환경에 맞춰 모델, 데이터, 시스템을 설계하고 실서비스에 적용 가능한 맞춤형 AI 솔루션을 제공합니다.",
     canonicalPath: "/custom-ai",
     });
