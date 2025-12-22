@@ -7,7 +7,7 @@ import { useSeo } from "../hooks/useSeo";
 
 const AboutPage = () => {
     useSeo({
-    title: "About Amuse8 | Our Vision & Team",
+    title: "Vision | Our Vision",
     description: "Amuse8의 비전과 히스토리, 그리고 우리가 만드는 AI 제품/솔루션을 소개합니다.",
     canonicalPath: "/about",
     });
