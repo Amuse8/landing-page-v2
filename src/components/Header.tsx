@@ -13,7 +13,7 @@ const NAV = [
         href: "https://wallwall.amuse8.kr/",
         external: true,
     }
-];
+] as const;
 
 export default function Header() {
     const [open, setOpen] = useState(false);
@@ -29,7 +29,10 @@ export default function Header() {
     const isCeepAI = location.pathname.startsWith("/ceep-ai");
     const isCustomAI = location.pathname.startsWith("/custom-ai");
     const isAbout = location.pathname.startsWith("/about");
+
     const isTransparent = (isHome || isCeepAI || isCustomAI || isAbout) && isHeroVisible && !open;
+
+    const showDivider = isHeroVisible;
 
     useEffect(() => {
         const handleHeroVisibility = (event: Event) => {
@@ -51,8 +54,8 @@ export default function Header() {
         if (homeRoot) {
             const canScroll = homeRoot.scrollHeight > homeRoot.clientHeight;
             if (canScroll) {
-            homeRoot.scrollTo({ top: 0, behavior: "smooth" });
-            return;
+                homeRoot.scrollTo({ top: 0, behavior: "smooth" });
+                return;
             }
         }
 
@@ -62,14 +65,14 @@ export default function Header() {
     };
 
     const handleLogoClick = () => {
-    if (open) setOpen(false);
+        if (open) setOpen(false);
 
-    if (location.pathname === "/") {
-        requestAnimationFrame(() => scrollToTop());
-        return;
-    }
+        if (location.pathname === "/") {
+            requestAnimationFrame(() => scrollToTop());
+            return;
+        }
 
-    navigate("/");
+        navigate("/");
     };
 
     return (
@@ -93,21 +96,32 @@ export default function Header() {
             </button>
 
             <nav className="hidden md:flex flex-row gap-6 text-base">
-                {NAV.map((item) =>
-                    item.external ? (
+                {NAV.map((item, idx) =>
+                    "external" in item && item.external ? (
                         <a
                             key={item.href}
                             href={item.href}
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label={`${item.label} (새 탭에서 열림)`}
                             className={clsx(
-                                "relative pb-1 transition-opacity",
+                                "group relative pb-1 transition-opacity flex items-center",
+                                showDivider && 
+                                    idx !== NAV.length - 1 &&
+                                    "after:content-['|'] after:absolute after:-right-4 after:top-1/2 after:-translate-y-1/2 after:transition-opacity after:duration-300",
                                 isTransparent
-                                    ? "text-white/80 hover:text-white"
-                                    : "text-gray-600 hover:text-primary"
+                                    ? "text-white/80 hover:text-white after:text-white/40"
+                                    : "text-gray-600 hover:text-primary after:text-gray-300"
                             )}
                         >
-                            {item.label}
+                            <span>{item.label}</span>
+                            <span
+                                aria-hidden="true"
+                                className="ml-1 inline-block text-[0.75em] opacity-70 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:opacity-100"
+                            >
+                                ↗
+                            </span>
+                            <span className="sr-only">새 탭에서 열림</span>
                         </a>
                     ) : (
                         <NavLink
@@ -115,13 +129,16 @@ export default function Header() {
                             to={item.href}
                             className={clsx(
                                 "relative pb-1 transition-opacity",
+                                showDivider &&
+                                    idx !== NAV.length - 1 &&
+                                    "after:content-['|'] after:absolute after:-right-4 after:top-1/2 after:-translate-y-1/2 after:transition-opacity after:duration-300",
                                 isTransparent
                                     ? isActive(item.href)
-                                        ? "text-white font-semibold"
-                                        : "text-white/80 hover:text-white"
+                                        ? "text-white font-semibold after:text-white/40"
+                                        : "text-white/80 hover:text-white after:text-white/40"
                                     : isActive(item.href)
-                                        ? "text-primary font-medium"
-                                        : "text-gray-600 hover:text-primary"
+                                        ? "text-primary font-medium after:text-gray-300"
+                                        : "text-gray-600 hover:text-primary after:text-gray-300"
                             )}
                             aria-current={isActive(item.href) ? "page" : undefined}
                         >
@@ -168,36 +185,41 @@ export default function Header() {
                 )}
             >
                 <nav className="flex flex-col gap-4 px-5 py-4 text-base">
-                {NAV.map((item) =>
-                    item.external ? (
-                        <a
-                            key={item.href}
-                            href={item.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={() => setOpen(false)}
-                            className="text-left py-1 text-gray-900 hover:text-primary transition-colors"
-                        >
-                            {item.label}
-                        </a>
-                    ) : (
-                        <NavLink
-                            key={item.href}
-                            to={item.href}
-                            onClick={() => setOpen(false)}
-                            className={clsx(
-                                "text-left py-1 transition-colors",
-                                isActive(item.href)
-                                    ? "text-primary font-semibold"
-                                    : "text-gray-900 hover:text-primary"
-                            )}
-                            aria-current={isActive(item.href) ? "page" : undefined}
-                        >
-                            {item.label}
-                        </NavLink>
-                    )
-                )}
-            </nav>
+                    {NAV.map((item) =>
+                        "external" in item && item.external ? (
+                            <a
+                                key={item.href}
+                                href={item.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`${item.label} (새 탭에서 열림)`}
+                                onClick={() => setOpen(false)}
+                                className="group flex items-center text-left py-1 text-gray-900 hover:text-primary transition-colors"
+                            >
+                                <span>{item.label}</span>
+                                <span aria-hidden="true" className="ml-1 text-[0.75em] opacity-70 group-hover:opacity-100">
+                                    ↗
+                                </span>
+                                <span className="sr-only">새 탭에서 열림</span>
+                            </a>
+                        ) : (
+                            <NavLink
+                                key={item.href}
+                                to={item.href}
+                                onClick={() => setOpen(false)}
+                                className={clsx(
+                                    "text-left py-1 transition-colors",
+                                    isActive(item.href)
+                                        ? "text-primary font-semibold"
+                                        : "text-gray-900 hover:text-primary"
+                                )}
+                                aria-current={isActive(item.href) ? "page" : undefined}
+                            >
+                                {item.label}
+                            </NavLink>
+                        )
+                    )}
+                </nav>
             </div>
         </header>
     );
