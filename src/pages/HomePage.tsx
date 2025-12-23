@@ -509,7 +509,7 @@ const HomePage = () => {
                         Trusted by many leading businesses
                     </p>
                     <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
-                        아뮤즈8은 많은 주요 기업들이 신뢰하는 기업입니다.
+                        많은 기업들이 아뮤즈8과 함께하고 있습니다.
                     </p>
                 </div>
 

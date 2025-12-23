@@ -244,7 +244,7 @@ const CustomAIPage = () => {
                 필요한 AI가 있으신가요?
             </h1>
             <p className="group inline-flex items-center text-white text-lg font-medium mb-12 px-4 py-2 rounded-full">
-                <span className="mr-3">원하시는 기능만큼, 원하는 형태로 제작해 드립니다.</span>
+                <span className="mr-3">원하는 기능을, 원하는 형태로 제작해 드립니다.</span>
             </p>
             <button onClick={handleScrollDown} className="text-white/80 text-base animate-bounce uppercase">
                 Scroll Down
