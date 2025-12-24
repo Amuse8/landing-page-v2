@@ -45,7 +45,7 @@ import { useSeo } from "../hooks/useSeo";
 const HomePage = () => {
     useSeo({
     title: "Amuse8 | Finding Muse In AI",
-    description: "Amuse8은 AI 기반 제품과 맞춤형 AI 솔루션을 통해 기업의 데이터와 업무를 효율적으로 연결하는 AI 기업입니다.",
+    description: "Amuse8은 AI 기반 서비스와 맞춤형 AI 솔루션을 통해 기업의 데이터와 업무를 효율적으로 연결하는 AI 기업입니다.",
     canonicalPath: "/",
     jsonLd: {
         "@context": "https://schema.org",
