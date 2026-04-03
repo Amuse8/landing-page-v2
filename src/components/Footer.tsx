@@ -32,7 +32,7 @@ const Footer = () => {
                 <div className="space-y-1 leading-relaxed text-gray-800 text-xs sm:text-sm md:text-base">
                     <p>사업자등록번호 : 225-10-15800</p>
                     <p>이메일 : dongmin@amuse8.kr</p>
-                    <p>주소 : 서울특별시 동작구 흑석로 93-1, 동작스타트업센터, 101호</p>
+                    <p>주소 : 서울특별시 동작구 흑석로 93-1, 101호</p>
                 </div>
                 <div className="pt-4 border-t border-gray-300 flex flex-col items-start gap-2">
                     <img
