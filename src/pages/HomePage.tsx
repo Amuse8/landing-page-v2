@@ -80,7 +80,7 @@ const HomePage = () => {
         { id: 12, title: "자료관리 자동화 킵, 모든 자료와 정보를 기억해줄 수 있는 AI 패러다임 바꿔나간다.", tags: ["#Ceep", "#AI패러다임"], image: mainArticle12, sourceName: "한국경제"  },
         { id: 13, title: "기업 내부 데이터 관리 패러다임 전환, AI 자동화 기술 앞세운 아뮤즈8", tags: ["#패러다임", "#AI자동화"], image: mainArticle13, sourceName: "동아일보"  },
         { id: 14, title: "아뮤즈8, AI 기반 데이터 자동 태깅 기술로 정보 관리 효율화", tags: ["#AI", "#정보관리"], image: mainArticle14, sourceName: "한국미디어뉴스통신"  },
-        { id: 15, title: "아뮤즈8 '청년창업사관학교 15기 졸업'", tags: ["#청년창업사관학교", "청창사"], image: mainArticle15, sourceName: "중소벤처기업부"  },
+        { id: 15, title: "아뮤즈8 '청년창업사관학교 15기 졸업'", tags: ["#청년창업사관학교", "#청창사"], image: mainArticle15, sourceName: "중소벤처기업부"  },
         { id: 16, title: "아뮤즈8 '2024 동국대학교 캠퍼스타운’ 우수기업 선정", tags: ["#동국대", "#캠퍼스타운", "#우수기업"], image: mainArticle16, sourceName: "동국대학교"  },
 
         
