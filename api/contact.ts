@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-type InquiryType = "ceep" | "wallwall" | "custom";
+type InquiryType = "blokit" | "wallwall" | "custom";
 type CustomAiCategory =
     | "data_business"
     | "vision_video"
@@ -13,7 +13,7 @@ type CustomAiCategory =
     | "etc";
 
     const INQUIRY_TYPE_LABEL: Record<InquiryType, string> = {
-    ceep: "Ceep AI 문의",
+    blokit: "Blokit AI 문의",
     wallwall: "WallWall AI 문의",
     custom: "Custom AI 문의",
     };

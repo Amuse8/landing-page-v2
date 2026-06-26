@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import mainArticle1 from "@/assets/main-article-1.webp";
 import mainArticle2 from "@/assets/main-article-2.webp";
@@ -36,16 +37,43 @@ import partnerLogo15 from "@/assets/company-logo/company-15.png";
 
 import mainCustom1200 from "@/assets/main-custom-1200.webp";
 import mainCustom2000 from "@/assets/main-custom-2000.webp";
-import mainCeep1200 from "@/assets/main-ceep-1200.webp";
-import mainCeep2000 from "@/assets/main-ceep-2000.webp";
+import mainBlokit1200 from "@/assets/main-blokit-1200.webp";
+import mainBlokit2000 from "@/assets/main-blokit-2000.webp";
 import mainFirstImage from "@/assets/main-first-image-2000.webp";
 import Footer from "../components/Footer";
 import { useSeo } from "../hooks/useSeo";
 
+type ArticleTranslation = {
+    title: string;
+    tags: string[];
+    sourceName: string;
+};
+
+const ARTICLE_IMAGES = [
+    mainArticle1,
+    mainArticle2,
+    mainArticle3,
+    mainArticle4,
+    mainArticle5,
+    mainArticle6,
+    mainArticle7,
+    mainArticle8,
+    mainArticle9,
+    mainArticle10,
+    mainArticle11,
+    mainArticle12,
+    mainArticle13,
+    mainArticle14,
+    mainArticle15,
+    mainArticle16,
+];
+
 const HomePage = () => {
+    const { t } = useTranslation();
+
     useSeo({
     title: "Amuse8 | Finding Muse In AI",
-    description: "Amuse8은 AI 기반 서비스와 맞춤형 AI 솔루션을 통해 기업의 데이터와 업무를 효율적으로 연결하는 AI 기업입니다.",
+    description: t("home.seoDescription"),
     canonicalPath: "/",
     jsonLd: {
         "@context": "https://schema.org",
@@ -65,28 +93,19 @@ const HomePage = () => {
     const [showAmuseTitle, setShowAmuseTitle] = useState(true);
 
     const ARTICLES = useMemo(
-        () => [
-        { id: 1, title: "AI 기반 스마트 클라우드 서비스를 제공하는 기업 ‘아뮤즈8’", tags: ["#AI", "#클라우드"], image: mainArticle1, sourceName: "한국경제" },
-        { id: 2, title: "아뮤즈8 '2024 품질만족지수 1위 기업 및 혁신기술 대상' 선정", tags: ["#품질만족지수", "#아뮤즈8"], image: mainArticle2, sourceName: "스포츠 동아"  },
-        { id: 3, title: "아뮤즈8 '2025 전략기술 딥테크 창업촉진 사업' 최종 선정", tags: ["#전략기술", "#딥테크"], image: mainArticle3, sourceName: "과학기술정보통신부"  },
-        { id: 4, title: "아뮤즈8 '2025 D.V.S 드림벤처스타' 최종선정", tags: ["#D.V.S", "#드림벤처스타"], image: mainArticle4, sourceName: "대전창조경제혁신센터"  },
-        { id: 5, title: "아뮤즈8 '2024 HAI START 창업 경진대회’ 딥테크 부문 수상", tags: ["#동국대", "#딥테크"], image: mainArticle5, sourceName: "동국대학교"  },
-        { id: 6, title: "아뮤즈8 '예비창업패키지 우수졸업'", tags: ["#예비창업패키지"], image: mainArticle6, sourceName: "중소벤처기업부"  },
-        { id: 7, title: "AI 자동 태깅으로 사내 자료 관리 혁신 이끄는 아뮤즈8", tags: ["#자동태깅", "#사내자료관리"], image: mainArticle7, sourceName: "동아일보"  },
-        { id: 8, title: "아뮤즈8, AI 기술 접목한 지능형 데이터 관리 서비스 확대", tags: ["#AI", "#데이터관리서비스"], image: mainArticle8, sourceName: "AI포스트"  },
-        { id: 9, title: "아뮤즈8, 광주광역시와 업무협약 및 기술협약", tags: ["#자동분류", "#정보관리"], image: mainArticle9, sourceName: "광주광역시"  },
-        { id: 10, title: "아뮤즈8, AI기반 데이터 자동 태깅 기술 비전 AI에 최초 적용", tags: ["#데이터자동태깅", "#효율화"], image: mainArticle10, sourceName: "MSN"  },
-        { id: 11, title: "베스트셀러 '대표라면 반드시 알아야 할 창업의 기술' 추천사 신동민 대표", tags: ["#창업의기술", "#추천사"], image: mainArticle11, sourceName: "플랫잇"  },
-        { id: 12, title: "자료관리 자동화 킵, 모든 자료와 정보를 기억해줄 수 있는 AI 패러다임 바꿔나간다.", tags: ["#Ceep", "#AI패러다임"], image: mainArticle12, sourceName: "한국경제"  },
-        { id: 13, title: "기업 내부 데이터 관리 패러다임 전환, AI 자동화 기술 앞세운 아뮤즈8", tags: ["#패러다임", "#AI자동화"], image: mainArticle13, sourceName: "동아일보"  },
-        { id: 14, title: "아뮤즈8, AI 기반 데이터 자동 태깅 기술로 정보 관리 효율화", tags: ["#AI", "#정보관리"], image: mainArticle14, sourceName: "한국미디어뉴스통신"  },
-        { id: 15, title: "아뮤즈8 '청년창업사관학교 15기 졸업'", tags: ["#청년창업사관학교", "#청창사"], image: mainArticle15, sourceName: "중소벤처기업부"  },
-        { id: 16, title: "아뮤즈8 '2024 동국대학교 캠퍼스타운’ 우수기업 선정", tags: ["#동국대", "#캠퍼스타운", "#우수기업"], image: mainArticle16, sourceName: "동국대학교"  },
-
-        
-    ],
-        []
+        () => (t("home.articles", { returnObjects: true }) as ArticleTranslation[]).map((article, index) => ({
+            id: index + 1,
+            ...article,
+            image: ARTICLE_IMAGES[index],
+        })),
+        [t]
     );
+
+    const productIntroLines = t("home.products.intro", { returnObjects: true }) as string[];
+    const productIntroKoLines = t("home.products.introKo", { returnObjects: true }) as string[];
+    const blokitDescriptionLines = t("home.products.blokitDescription", { returnObjects: true }) as string[];
+    const customDescriptionLines = t("home.products.customDescription", { returnObjects: true }) as string[];
+    const historyHeadlineLines = t("home.history.headline", { returnObjects: true }) as string[];
 
     const PARTNER_LOGOS = useMemo(
         () => [
@@ -237,7 +256,7 @@ const HomePage = () => {
                     ${showAmuseTitle ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"}
                 `}
                 >
-                Finding Muse In AI
+                {t("home.hero.tagline")}
                 </span>
             </h1>
 
@@ -252,7 +271,7 @@ const HomePage = () => {
                 "
             >
                 <span className="mr-3 transition group-hover:opacity-80">
-                우리의 비전에 대해 알아보기
+                {t("home.hero.visionCta")}
                 </span>
                 <span
                 className="
@@ -272,7 +291,7 @@ const HomePage = () => {
                 className="text-white/80 text-xl animate-bounce uppercase"
                 type="button"
             >
-                Scroll Down
+                {t("common.scrollDown")}
             </button>
             </div>
         </section>
@@ -288,17 +307,18 @@ const HomePage = () => {
         >
             <div className="w-full max-w-[1600px]">
                 <p className="text-xs sm:text-sm font-semibold text-gray-400 mb-4">
-                Our Products
+                {t("home.products.label")}
             </p>
             <div className="mb-16 flex flex-col gap-2">
                 <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
-                    We unlock the full potential of data<br />
-                    and provide AI optimized for your business.
+                    {productIntroLines.map((line) => (
+                        <span key={line}>{line}<br /></span>
+                    ))}
                 </p>
                 <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
-                    정보의 잠재력을 드러내고
-                    비즈니스에 최적화된 AI를
-                    제공합니다.
+                    {productIntroKoLines.map((line) => (
+                        <span key={line}>{line}<br /></span>
+                    ))}
                 </p>
             </div>
 
@@ -306,12 +326,12 @@ const HomePage = () => {
                 <article className="border border-gray-300 rounded-2xl px-10 py-14 flex flex-col shadow-sm">
                 <div className="mb-10 overflow-hidden aspect-[16/9] [transform:translateZ(0)]">
                     <picture>
-                        <source media="(max-width: 768px)" srcSet={mainCeep1200}/>
+                        <source media="(max-width: 768px)" srcSet={mainBlokit1200}/>
                         <img
-                            src={mainCeep1200}
-                            srcSet={`${mainCeep1200} 1200w, ${mainCeep2000} 2000w`}
+                            src={mainBlokit1200}
+                            srcSet={`${mainBlokit1200} 1200w, ${mainBlokit2000} 2000w`}
                             sizes="1068px"
-                            alt="Ceep"
+                            alt="Blokit"
                             loading="eager"
                             decoding="async"
                             className="block h-full w-full object-cover [backface-visibility:hidden] [transform:translateZ(0)]"
@@ -322,21 +342,20 @@ const HomePage = () => {
 
                 <div className="fade-up flex flex-col flex-1">
                     <p className="text-xl leading-relaxed text-gray-700 mb-10">
-                    흩어진 문서를 자동으로 분석해 명확한 구조로 정리해줍니다.
-                    <br />
-                    Ceep을 통해 복잡한 자료 관리 없이 필요한 순간 <br /> 즉시 활용할 수 있는
-                    업무 환경을 경험해보세요.
+                    {blokitDescriptionLines.map((line) => (
+                        <span key={line}>{line}<br /></span>
+                    ))}
                     </p>
 
                     <Link
-                        to="/ceep-ai"
+                        to="/blokit-ai"
                         className="
                         mt-auto inline-flex items-center justify-center
                         text-xl font-semibold text-gray-900
                         hover:opacity-70
                         "
                     >
-                        <span>Ceep AI 알아보기</span>
+                        <span>{t("home.products.blokitCta")}</span>
                         <span className="ml-2 text-2xl">→</span>
                     </Link>
                 </div>
@@ -361,10 +380,9 @@ const HomePage = () => {
 
                 <div className="fade-up flex flex-col flex-1">
                     <p className="text-xl leading-relaxed text-gray-700 mb-10">
-                    기업의 문제를 분석해 목적에 맞는 AI 솔루션을 설계·구현합니다.
-                    <br />
-                    Custom AI를 통해 복잡한 업무를 자동화하고,<br /> 실제 현장에서 바로 적용
-                    가능한 AI 경험을 만들어 보세요.
+                    {customDescriptionLines.map((line) => (
+                        <span key={line}>{line}<br /></span>
+                    ))}
                     </p>
                     <Link
                         to="/custom-ai"
@@ -374,7 +392,7 @@ const HomePage = () => {
                         hover:opacity-70
                         "
                     >
-                        <span>Custom AI 알아보기</span>
+                        <span>{t("home.products.customCta")}</span>
                         <span className="ml-2 text-2xl">→</span>
                     </Link>
                 </div>
@@ -393,15 +411,16 @@ const HomePage = () => {
         >
             <div className="w-full max-w-[1600px]">
                 <p className="text-xs sm:text-sm font-semibold text-gray-400 mb-4">
-                    Our History
+                    {t("home.history.label")}
                 </p>
                 <div className="mb-16 flex flex-col gap-2">
                     <p className="text-sm sm:text-base lg:text-lg font-semibold text-black leading-snug">
-                        We redefine how businesses operate<br />
-                        and their future competitiveness.
+                        {historyHeadlineLines.map((line) => (
+                            <span key={line}>{line}<br /></span>
+                        ))}
                     </p>
                     <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
-                        기업의 운영 방식과 미래 경쟁력을 재정의합니다.
+                        {t("home.history.subline")}
                     </p>
                 </div>
                 
@@ -424,7 +443,7 @@ const HomePage = () => {
                     <div className="w-full h-48 rounded-xl mb-5 overflow-hidden bg-gray-200">
                         <img
                         src={a.image}
-                        alt="뉴스 썸네일"
+                        alt={t("common.newsThumbnail")}
                         className="w-full h-full object-cover"
                         loading="lazy"
                         />
@@ -462,7 +481,7 @@ const HomePage = () => {
                         <div className="w-full h-56 rounded-xl mb-6 overflow-hidden bg-gray-200">
                         <img
                             src={a.image}
-                            alt="뉴스 썸네일"
+                            alt={t("common.newsThumbnail")}
                             className="w-full h-full object-cover"
                             loading="lazy"
                         />
@@ -506,10 +525,10 @@ const HomePage = () => {
             >
                 <div className="mb-16 flex flex-col gap-2">
                     <p className="text-sm sm:text-base lg:text-lg font-semibold text-black leading-snug">
-                        Trusted by many leading businesses
+                        {t("home.partners.trusted")}
                     </p>
                     <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
-                        많은 기업들이 아뮤즈8과 함께하고 있습니다.
+                        {t("home.partners.trustedKo")}
                     </p>
                 </div>
 
@@ -548,24 +567,24 @@ const HomePage = () => {
                 "
             >
                 <h1 className="text-3xl sm:text-2xl font-semibold text-gray-400 mb-4">
-                    Shaping the Future with Amuse8
+                    {t("home.partners.shaping")}
                 </h1>
                 <div className="mb-16 flex flex-col gap-2">
 
                 <p className="text-sm sm:text-base lg:text-lg font-semibold text-black leading-snug">
-                    New business opportunities expanded by AI
+                    {t("home.partners.opportunity")}
                 </p>
                 <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
-                    AI로 확장되는 새로운 비즈니스 기회
+                    {t("home.partners.opportunityKo")}
                 </p>
                 </div>
 
             <div className="mb-16 flex flex-col gap-2">
                 <p className="text-sm sm:text-base lg:text-lg font-semibold text-black leading-snug">
-                    Create the services of the future with Amuse8.
+                    {t("home.partners.create")}
                 </p>
                 <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-500 leading-snug">
-                    Amuse8와 함께 미래의 서비스를 만들어보세요.
+                    {t("home.partners.createKo")}
                 </p>
             </div>
             <Link
@@ -594,7 +613,7 @@ const HomePage = () => {
                 "
             />
 
-            <span className="relative z-10">Contact Us</span>
+            <span className="relative z-10">{t("common.contactUs")}</span>
 
             <span
                 className="

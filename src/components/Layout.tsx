@@ -9,7 +9,7 @@ const ICON_V = "2025-12-19";
 
 const Layout = ({ children }: LayoutProps) => {
     const { pathname } = useLocation();
-    const isCeep = pathname.startsWith("/ceep-ai");
+    const isBlokitAI = pathname.startsWith("/blokit-ai");
 
     const amuse8FaviconSet = useMemo<FaviconSet>(() => ({
         icons: [
@@ -21,17 +21,17 @@ const Layout = ({ children }: LayoutProps) => {
         ],
     }), []);
         
-    const ceepFaviconSet = useMemo<FaviconSet>(() => ({
+    const blokitFaviconSet = useMemo<FaviconSet>(() => ({
         icons: [
-            { href: `/ceep-favicon-32x32.png?v=${ICON_V}`, type: "image/png", sizes: "32x32" },
-            { href: `/ceep-favicon-16x16.png?v=${ICON_V}`, type: "image/png", sizes: "16x16" },
+            { href: `/blokit-favicon-32x32.png?v=${ICON_V}`, type: "image/png", sizes: "32x32" },
+            { href: `/blokit-favicon-16x16.png?v=${ICON_V}`, type: "image/png", sizes: "16x16" },
         ],
         appleTouchIcons: [
-            { href: `/ceep-apple-touch-icon.png?v=${ICON_V}`, sizes: "180x180" },
+            { href: `/blokit-apple-touch-icon.png?v=${ICON_V}`, sizes: "180x180" },
         ],
     }), []);
 
-    useFavicon(isCeep ? ceepFaviconSet : amuse8FaviconSet);
+    useFavicon(isBlokitAI ? blokitFaviconSet : amuse8FaviconSet);
 
     return (
         <div className="app">

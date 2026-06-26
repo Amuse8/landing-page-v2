@@ -1,14 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import ceepIcon from "@/assets/about-icons/Ceep-icon.png";
+import { useTranslation } from "react-i18next";
+import blokitIcon from "@/assets/about-icons/Blokit-icon.png";
 import customAiIcon from "@/assets/about-icons/Wrench-icon.png";
 import Footer from "../components/Footer";
 import { useSeo } from "../hooks/useSeo";
+import { aboutContent, getLanguage } from "../localizedContent";
+
+const renderLines = (text: string) => text.split("\n").map((line) => (
+    <span key={line} className="block">{line}</span>
+));
 
 const AboutPage = () => {
+    const { i18n } = useTranslation();
+    const content = aboutContent[getLanguage(i18n.language)];
+
     useSeo({
     title: "Vision | Our Vision",
-    description: "Amuse8의 비전과 히스토리, 그리고 우리가 만드는 AI 제품/솔루션을 소개합니다.",
+    description: content.seoDescription,
     canonicalPath: "/about",
     });
     const location = useLocation();
@@ -24,7 +33,7 @@ const AboutPage = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isHeroVisible, setIsHeroVisible] = useState(true);
 
-    const [isCeepExpanded, setIsCeepExpanded] = useState(false);
+    const [isBlokitExpanded, setIsBlokitExpanded] = useState(false);
     const [isCustomExpanded, setIsCustomExpanded] = useState(false);
     const [isContactExpanded, setIsContactExpanded] = useState(false);
 
@@ -215,7 +224,7 @@ const AboutPage = () => {
                                 className="mt-10 text-white/70 text-sm tracking-[0.2em] uppercase"
                                 style={{ opacity: logoOpacity }}
                             >
-                                Scroll
+	                                {content.scroll}
                             </button>
                         </div>
 
@@ -245,22 +254,18 @@ const AboutPage = () => {
 
                             <p className="text-gray-800 text-base sm:text-lg leading-relaxed w-full sm:max-w-[35%]">
                                 <span className="block">
-                                    At Amuse8, we build AI inspired by our own muse, 
-                                    <br />
-                                    with the mission of automating information management.
+	                                    {renderLines(content.introEn)}
                                 </span>
 
                                 <span className="block mt-4">
-                                    Amuse8(아뮤즈8)은 ‘정보관리 자동화’를 미션으로,
-                                    <br />
-                                    우리만의 영감을 담은 AI를 만듭니다.
+	                                    {renderLines(content.introKo)}
                                 </span>
                             </p>
                             <div
                                 className="mt-4 sm:mt-0 text-gray-800 text-sm sm:text-base
                                 whitespace-nowrap hidden xs:block sm:block uppercase"
                             >
-                                scroll down
+	                                {content.scrollDown}
                             </div>
                         </div>
                     </div>
@@ -275,15 +280,11 @@ const AboutPage = () => {
                         </h2>
                         <p className="text-base sm:text-lg leading-relaxed text-gray-700">
                             <span className="block">
-                                At Amuse8, we build AI inspired by our own muse, 
-                                <br />
-                                with the mission of automating information management.
+	                                {renderLines(content.introEn)}
                             </span>
 
                             <span className="block mt-4">
-                                Amuse8(아뮤즈8)은 ‘정보관리 자동화’를 미션으로,
-                                <br />
-                                우리만의 영감을 담은 AI를 만듭니다.
+	                                {renderLines(content.introKo)}
                             </span>
                         </p>
                     </div>
@@ -334,48 +335,18 @@ const AboutPage = () => {
                                         <p className="text-4xl sm:text-5xl md:text-6xl font-bold">AI</p>
                                     </div>
                                     <div className="text-xl sm:text-2xl md:text-3xl leading-snug sm:leading-relaxed">
-                                        <p className="font-medium">Data discovers</p>
-                                        <p className="font-medium">your Possibilities</p>
+	                                        <p className="font-medium">{content.dataDiscovers[0]}</p>
+	                                        <p className="font-medium">{content.dataDiscovers[1]}</p>
                                     </div>
                                 </div>
                                 <div className="w-full lg:w-2/3 space-y-5 sm:space-y-6 min-w-0">
                                     <h3 className="text-base sm:text-xl md:text-2xl font-semibold leading-relaxed break-words">
-                                        AI는{" "}
-                                        <span className="text-primary font-bold">데이터(Data)</span>{" "}
-                                        속에 숨은{" "}
-                                        <span className="text-primary font-bold">가능성(Possibility)</span>
-                                        을{" "}
-                                        <span className="hidden sm:inline">
-                                            <br />
-                                        </span>
-                                        현실로 바꾸는 가장 확장적인 기술입니다.
+	                                        {content.possibilityTitle}
                                     </h3>
                                     <div className="space-y-3 text-base sm:text-sm md:text-base leading-relaxed text-gray-700 break-words">
-                                        <p>
-                                            오늘의 기업들은 복잡한 데이터와 비효율적인 시스템 속에서 무엇이
-                                            문제인지,
-                                            <span className="hidden sm:inline">
-                                                <br />
-                                            </span>
-                                            <span className="inline sm:hidden"> </span>
-                                            어떻게 AI를 적용해야 하는지조차 알기 어려운 상황에 놓여 있습니다.
-                                        </p>
-                                        <p>Amuse8은 이 간극을 메웁니다.</p>
-                                        <p>
-                                            우리는 사용자의 경험을 중심에 두고, 정보를 분석해 잠재력을
-                                            발견하며
-                                            <span className="hidden sm:inline">
-                                                <br />
-                                            </span>
-                                            <span className="inline sm:hidden"> </span>
-                                            필요한 순간 바로 활용할 수 있는 AI 제품을 만들어
-                                            <span className="hidden sm:inline">
-                                                <br />
-                                            </span>
-                                            <span className="inline sm:hidden"> </span>
-                                            모든 기업이 AI의 가능성을 현실로 바꿀 수 있는 세상을 만들어
-                                            갑니다.
-                                        </p>
+	                                        {content.possibilityBody.map((paragraph) => (
+	                                            <p key={paragraph}>{paragraph}</p>
+	                                        ))}
                                     </div>
                                 </div>
                             </div>
@@ -405,9 +376,7 @@ const AboutPage = () => {
                                     </div>
                                     <div className="text-2xl leading-relaxed">
                                         <p className="font-medium">
-                                            <span className="text-primary font-semibold">Amuse8</span>는 모두가
-                                            <br /> AI의 가능성을 활용할 수 있는
-                                            <br /> 미래를 만듭니다.
+	                                            {renderLines(content.future)}
                                         </p>
                                     </div>
                                 </div>
@@ -441,17 +410,13 @@ const AboutPage = () => {
                                                             className="text-3xl text-white font-semibold mb-4"
                                                             style={{ opacity: problemTextOpacity }}
                                                         >
-                                                            AI 적용의 난제
+	                                                            {content.problemTitle}
                                                         </h3>
                                                         <p
                                                             className="text-base leading-relaxed text-white"
                                                             style={{ opacity: problemTextOpacity }}
                                                         >
-                                                            AI 기술은 빠르게 발전하는데, <br />
-                                                            왜 기업은 여전히 어려움을 겪을까요? <br />
-                                                            복잡한 데이터와 시스템 속에서 문제를 파악하기 어렵고,
-                                                            <br />
-                                                            AI의 실제 업무 적용 방식도 명확하지 않기 때문입니다.
+	                                                            {renderLines(content.problemBody)}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -472,14 +437,9 @@ const AboutPage = () => {
                                                         Solution
                                                     </div>
                                                     <div className="mt-auto">
-                                                        <h3 className="text-3xl font-semibold mb-4">명확한 AI 해법</h3>
+	                                                        <h3 className="text-3xl font-semibold mb-4">{content.solutionTitle}</h3>
                                                         <p className="text-base leading-relaxed text-gray-800">
-                                                            Amuse8은 문제를 먼저 정의하고,<br />
-                                                            그에 가장 적합한 AI 해결책을 제품 형태로 제공합니다.
-                                                            <br />
-                                                            누구나 필요한 순간 바로 사용할 수 있는 실질적인 AI 경험을 만드는 것이{" "}
-                                                            <br />
-                                                            우리의 방식입니다.
+	                                                            {renderLines(content.solutionBody)}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -492,24 +452,18 @@ const AboutPage = () => {
                                             <div className="inline-flex items-center px-4 py-1 rounded-full bg-white text-black text-xs font-medium mb-4">
                                                 Problem
                                             </div>
-                                            <h3 className="text-xl font-semibold mb-3 text-white">막막한 AI 적용</h3>
+	                                            <h3 className="text-xl font-semibold mb-3 text-white">{content.problemTitleMobile}</h3>
                                             <p className="text-sm leading-relaxed text-white/90">
-                                                AI 기술은 빠르게 발전하는데, <br />
-                                                왜 기업은 여전히 어려움을 겪을까요? <br />
-                                                복잡한 데이터와 시스템 속에서 문제를 파악하기 어렵고,
-                                                <br />
-                                                AI의 실제 업무 적용 방식도 명확하지 않기 때문입니다.
+	                                                {renderLines(content.problemBody)}
                                             </p>
                                         </div>
                                         <div className="bg-[#F3F3F3] text-black rounded-3xl px-6 py-8">
                                             <div className="inline-flex items-center px-4 py-1 rounded-full bg-primary text-white text-xs font-medium mb-4">
                                                 Solution
                                             </div>
-                                            <h3 className="text-xl font-semibold mb-3">손쉬운 AI 경험</h3>
+	                                            <h3 className="text-xl font-semibold mb-3">{content.solutionTitleMobile}</h3>
                                             <p className="text-sm leading-relaxed text-gray-800">
-                                                Amuse8은 문제를 먼저 정의하고, 그에 가장 적합한 AI 해결책을 제품 형태로 제공합니다.
-                                                <br />
-                                                누구나 필요한 순간 바로 사용할 수 있는 실질적인 AI 경험을 만드는 것이 우리의 방식입니다.
+	                                                {renderLines(content.solutionBody)}
                                             </p>
                                         </div>
                                     </div>
@@ -535,7 +489,7 @@ const AboutPage = () => {
                                     <div className="absolute inset-0 bg-black/55" />
                                     <div className="relative z-10 px-8 sm:px-10 lg:px-12 py-10 lg:py-12 flex flex-col gap-10 lg:gap-12">
                                         <div className="text-white max-w-xl">
-                                            <p className="text-xs font-medium text-white/60 mb-3">Our Product</p>
+	                                            <p className="text-xs font-medium text-white/60 mb-3">{content.productLabel}</p>
                                             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
                                                 <span className="text-primary">AI∞</span>{" "}
                                                 <span>
@@ -543,12 +497,10 @@ const AboutPage = () => {
                                                     Possibilities
                                                 </span>
                                                 <br />
-                                                <span>직접 경험해 보세요</span>
+	                                                <span>{content.productTitle}</span>
                                             </h2>
                                             <p className="text-sm sm:text-base text-white/80 leading-relaxed">
-                                                AI로 비즈니스의 한계를 넘어서고 싶다면,
-                                                <br />
-                                                지금 Amuse8과 함께 <br /> 무한한 AI 경험을 시작해보세요.
+	                                                {renderLines(content.productBody)}
                                             </p>
                                         </div>
 
@@ -564,26 +516,24 @@ const AboutPage = () => {
                                                         "
                                                         >
                                                         <img
-                                                            src={ceepIcon}
-                                                            alt="Ceep Icon"
+                                                            src={blokitIcon}
+                                                            alt="Blokit Icon"
                                                             className="w-full h-full object-contain opacity-90"
                                                         />
                                                     </div>
 
-                                                    <p className="text-xs font-medium text-primary mb-4">Ceep AI</p>
+                                                    <p className="text-xs font-medium text-primary mb-4">Blokit AI</p>
 
                                                     <p className="text-base sm:text-lg font-medium leading-relaxed mb-8 pr-14">
-                                                        흩어진 정보를
-                                                        <br />
-                                                        즉시 활용 가능한 지식으로 바꿉니다.
+	                                                        {renderLines(content.blokitCard)}
                                                     </p>
 
                                                     <button
                                                         onClick={() => {
-                                                            if (!isCeepExpanded) {
-                                                                setIsCeepExpanded(true);
+                                                            if (!isBlokitExpanded) {
+                                                                setIsBlokitExpanded(true);
                                                             } else {
-                                                                navigate("/ceep-ai");
+                                                                navigate("/blokit-ai");
                                                             }
                                                         }}
                                                         className={`
@@ -591,10 +541,10 @@ const AboutPage = () => {
                                                             flex items-center justify-center
                                                             text-xs sm:text-sm font-medium
                                                             transition-all duration-200
-                                                            ${isCeepExpanded ? "px-4 h-10" : "w-10 h-10 text-xl"}
+                                                            ${isBlokitExpanded ? "px-4 h-10" : "w-10 h-10 text-xl"}
                                                         `}
                                                     >
-                                                        {isCeepExpanded ? "Ceep AI 더 알아보기" : "+"}
+	                                                        {isBlokitExpanded ? content.moreBlokit : "+"}
                                                     </button>
                                                 </div>
                                             </div>
@@ -619,9 +569,7 @@ const AboutPage = () => {
                                                     <p className="text-xs font-medium text-primary mb-4">Custom AI</p>
 
                                                     <p className="text-base sm:text-lg font-medium leading-relaxed mb-8 pr-14">
-                                                        비즈니스에 필요한 AI를
-                                                        <br />
-                                                        원하는 형태로 만들어 드립니다.
+	                                                        {renderLines(content.customCard)}
                                                     </p>
 
                                                     <button
@@ -640,7 +588,7 @@ const AboutPage = () => {
                                                             ${isCustomExpanded ? "px-4 h-10" : "w-10 h-10 text-xl"}
                                                         `}
                                                     >
-                                                        {isCustomExpanded ? "Custom AI 더 알아보기" : "+"}
+	                                                        {isCustomExpanded ? content.moreCustom : "+"}
                                                     </button>
                                                 </div>
                                             </div>
@@ -667,7 +615,7 @@ const AboutPage = () => {
                                                 ${isContactExpanded ? "px-6 h-14 w-auto text-base" : "w-14 h-14"}
                                             `}
                                         >
-                                            {isContactExpanded ? "문의하기" : "?"}
+	                                            {isContactExpanded ? content.contact : "?"}
                                         </button>
                                     </div>
                                 </div>
