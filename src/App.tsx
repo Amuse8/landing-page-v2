@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
-import CeepAIPage from "./pages/CeepAIPage";
+import BlokitAIPage from "./pages/BlokitAIPage";
 import CustomAIPage from "./pages/CustomAIPage";
 import InquiryPage from "./pages/InquiryPage";
 import Privacy from "./components/Privacy";
@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/about" element={<AboutPage/>}/>
-          <Route path="/ceep-ai" element={<CeepAIPage/>}/>
+          <Route path="/blokit-ai" element={<BlokitAIPage/>}/>
           <Route path="/custom-ai" element={<CustomAIPage/>}/>
           <Route path="/inquiry" element={<InquiryPage/>}/>
           <Route path="/privacy" element={<Privacy/>}/>

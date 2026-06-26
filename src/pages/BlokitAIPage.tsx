@@ -2,21 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 import PageTitle from "../components/PageTitle";
 import dragVideo from "../assets/drag-video.mp4";
-import heroVideo from "../assets/ceepai-video.mp4";
-import timeImage from "../assets/ceepai-time-image.webp";
-import productiveImage from "../assets/ceepai-productive-image.webp";
-import moneyImage from "../assets/ceepai-money-image.webp";
+import heroVideo from "../assets/blokitai-video.mp4";
+import timeImage from "../assets/blokitai-time-image.webp";
+import productiveImage from "../assets/blokitai-productive-image.webp";
+import moneyImage from "../assets/blokitai-money-image.webp";
 import { Box } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Footer from "../components/Footer";
 import { useSeo } from "../hooks/useSeo";
 
-const CeepAIPage = () => {
+const BlokitAIPage = () => {
     useSeo({
-    title: "Ceep AI | AI Document Intelligence by Amuse8",
-    description: "Ceep은 문서와 데이터를 자동으로 정리·태깅하고, 필요한 정보를 빠르게 찾을 수 있도록 돕는 AI 기반 문서·데이터 관리 시스템입니다.",
-    canonicalPath: "/ceep-ai",
+    title: "Blokit AI | AI Document Intelligence by Amuse8",
+    description: "Blokit은 문서와 데이터를 자동으로 정리·태깅하고, 필요한 정보를 빠르게 찾을 수 있도록 돕는 AI 기반 문서·데이터 관리 시스템입니다.",
+    canonicalPath: "/blokit-ai",
     });
     const scrollRootRef = useRef<HTMLDivElement | null>(null);
     const heroRef = useRef<HTMLElement | null>(null);
@@ -73,7 +73,7 @@ const CeepAIPage = () => {
         <div
             ref={scrollRootRef} 
             className="h-screen overflow-y-scroll snap-y snap-mandatory overscroll-contain">
-            <PageTitle title="Ceep"/>
+            <PageTitle title="Blokit"/>
             <section
                 ref={heroRef}
                 className="relative min-h-screen
@@ -103,7 +103,7 @@ const CeepAIPage = () => {
                     </p>
                     <p className="group inline-flex items-center text-white text-lg font-medium mb-12
                         px-4 py-2 rounded-full">
-                            <span className="mr-3">우리 회사 시스템에 Ceep AI 도입하기</span>
+                            <span className="mr-3">우리 회사 시스템에 Blokit AI 도입하기</span>
                             
                     </p>
                     <button
@@ -321,7 +321,7 @@ const CeepAIPage = () => {
 
                         <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-14 leading-snug">
                             가장 스마트한 <br/>
-                            <span className="text-blue-600">AI API Ceep</span>
+                            <span className="text-blue-600">AI API Blokit</span>
                         </h2>
 
                         <div className="space-y-6 sm:space-y-8 mb-20">
@@ -574,10 +574,10 @@ const CeepAIPage = () => {
                     >
                     <div className="text-left">
                         <p className="text-sm sm:text-base font-semibold text-blue-600 mb-2">
-                        Ceep AI 도입 문의
+                        Blokit AI 도입 문의
                         </p>
                         <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-snug">
-                        우리 회사 시스템에 <span className="text-blue-600">Ceep AI</span> 도입하기
+                        우리 회사 시스템에 <span className="text-blue-600">Blokit AI</span> 도입하기
                         </h3>
                         <p className="mt-3 text-sm sm:text-base md:text-lg font-semibold text-gray-600 leading-relaxed">
                         현재 업무 흐름에 맞춰 연동/도입 방식을 함께 설계해드립니다.
@@ -639,7 +639,7 @@ const CeepAIPage = () => {
                     </p>
 
                     <p className="text-sm sm:text-base md:text-lg text-gray-900 leading-relaxed">
-                        <span className="font-extrabold">Ceep</span>은 사용자의 데이터를 <br className="sm:hidden"/> AI 기능 개선을 위한 용도로만 활용하며, <br className="sm:hidden"/>
+                        <span className="font-extrabold">Blokit</span>은 사용자의 데이터를 <br className="sm:hidden"/> AI 기능 개선을 위한 용도로만 활용하며, <br className="sm:hidden"/>
                         다른 목적으로 이를 활용하지 않습니다.
                     </p>
                 </div>
@@ -648,4 +648,4 @@ const CeepAIPage = () => {
         </div>
     )
 }
-export default CeepAIPage;
+export default BlokitAIPage;

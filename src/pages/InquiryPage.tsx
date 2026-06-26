@@ -69,7 +69,7 @@ type NoticeState = { type: NoticeType; text: string } | null;
 const isValidEmail = (v: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
-type InquiryType = "ceep" | "wallwall" | "custom";
+type InquiryType = "blokit" | "wallwall" | "custom";
 type CustomAiCategory = 
     | "data_business"
     | "vision_video"
@@ -82,7 +82,7 @@ type CustomAiCategory =
     | "etc";
 
 const INQUIRY_TYPE_OPTIONS: { value: InquiryType; label: string }[] = [
-    { value: "ceep", label: "Ceep AI 문의"},
+    { value: "blokit", label: "Blokit AI 문의"},
     { value: "wallwall", label: "WallWall AI 문의" },
     { value: "custom", label: "Custom AI 문의" },
 ];

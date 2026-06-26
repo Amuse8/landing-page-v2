@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import ceepIcon from "@/assets/about-icons/Ceep-icon.png";
+import blokitIcon from "@/assets/about-icons/Blokit-icon.png";
 import customAiIcon from "@/assets/about-icons/Wrench-icon.png";
 import Footer from "../components/Footer";
 import { useSeo } from "../hooks/useSeo";
@@ -24,7 +24,7 @@ const AboutPage = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isHeroVisible, setIsHeroVisible] = useState(true);
 
-    const [isCeepExpanded, setIsCeepExpanded] = useState(false);
+    const [isBlokitExpanded, setIsBlokitExpanded] = useState(false);
     const [isCustomExpanded, setIsCustomExpanded] = useState(false);
     const [isContactExpanded, setIsContactExpanded] = useState(false);
 
@@ -564,13 +564,13 @@ const AboutPage = () => {
                                                         "
                                                         >
                                                         <img
-                                                            src={ceepIcon}
-                                                            alt="Ceep Icon"
+                                                            src={blokitIcon}
+                                                            alt="Blokit Icon"
                                                             className="w-full h-full object-contain opacity-90"
                                                         />
                                                     </div>
 
-                                                    <p className="text-xs font-medium text-primary mb-4">Ceep AI</p>
+                                                    <p className="text-xs font-medium text-primary mb-4">Blokit AI</p>
 
                                                     <p className="text-base sm:text-lg font-medium leading-relaxed mb-8 pr-14">
                                                         흩어진 정보를
@@ -580,10 +580,10 @@ const AboutPage = () => {
 
                                                     <button
                                                         onClick={() => {
-                                                            if (!isCeepExpanded) {
-                                                                setIsCeepExpanded(true);
+                                                            if (!isBlokitExpanded) {
+                                                                setIsBlokitExpanded(true);
                                                             } else {
-                                                                navigate("/ceep-ai");
+                                                                navigate("/blokit-ai");
                                                             }
                                                         }}
                                                         className={`
@@ -591,10 +591,10 @@ const AboutPage = () => {
                                                             flex items-center justify-center
                                                             text-xs sm:text-sm font-medium
                                                             transition-all duration-200
-                                                            ${isCeepExpanded ? "px-4 h-10" : "w-10 h-10 text-xl"}
+                                                            ${isBlokitExpanded ? "px-4 h-10" : "w-10 h-10 text-xl"}
                                                         `}
                                                     >
-                                                        {isCeepExpanded ? "Ceep AI 더 알아보기" : "+"}
+                                                        {isBlokitExpanded ? "Blokit AI 더 알아보기" : "+"}
                                                     </button>
                                                 </div>
                                             </div>

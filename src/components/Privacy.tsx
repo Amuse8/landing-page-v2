@@ -18,7 +18,7 @@ const Privacy = () => {
                             1. 총칙
                         </h2>
                         <p className="leading-relaxed">
-                            Amuse8 주식회사(이하 '회사')는 'Ceep' 서비스 이용자의 개인정보 보호를 매우 중요하게 여기며,
+                            Amuse8 주식회사(이하 '회사')는 'Blokit' 서비스 이용자의 개인정보 보호를 매우 중요하게 여기며,
                             「개인정보 보호법」 등 관련 법령을 준수하고 있습니다. 회사는 개인정보 처리방침을 통해 이용자의
                             개인정보가 어떤 용도와 방식으로 이용되고 있으며, 개인정보 보호를 위해 어떤 조치가 취해지고 있는지
                             알려드립니다.
@@ -58,7 +58,7 @@ const Privacy = () => {
                         <div className="border border-gray-200 rounded-lg p-4">
                             <h3 className="font-medium text-gray-800 mb-2">1. 서비스 제공</h3>
                             <ul className="list-disc ml-6 space-y-1 mb-4">
-                            <li>Ceep 서비스의 개인별 관리</li>
+                            <li>Blokit 서비스의 개인별 관리</li>
                             </ul>
                             <h3 className="font-medium text-gray-800 mb-2">2. 서비스 개선</h3>
                             <ul className="list-disc ml-6 space-y-1 mb-4">

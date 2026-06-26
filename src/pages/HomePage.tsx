@@ -36,8 +36,8 @@ import partnerLogo15 from "@/assets/company-logo/company-15.png";
 
 import mainCustom1200 from "@/assets/main-custom-1200.webp";
 import mainCustom2000 from "@/assets/main-custom-2000.webp";
-import mainCeep1200 from "@/assets/main-ceep-1200.webp";
-import mainCeep2000 from "@/assets/main-ceep-2000.webp";
+import mainBlokit1200 from "@/assets/main-blokit-1200.webp";
+import mainBlokit2000 from "@/assets/main-blokit-2000.webp";
 import mainFirstImage from "@/assets/main-first-image-2000.webp";
 import Footer from "../components/Footer";
 import { useSeo } from "../hooks/useSeo";
@@ -306,12 +306,12 @@ const HomePage = () => {
                 <article className="border border-gray-300 rounded-2xl px-10 py-14 flex flex-col shadow-sm">
                 <div className="mb-10 overflow-hidden aspect-[16/9] [transform:translateZ(0)]">
                     <picture>
-                        <source media="(max-width: 768px)" srcSet={mainCeep1200}/>
+                        <source media="(max-width: 768px)" srcSet={mainBlokit1200}/>
                         <img
-                            src={mainCeep1200}
-                            srcSet={`${mainCeep1200} 1200w, ${mainCeep2000} 2000w`}
+                            src={mainBlokit1200}
+                            srcSet={`${mainBlokit1200} 1200w, ${mainBlokit2000} 2000w`}
                             sizes="1068px"
-                            alt="Ceep"
+                            alt="Blokit"
                             loading="eager"
                             decoding="async"
                             className="block h-full w-full object-cover [backface-visibility:hidden] [transform:translateZ(0)]"
@@ -324,19 +324,19 @@ const HomePage = () => {
                     <p className="text-xl leading-relaxed text-gray-700 mb-10">
                     흩어진 문서를 자동으로 분석해 명확한 구조로 정리해줍니다.
                     <br />
-                    Ceep을 통해 복잡한 자료 관리 없이 필요한 순간 <br /> 즉시 활용할 수 있는
+                    Blokit을 통해 복잡한 자료 관리 없이 필요한 순간 <br /> 즉시 활용할 수 있는
                     업무 환경을 경험해보세요.
                     </p>
 
                     <Link
-                        to="/ceep-ai"
+                        to="/blokit-ai"
                         className="
                         mt-auto inline-flex items-center justify-center
                         text-xl font-semibold text-gray-900
                         hover:opacity-70
                         "
                     >
-                        <span>Ceep AI 알아보기</span>
+                        <span>Blokit AI 알아보기</span>
                         <span className="ml-2 text-2xl">→</span>
                     </Link>
                 </div>

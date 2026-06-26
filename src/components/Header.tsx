@@ -6,7 +6,7 @@ import logoWhite from "@/assets/logo-white.svg";
 
 const NAV = [
     { label: "Amuse8", href: "/about" },
-    { label: "Ceep AI", href: "/ceep-ai" },
+    { label: "Blokit AI", href: "/blokit-ai" },
     { label: "Custom AI", href: "/custom-ai" },
     {
         label: "WallWall AI",
@@ -26,11 +26,11 @@ export default function Header() {
         location.pathname === href || (href !== "/" && location.pathname.startsWith(href));
 
     const isHome = location.pathname === "/";
-    const isCeepAI = location.pathname.startsWith("/ceep-ai");
+    const isBlokitAI = location.pathname.startsWith("/blokit-ai");
     const isCustomAI = location.pathname.startsWith("/custom-ai");
     const isAbout = location.pathname.startsWith("/about");
 
-    const isTransparent = (isHome || isCeepAI || isCustomAI || isAbout) && isHeroVisible && !open;
+    const isTransparent = (isHome || isBlokitAI || isCustomAI || isAbout) && isHeroVisible && !open;
 
     const showDivider = isHeroVisible;
 
