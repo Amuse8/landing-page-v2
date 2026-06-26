@@ -1,7 +1,12 @@
 import logo from "@/assets/logo-black.svg";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { footerContent, getLanguage } from "../localizedContent";
 
 const Footer = () => {
+    const { i18n } = useTranslation();
+    const content = footerContent[getLanguage(i18n.language)];
+
     return (
         <footer className="w-full bg-[#F3F4F6] text-gray-600">
             <div className="max-w-6xl mx-auto px-4 py-10 flex flex-col gap-6 text-xs sm:text-sm md:text-base">
@@ -10,14 +15,14 @@ const Footer = () => {
                         to="/terms"
                         className="hover:underline underline-offset-4 font-medium"
                     >
-                        서비스 이용약관
+                        {content.terms}
                     </Link>
                     <div className="h-4 w-px bg-gray-400" />
                     <Link
                         to="/privacy"
                         className="hover:underline underline-offset-4 font-medium"
                     >
-                        개인정보처리방침
+                        {content.privacy}
                     </Link>
                 </div>
                 <div className="flex items-center gap-3">
@@ -26,13 +31,13 @@ const Footer = () => {
                     </div>
                     <div className="h-4 w-px bg-gray-400" />
                     <div className="text-gray-800 text-xs sm:text-sm md:text-base">
-                        대표 : 신동민
+                        {content.ceo}
                     </div>
                 </div>
                 <div className="space-y-1 leading-relaxed text-gray-800 text-xs sm:text-sm md:text-base">
-                    <p>사업자등록번호 : 225-10-15800</p>
-                    <p>이메일 : dongmin@amuse8.kr</p>
-                    <p>주소 : 서울특별시 동작구 흑석로 93-1, 동작스타트업센터, 101호</p>
+                    <p>{content.businessNumber}</p>
+                    <p>{content.email}</p>
+                    <p>{content.address}</p>
                 </div>
                 <div className="pt-4 border-t border-gray-300 flex flex-col items-start gap-2">
                     <img
@@ -41,7 +46,7 @@ const Footer = () => {
                         className="h-6 w-auto opacity-80"
                     />
                     <p className="text-[10px] sm:text-xs md:text-sm text-gray-700">
-                        Copyright © {new Date().getFullYear()} Amuse8 Inc.All rights reserved
+                        Copyright © {new Date().getFullYear()} Amuse8 Inc. {content.copyright}
                     </p>
 
                 </div>

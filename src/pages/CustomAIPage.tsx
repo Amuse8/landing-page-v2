@@ -1,22 +1,39 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { CATEGORIES } from "../constants/customAiCategories";
+import { useTranslation } from "react-i18next";
 import { CATEGORY_ICON_LIST } from "../constants/categoryIcons";
-import { PROCESS_STEPS } from "../constants/processSteps";
 import { PROCESS_ICON_LIST } from "../constants/processIcons";
-import { FAQ_LIST } from "../constants/faqList";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import customAiVideo from "../assets/si-video.mp4";
 import Footer from "../components/Footer";
-import { REASONS } from "../constants/reasonItem";
 import { AlertTriangle, CheckCircle2 } from "lucide-react";
 import { useSeo } from "../hooks/useSeo";
+import {
+    customCategories,
+    customContent,
+    customFaqList,
+    customProcessSteps,
+    customReasons,
+    getLanguage,
+} from "../localizedContent";
+
+const renderLines = (text: string) => text.split("\n").map((line) => (
+    <span key={line} className="block">{line}</span>
+));
 
 const CustomAIPage = () => {
+    const { i18n } = useTranslation();
+    const language = getLanguage(i18n.language);
+    const content = customContent[language];
+    const categories = customCategories[language];
+    const reasons = customReasons[language];
+    const processSteps = customProcessSteps[language];
+    const faqList = customFaqList[language];
+
     useSeo({
     title: "Custom AI | Adaptive AI Solutions by Amuse8",
-    description: "Amuse8은 기업의 목적과 환경에 맞춰 모델, 데이터, 시스템을 설계하고 실서비스에 적용 가능한 맞춤형 AI 솔루션을 제공합니다.",
+    description: content.seoDescription,
     canonicalPath: "/custom-ai",
     });
 
@@ -32,7 +49,7 @@ const CustomAIPage = () => {
     };
 
     const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
-    const [activeCategory, setActiveCategory] = useState<string>(CATEGORIES[0].id);
+    const [activeCategory, setActiveCategory] = useState<string>(categories[0].id);
     const [showScrollTop, setShowScrollTop] = useState(false);
 
     const [isHeroVisible, setIsHeroVisible] = useState(true);
@@ -241,10 +258,10 @@ const CustomAIPage = () => {
 
             <div className="relative z-10 flex flex-col items-center">
             <h1 className="relative z-10 text-3xl sm:text-4xl md:text-5xl font-bold mb-14">
-                필요한 AI가 있으신가요?
+	                {content.heroTitle}
             </h1>
             <p className="group inline-flex items-center text-white text-lg font-medium mb-12 px-4 py-2 rounded-full">
-                <span className="mr-3">원하는 기능을, 원하는 형태로 제작해 드립니다.</span>
+	                <span className="mr-3">{content.heroBody}</span>
             </p>
             <button onClick={handleScrollDown} className="text-white/80 text-base animate-bounce uppercase">
                 Scroll Down
@@ -260,13 +277,13 @@ const CustomAIPage = () => {
                     <div className="flex flex-col items-center text-center gap-6">
                         <div className="space-y-3">
                             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
-                                Custom AI가 필요한 이유는 분명합니다
+	                                {content.reasonsTitle}
                             </h2>
                             
                         </div>
                     </div>
                     <div className="mt-12 grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
-                        {REASONS.map((item) => {
+	                        {reasons.map((item) => {
                             const isActiveMobile = !canHover && activeReasonId === item.id;
 
                             return (
@@ -300,7 +317,7 @@ const CustomAIPage = () => {
                                         <div className="flex flex-col items-center">
                                             <span className="mb-2 inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 px-2.5 py-1 rounded-full bg-gray-100 border border-gray-200">
                                                 <AlertTriangle className="w-3.5 h-3.5 text-gray-500" />
-                                                문제 상황
+	                                                {content.problemLabel}
                                             </span>
 
                                             <div className="text-base sm:text-lg font-semibold leading-snug text-gray-900 whitespace-pre-line">
@@ -323,7 +340,7 @@ const CustomAIPage = () => {
                                         <div className="flex flex-col items-center">
                                             <span className="mb-2 inline-flex items-center gap-1.5 text-xs font-semibold text-[#3762E3] px-2.5 py-1 rounded-full bg-[#3762E3]/10 border border-[#3762E3]/20">
                                                 <CheckCircle2 className="w-3.5 h-3.5 text-[#3762E3]" />
-                                                해결 방안
+	                                                {content.solutionLabel}
                                             </span>
 
                                             <div className="text-base sm:text-lg font-bold leading-snug text-gray-900 whitespace-pre-line">
@@ -344,7 +361,7 @@ const CustomAIPage = () => {
                                             !canHover && isActiveMobile ? "opacity-0 translate-y-1 pointer-events-none" : "",
                                         ].join(" ")}
                                         >
-                                        {canHover ? "마우스를 올려보세요" : "탭해서 내용을 확인해보세요"}
+	                                        {canHover ? content.hoverHint : content.tapHint}
                                         </span>
                                     </div>
                                     </button>
@@ -384,28 +401,20 @@ const CustomAIPage = () => {
                     <div className="relative">
                     <div className="flex justify-center">
                         <span className="inline-flex items-center gap-2 rounded-full border border-[#3762E3]/20 bg-[#3762E3]/10 px-3 py-1 text-xs sm:text-sm font-semibold text-[#3762E3]">
-                        Custom AI by Amuse8
+	                        {content.designBadge}
                         </span>
                     </div>
 
                     <p className="mt-6 text-center text-2xl sm:text-3xl md:text-4xl font-bold leading-snug text-gray-900">
-                        Amuse8은
-                        <br />
-                        상황에 맞는 AI를 설계합니다
+	                        {renderLines(content.designTitle)}
                     </p>
 
                     <p className="mt-5 text-center text-sm sm:text-base md:text-lg leading-relaxed text-gray-600">
-                        특정 모델/기능에 갇히지 않고,
-                        <br className="hidden sm:block" />
-                        목표·데이터·예산·일정에 맞춰 가장 적합한 조합으로 구현합니다.
+	                        {renderLines(content.designBody)}
                     </p>
 
                     <div className="mt-10 grid gap-3 sm:gap-4 sm:grid-cols-3">
-                        {[
-                        ["목표 중심 설계", "필요한 성과부터 정의합니다."],
-                        ["빠른 PoC", "검증 후 확장으로 리스크를 줄입니다."],
-                        ["운영까지 고려", "배포·모니터링·개선까지 연결합니다."],
-                        ].map(([title, desc]) => (
+	                        {content.designCards.map(([title, desc]) => (
                         <div
                             key={title}
                             className="rounded-2xl border border-gray-200 bg-white/70 backdrop-blur px-5 py-4 shadow-sm"
@@ -454,7 +463,7 @@ const CustomAIPage = () => {
             <div className="w-full max-w-6xl">
             <div className="pb-4 mb-10 md:sticky md:top-0 md:z-10 md:bg-white/90 md:backdrop-blur">
                 <div className="flex flex-wrap justify-center text-center gap-3">
-                {CATEGORIES.map((cat) => {
+	                {categories.map((cat) => {
                     const isActive = cat.id === activeCategory;
                     return (
                     <button
@@ -473,7 +482,7 @@ const CustomAIPage = () => {
             </div>
 
             <div className="space-y-16">
-                {CATEGORIES.map((cat) => (
+	                {categories.map((cat) => (
                 <div
                     key={cat.id}
                     ref={(el) => {
@@ -498,7 +507,7 @@ const CustomAIPage = () => {
                             {iconSrc ? (
                                 <img
                                 src={iconSrc}
-                                alt={`${cat.label} 아이콘`}
+                                alt={`${cat.label} icon`}
                                 className="w-7 h-7 sm:w-8 sm:h-8 object-contain"
                                 loading="lazy"
                                 decoding="async"
@@ -549,14 +558,12 @@ const CustomAIPage = () => {
                 ].join(" ")}
                 >
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-snug">
-                    프로세스는
-                    <br />
-                    이렇게 진행됩니다
+                    {renderLines(content.processTitle)}
                 </h2>
                 </div>
 
                 <div className="grid gap-6 sm:gap-7 md:grid-cols-2 lg:grid-cols-4">
-                {PROCESS_STEPS.map((step, idx) => {
+	                {processSteps.map((step, idx) => {
                     const iconSrc = PROCESS_ICON_LIST[step.id] ?? null;
 
                     return (
@@ -574,7 +581,7 @@ const CustomAIPage = () => {
                             {iconSrc ? (
                             <img
                                 src={iconSrc}
-                                alt={`${step.id} 단계 아이콘`}
+                                alt={`${step.id} step icon`}
                                 className="w-8 h-8 object-contain"
                                 loading="lazy"
                                 decoding="async"
@@ -612,7 +619,7 @@ const CustomAIPage = () => {
                 </h2>
 
                 <div className="space-y-5">
-                {FAQ_LIST.map((item) => {
+	                {faqList.map((item) => {
                     const isOpen = activeFaqId === item.id;
 
                     return (
@@ -700,19 +707,15 @@ const CustomAIPage = () => {
                 <div className="flex flex-col gap-10 sm:gap-12 lg:flex-row lg:items-end lg:justify-between">
                 <div className="space-y-6 max-w-3xl text-left">
                     <p className="text-sm sm:text-base tracking-wide text-[#3762E3] font-semibold">
-                    상담이 필요하신가요?
+                    {content.ctaLead}
                     </p>
 
                     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-snug text-gray-900">
-                    어떤 AI가 필요한지 모르셔도
-                    <br className="sm:block" />
-                    괜찮습니다
+                    {renderLines(content.ctaTitle)}
                     </h2>
 
                     <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed">
-                    비즈니스 상황에 가장 적합한 AI 활용 방법을
-                    <br className="md:block" />
-                    명확하게 안내해드립니다.
+                    {renderLines(content.ctaBody)}
                     </p>
                 </div>
 
@@ -722,7 +725,7 @@ const CustomAIPage = () => {
                     onClick={goInquiry}
                     className="inline-flex items-center text-base sm:text-lg font-medium text-white bg-[#3762E3] px-6 py-2.5 rounded-full shadow-md shadow-blue-200 hover:bg-[#2F54C8] transition"
                     >
-                    문의하기
+                    {content.ctaButton}
                     <span className="ml-2 text-sm">↗</span>
                     </button>
                 </div>

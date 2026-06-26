@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import PrivacyModal from "../components/PrivacyModal";
 import companyImage from "@/assets/optimized/question-mark-1600.webp";
 import { useSeo } from "../hooks/useSeo";
+import { getLanguage, inquiryContent } from "../localizedContent";
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -81,28 +83,27 @@ type CustomAiCategory =
     | "crm_erp"
     | "etc";
 
-const INQUIRY_TYPE_OPTIONS: { value: InquiryType; label: string }[] = [
-    { value: "blokit", label: "Blokit AI 문의"},
-    { value: "wallwall", label: "WallWall AI 문의" },
-    { value: "custom", label: "Custom AI 문의" },
-];
+const INQUIRY_TYPE_VALUES: InquiryType[] = ["blokit", "wallwall", "custom"];
 
-const CUSTOM_AI_CATEGORY_OPTIONS: { value: CustomAiCategory; label: string }[] = [
-    { value: "data_business", label: "1. 데이터/비즈니스" },
-    { value: "vision_video", label: "2. 비전/영상" },
-    { value: "recommend_personalize", label: "3. 추천/개인화" },
-    { value: "nlp_voice", label: "4. 자연어/음성" },
-    { value: "robotics", label: "5. 로보틱스" },
-    { value: "multimodal", label: "6. 멀티모달" },
-    { value: "app_web", label: "7. APP/WEB" },
-    { value: "crm_erp", label: "8. CRM/ERP" },
-    { value: "etc", label: "9. 기타 : 직접 입력" },
+const CUSTOM_AI_CATEGORY_VALUES: CustomAiCategory[] = [
+    "data_business",
+    "vision_video",
+    "recommend_personalize",
+    "nlp_voice",
+    "robotics",
+    "multimodal",
+    "app_web",
+    "crm_erp",
+    "etc",
 ];
 
 export default function InquiryPage() {
+    const { i18n } = useTranslation();
+    const content = inquiryContent[getLanguage(i18n.language)];
+
     useSeo({
     title: "Contact Amuse8 | AI Partnership & Inquiry",
-    description: "Amuse8과의 협업, AI 도입 및 제품·솔루션 관련 문의를 남겨주세요. 요구사항을 바탕으로 적합한 AI 방향을 제안드립니다.",
+    description: content.seoDescription,
     canonicalPath: "/contact",
     });
     const [openPrivacy, setOpenPrivacy] = useState(false);
@@ -183,19 +184,19 @@ export default function InquiryPage() {
     }, [agree, inquiryType, isCustomSubValid, email, phone, message, turnstileToken, hp, submitting]);
 
     const validate = () => {
-        if (!agree) return "개인정보 수집·이용에 동의해 주세요.";
-        if (!inquiryType) return "문의 유형을 선택해 주세요.";
+        if (!agree) return content.errors.agree;
+        if (!inquiryType) return content.errors.type;
         if (inquiryType == "custom") {
-            if (!customAiCategory) return "Custom AI 문의 항목을 선택해 주세요.";
-            if (customAiCategory === "etc" && !customAiEtcText.trim()) return "기타 항목을 입력해 주세요.";
+            if (!customAiCategory) return content.errors.custom;
+            if (customAiCategory === "etc" && !customAiEtcText.trim()) return content.errors.etc;
         }
 
-        if (!email.trim()) return "이메일을 입력해 주세요.";
-        if (!isValidEmail(email)) return "올바른 이메일 형식으로 입력해 주세요.";
-        if (!phone.trim()) return "연락처를 입력해 주세요.";
-        if (!message.trim()) return "문의 내용을 입력해 주세요.";
-        if (message.length > 100) return "문의 내용은 100자 이내로 입력해 주세요.";
-        if (!tokenRef.current) return "봇 방지 인증을 완료해 주세요.";
+        if (!email.trim()) return content.errors.emailRequired;
+        if (!isValidEmail(email)) return content.errors.emailInvalid;
+        if (!phone.trim()) return content.errors.phone;
+        if (!message.trim()) return content.errors.message;
+        if (message.length > 100) return content.errors.length;
+        if (!tokenRef.current) return content.errors.bot;
         return null;
     };
 
@@ -205,7 +206,7 @@ export default function InquiryPage() {
         const err = validate();
         if (err) return showNotice("error", err);
 
-        if (hp) return showNotice("error", "요청을 처리할 수 없습니다.");
+        if (hp) return showNotice("error", content.errors.blocked);
 
         setSubmitting(true);
 
@@ -228,9 +229,9 @@ export default function InquiryPage() {
 
             const data = await res.json().catch(() => ({}));
 
-            if (!res.ok) return showNotice("error", data?.message ?? "전송 실패. 잠시 후 다시 시도해 주세요.");
+            if (!res.ok) return showNotice("error", data?.message ?? content.errors.failed);
 
-            showNotice("success", "접수가 완료되었습니다. 빠르게 확인 후 연락드리겠습니다.");
+            showNotice("success", content.errors.success);
 
             setEmail(""); setPhone(""); setMessage(""); setInquiryType(""); setCustomAiCategory(""); setCustomAiEtcText("");
             setTurnstileToken("");
@@ -250,27 +251,27 @@ export default function InquiryPage() {
         )}
         <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
             <div className="relative hidden lg:block">
-                <img src={companyImage} alt="회사 이미지" className="absolute inset-0 h-full w-full object-cover"/>
+                <img src={companyImage} alt={content.companyImageAlt} className="absolute inset-0 h-full w-full object-cover"/>
                 <div className="absolute inset-0 bg-black/25" />
             </div>
 
             <div className="flex items-center justify-center px-6 py-14">
                 <div className="w-full max-w-xl space-y-7">
-                    <h1 className="mt-3 text-4xl font-extrabold">문의하기</h1>
+	                    <h1 className="mt-3 text-4xl font-extrabold">{content.title}</h1>
                     
 
                     <div className="mt-10 space-y-7">
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
                             <span className="text-sm font-medium text-gray-900">
-                            개인정보 수집동의 <span className="text-red-500">*</span>
+	                            {content.privacyAgree} <span className="text-red-500">*</span>
                             </span>
                             <button
                             type="button"
                             onClick={() => setOpenPrivacy(true)}
                             className="text-sm text-gray-400 underline underline-offset-4"
                             >
-                            전문보기
+	                            {content.viewFull}
                             </button>
                         </div>
 
@@ -282,12 +283,12 @@ export default function InquiryPage() {
                             onChange={(e) => setAgree(e.target.checked)}
                             className="h-5 w-5 bg-white"
                             />
-                            동의합니다.
+	                            {content.agree}
                         </label>
                     </div>
                     <div>
                         <label className="mb-2 block text-sm font-semibold">
-                        문의 유형 <span className="text-red-500">*</span>
+	                        {content.inquiryType} <span className="text-red-500">*</span>
                         </label>
 
                         <select
@@ -295,22 +296,22 @@ export default function InquiryPage() {
                         onChange={(e) => setInquiryType(e.target.value as InquiryType | "")}
                         className="w-full rounded-xl border bg-white text-black px-4 py-3 outline-none focus:ring"
                         >
-                        <option value="">선택해 주세요</option>
-                        {INQUIRY_TYPE_OPTIONS.map((opt) => (
-                            <option key={opt.value} value={opt.value}>
-                            {opt.label}
+	                        <option value="">{content.select}</option>
+	                        {INQUIRY_TYPE_VALUES.map((value, index) => (
+	                            <option key={value} value={value}>
+	                            {content.inquiryOptions[index]}
                             </option>
                         ))}
                         </select>
 
-                        <p className="mt-1 text-xs text-gray-400">문의 목적에 맞는 항목을 선택해 주세요.</p>
+	                        <p className="mt-1 text-xs text-gray-400">{content.selectHelp}</p>
                     </div>
 
                     {inquiryType === "custom" && (
                         <div className="space-y-3">
                         <div>
                             <label className="mb-2 block text-sm font-semibold">
-                            Custom AI 문의 항목 <span className="text-red-500">*</span>
+	                            {content.customCategory} <span className="text-red-500">*</span>
                             </label>
 
                             <select
@@ -318,10 +319,10 @@ export default function InquiryPage() {
                             onChange={(e) => setCustomAiCategory(e.target.value as CustomAiCategory | "")}
                             className="w-full rounded-xl border bg-white text-black px-4 py-3 outline-none focus:ring"
                             >
-                            <option value="">선택해 주세요</option>
-                            {CUSTOM_AI_CATEGORY_OPTIONS.map((opt) => (
-                                <option key={opt.value} value={opt.value}>
-                                {opt.label}
+	                            <option value="">{content.select}</option>
+	                            {CUSTOM_AI_CATEGORY_VALUES.map((value, index) => (
+	                                <option key={value} value={value}>
+	                                {content.categoryOptions[index]}
                                 </option>
                             ))}
                             </select>
@@ -330,13 +331,13 @@ export default function InquiryPage() {
                         {customAiCategory === "etc" && (
                             <div>
                             <label className="mb-2 block text-sm font-semibold">
-                                기타 내용 <span className="text-red-500">*</span>
+	                                {content.etc} <span className="text-red-500">*</span>
                             </label>
                             <input
                                 value={customAiEtcText}
                                 onChange={(e) => setCustomAiEtcText(e.target.value)}
                                 className="w-full rounded-xl border bg-white text-black px-4 py-3 outline-none focus:ring"
-                                placeholder="예) 사내 문서 자동 분류/권한 기반 검색 등"
+	                                placeholder={content.etcPlaceholder}
                             />
                             </div>
                         )}
@@ -344,14 +345,14 @@ export default function InquiryPage() {
                     )}
                     <div>
                         <label className="mb-2 block text-sm font-semibold">
-                        이메일 <span className="text-red-500">*</span>
+	                        {content.email} <span className="text-red-500">*</span>
                         </label>
                         <input
                         value={email}
                         onChange={(e) => {
                         const v = e.target.value;
                         setEmail(v);
-                        if (v && !isValidEmail(v)) setEmailError("올바른 이메일 형식으로 입력해 주세요.");
+                        if (v && !isValidEmail(v)) setEmailError(content.errors.emailInvalid);
                         else setEmailError(null);
                         }}
                         className="w-full rounded-xl border bg-white text-black px-4 py-3 outline-none focus:ring"
@@ -361,7 +362,7 @@ export default function InquiryPage() {
 
                     <div>
                         <label className="mb-2 block text-sm font-semibold">
-                        연락처 <span className="text-red-500">*</span>
+	                        {content.phone} <span className="text-red-500">*</span>
                         </label>
                         <input
                         value={phone}
@@ -375,16 +376,16 @@ export default function InquiryPage() {
 
                     <div>
                         <label className="mb-2 block text-sm font-semibold">
-                        문의 내용 <span className="text-red-500">*</span>
+	                        {content.message} <span className="text-red-500">*</span>
                         </label>
                         <textarea
                         value={message}
                         onChange={(e) => setMessage(e.target.value.slice(0, 100))}
                         rows={5}
                         className="w-full resize-none rounded-xl border bg-white text-black px-4 py-3 outline-none focus:ring"
-                        placeholder="100자 이내로 입력해 주세요."
+	                        placeholder={content.messagePlaceholder}
                         />
-                        <div className="mt-2 text-right text-xs text-gray-400">{remaining}자 남음</div>
+	                        <div className="mt-2 text-right text-xs text-gray-400">{remaining}{content.remaining}</div>
                     </div>
 
                     <div className="hidden">
@@ -396,7 +397,7 @@ export default function InquiryPage() {
                     <div className="rounded-xl border p-4">
                         <TurnstileWidget onToken={handleTurnstileToken} />
                         <p className="mt-2 text-xs text-gray-500">
-                        봇 방지를 위해 인증이 필요합니다.
+	                        {content.botHelp}
                         </p>
                     </div>
                     )}
@@ -407,7 +408,7 @@ export default function InquiryPage() {
                         onClick={onSubmit}
                         className="w-full rounded-xl bg-black py-4 text-white disabled:opacity-60"
                     >
-                        {submitting ? "전송 중..." : "제출하기"}
+	                        {submitting ? content.submitting : content.submit}
                     </button>
                     </div>
                 </div>

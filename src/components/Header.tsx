@@ -1,21 +1,23 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import logo from "@/assets/logo-black.svg";
 import logoWhite from "@/assets/logo-white.svg";
 
 const NAV = [
-    { label: "Amuse8", href: "/about" },
-    { label: "Blokit AI", href: "/blokit-ai" },
-    { label: "Custom AI", href: "/custom-ai" },
+    { labelKey: "nav.amuse8", href: "/about" },
+    { labelKey: "nav.blokit", href: "/blokit-ai" },
+    { labelKey: "nav.custom", href: "/custom-ai" },
     {
-        label: "WallWall AI",
+        labelKey: "nav.wallwall",
         href: "https://wallwall.amuse8.kr/",
         external: true,
     }
 ] as const;
 
 export default function Header() {
+    const { t, i18n } = useTranslation();
     const [open, setOpen] = useState(false);
     const [isHeroVisible, setIsHeroVisible] = useState<boolean>(true);
 
@@ -33,6 +35,43 @@ export default function Header() {
     const isTransparent = (isHome || isBlokitAI || isCustomAI || isAbout) && isHeroVisible && !open;
 
     const showDivider = isHeroVisible;
+    const currentLanguage = i18n.language.startsWith("en") ? "en" : "ko";
+
+    const changeLanguage = (language: "ko" | "en") => {
+        i18n.changeLanguage(language);
+        localStorage.setItem("amuse8-language", language);
+    };
+
+    const languageSwitcher = (
+        <div
+            className={clsx(
+                "inline-flex items-center rounded-full border p-0.5 text-xs font-semibold",
+                isTransparent && !open ? "border-white/50 bg-white/10" : "border-gray-200 bg-gray-50"
+            )}
+            aria-label={t("common.language")}
+        >
+            {(["ko", "en"] as const).map((language) => (
+                <button
+                    key={language}
+                    type="button"
+                    onClick={() => changeLanguage(language)}
+                    className={clsx(
+                        "min-w-9 rounded-full px-2.5 py-1 transition-colors",
+                        currentLanguage === language
+                            ? isTransparent && !open
+                                ? "bg-white text-gray-900"
+                                : "bg-gray-900 text-white"
+                            : isTransparent && !open
+                                ? "text-white/75 hover:text-white"
+                                : "text-gray-500 hover:text-gray-900"
+                    )}
+                    aria-pressed={currentLanguage === language}
+                >
+                    {t(language === "ko" ? "common.korean" : "common.english")}
+                </button>
+            ))}
+        </div>
+    );
 
     useEffect(() => {
         const handleHeroVisibility = (event: Event) => {
@@ -86,7 +125,7 @@ export default function Header() {
                 type="button"
                 onClick={handleLogoClick}
                 className="flex items-center gap-2"
-                aria-label="홈으로 이동"
+                aria-label={t("common.goHome")}
             >
                 <img
                     src={isTransparent ? logoWhite : logo}
@@ -95,15 +134,18 @@ export default function Header() {
                 />
             </button>
 
-            <nav className="hidden md:flex flex-row gap-6 text-base">
-                {NAV.map((item, idx) =>
-                    "external" in item && item.external ? (
+            <div className="hidden md:flex items-center gap-6">
+                <nav className="flex flex-row gap-6 text-base">
+                    {NAV.map((item, idx) => {
+                        const label = t(item.labelKey);
+
+                        return "external" in item && item.external ? (
                         <a
                             key={item.href}
                             href={item.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label={`${item.label} (새 탭에서 열림)`}
+                            aria-label={`${label} (${t("common.opensNewTab")})`}
                             className={clsx(
                                 "group relative pb-1 transition-opacity flex items-center",
                                 showDivider && 
@@ -114,14 +156,14 @@ export default function Header() {
                                     : "text-gray-600 hover:text-primary after:text-gray-300"
                             )}
                         >
-                            <span>{item.label}</span>
+                            <span>{label}</span>
                             <span
                                 aria-hidden="true"
                                 className="ml-1 inline-block text-[0.75em] opacity-70 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:opacity-100"
                             >
                                 ↗
                             </span>
-                            <span className="sr-only">새 탭에서 열림</span>
+                            <span className="sr-only">{t("common.opensNewTab")}</span>
                         </a>
                     ) : (
                         <NavLink
@@ -142,14 +184,16 @@ export default function Header() {
                             )}
                             aria-current={isActive(item.href) ? "page" : undefined}
                         >
-                            {item.label}
+                            {label}
                         </NavLink>
-                    )
-                )}
-            </nav>
+                    );
+                })}
+                </nav>
+                {languageSwitcher}
+            </div>
             <button
                 type="button"
-                aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
+                aria-label={open ? t("common.closeMenu") : t("common.openMenu")}
                 aria-expanded={open}
                 aria-controls="mobile-menu"
                 onClick={() => setOpen((v) => !v)}
@@ -185,22 +229,24 @@ export default function Header() {
                 )}
             >
                 <nav className="flex flex-col gap-4 px-5 py-4 text-base">
-                    {NAV.map((item) =>
-                        "external" in item && item.external ? (
+                    {NAV.map((item) => {
+                        const label = t(item.labelKey);
+
+                        return "external" in item && item.external ? (
                             <a
                                 key={item.href}
                                 href={item.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label={`${item.label} (새 탭에서 열림)`}
+                                aria-label={`${label} (${t("common.opensNewTab")})`}
                                 onClick={() => setOpen(false)}
                                 className="group flex items-center text-left py-1 text-gray-900 hover:text-primary transition-colors"
                             >
-                                <span>{item.label}</span>
+                                <span>{label}</span>
                                 <span aria-hidden="true" className="ml-1 text-[0.75em] opacity-70 group-hover:opacity-100">
                                     ↗
                                 </span>
-                                <span className="sr-only">새 탭에서 열림</span>
+                                <span className="sr-only">{t("common.opensNewTab")}</span>
                             </a>
                         ) : (
                             <NavLink
@@ -215,10 +261,11 @@ export default function Header() {
                                 )}
                                 aria-current={isActive(item.href) ? "page" : undefined}
                             >
-                                {item.label}
+                                {label}
                             </NavLink>
-                        )
-                    )}
+                        );
+                    })}
+                    <div className="pt-1">{languageSwitcher}</div>
                 </nav>
             </div>
         </header>
